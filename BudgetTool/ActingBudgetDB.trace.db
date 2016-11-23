@@ -1,0 +1,928 @@
+2016-11-06 12:21:14 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: No suitable driver found for jdbc:jdbc:h2:C:\Users\Daniel_m\workspace1\BudgetTool\BudgetDB; SQL statement:
+CREATE LINKED TABLE LINK('', 'jdbc:jdbc:h2:C:\Users\Daniel_m\workspace1\BudgetTool\BudgetDB', 'Daniel_m', '',
+    '(SELECT * FROM BUDJET_YEAT WHERE ID>0)') [0-192]
+	at org.h2.message.DbException.addSQL(DbException.java:132)
+	at org.h2.command.Command.executeUpdate(Command.java:270)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.sql.SQLException: No suitable driver found for jdbc:jdbc:h2:C:\Users\Daniel_m\workspace1\BudgetTool\BudgetDB
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at org.h2.util.JdbcUtils.getConnection(JdbcUtils.java:301)
+	at org.h2.util.JdbcUtils.getConnection(JdbcUtils.java:263)
+	at org.h2.table.TableLinkConnection.open(TableLinkConnection.java:90)
+	at org.h2.table.TableLinkConnection.open(TableLinkConnection.java:77)
+	at org.h2.engine.Database.getLinkConnection(Database.java:2433)
+	at org.h2.table.TableLink.connect(TableLink.java:96)
+	at org.h2.table.TableLink.<init>(TableLink.java:79)
+	at org.h2.schema.Schema.createTableLink(Schema.java:614)
+	at org.h2.command.ddl.CreateLinkedTable.update(CreateLinkedTable.java:77)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:98)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	... 9 more
+2016-11-06 12:22:34 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Table "(SELECT * FROM TEST WHERE ID>0)(org.h2.jdbc.JdbcSQLException: Table ""TEST"" not found; SQL statement:
+SELECT * FROM (SELECT * FROM TEST WHERE ID>0) T WHERE 1=0 [42102-192])" not found; SQL statement:
+CREATE LINKED TABLE LINK('org.h2.Driver', 'jdbc:h2:C:\Users\Daniel_m\workspace1\BudgetTool\BudgetDB', 'Daniel_m', '',
+    '(SELECT * FROM TEST WHERE ID>0)') [42102-192]
+2016-11-06 12:22:54 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Table "(SELECT * FROM BUDGET_YEAR  WHERE ID>0)(org.h2.jdbc.JdbcSQLException: Column ""ID"" not found; SQL statement:
+CREATE FORCE VIEW PUBLIC._0 AS
+SELECT
+    BUDGET_YEAR.B_YEAR
+FROM PUBLIC.BUDGET_YEAR
+WHERE ID > 0 [42122-192])" not found; SQL statement:
+CREATE LINKED TABLE LINK('org.h2.Driver', 'jdbc:h2:C:\Users\Daniel_m\workspace1\BudgetTool\BudgetDB', 'Daniel_m', '',
+    '(SELECT * FROM BUDGET_YEAR  WHERE ID>0)') [42102-192]
+2016-11-06 12:26:23 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FORM[*] BUDGET_YEAR "; SQL statement:
+select * form Budget_Year [42000-192]
+2016-11-06 12:27:21 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Table "BUDGET" not found; SQL statement:
+delete from budget year where B_YEAR != null [42102-192]
+2016-11-06 12:32:08 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: IO Exception: null; SQL statement:
+CREATE LINKED TABLE LINK('org.h2.Driver', 'jdbc:h2:C:./BudgetDB', 'Daniel_m', '',
+    '(SELECT * FROM BUDGET_YEAR)') [90028-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.mvstore.db.MVTableEngine$Store.convertIllegalStateException(MVTableEngine.java:191)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:167)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:99)
+	at org.h2.engine.Database.getPageStore(Database.java:2463)
+	at org.h2.engine.Database.open(Database.java:692)
+	at org.h2.engine.Database.openDatabase(Database.java:270)
+	at org.h2.engine.Database.<init>(Database.java:264)
+	at org.h2.engine.Engine.openSession(Engine.java:64)
+	at org.h2.engine.Engine.openSession(Engine.java:176)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:154)
+	at org.h2.engine.Engine.createSession(Engine.java:137)
+	at org.h2.engine.Engine.createSession(Engine.java:27)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:349)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at org.h2.util.JdbcUtils.getConnection(JdbcUtils.java:281)
+	at org.h2.util.JdbcUtils.getConnection(JdbcUtils.java:263)
+	at org.h2.table.TableLinkConnection.open(TableLinkConnection.java:90)
+	at org.h2.table.TableLinkConnection.open(TableLinkConnection.java:77)
+	at org.h2.engine.Database.getLinkConnection(Database.java:2433)
+	at org.h2.table.TableLink.connect(TableLink.java:96)
+	at org.h2.table.TableLink.<init>(TableLink.java:79)
+	at org.h2.schema.Schema.createTableLink(Schema.java:614)
+	at org.h2.command.ddl.CreateLinkedTable.update(CreateLinkedTable.java:77)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:98)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.IllegalStateException: Could not open file nio:C:/Program Files (x86)/H2/bin/BudgetDB.mv.db [1.4.192/1]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:773)
+	at org.h2.mvstore.FileStore.open(FileStore.java:178)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:344)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2893)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:154)
+	... 36 more
+Caused by: java.io.FileNotFoundException: C:\Program Files (x86)\H2\bin\BudgetDB.mv.db (Access is denied)
+	at java.io.RandomAccessFile.open0(Native Method)
+	at java.io.RandomAccessFile.open(Unknown Source)
+	at java.io.RandomAccessFile.<init>(Unknown Source)
+	at java.io.RandomAccessFile.<init>(Unknown Source)
+	at org.h2.store.fs.FileNio.<init>(FilePathNio.java:43)
+	at org.h2.store.fs.FilePathNio.open(FilePathNio.java:23)
+	at org.h2.mvstore.FileStore.open(FileStore.java:153)
+	... 39 more
+2016-11-06 12:32:44 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: IO Exception: null; SQL statement:
+CREATE LINKED TABLE LINK('org.h2.Driver', 'jdbc:h2:C:.\BudgetDB', 'Daniel_m', '',
+    '(SELECT * FROM BUDGET_YEAR)') [90028-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.mvstore.db.MVTableEngine$Store.convertIllegalStateException(MVTableEngine.java:191)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:167)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:99)
+	at org.h2.engine.Database.getPageStore(Database.java:2463)
+	at org.h2.engine.Database.open(Database.java:692)
+	at org.h2.engine.Database.openDatabase(Database.java:270)
+	at org.h2.engine.Database.<init>(Database.java:264)
+	at org.h2.engine.Engine.openSession(Engine.java:64)
+	at org.h2.engine.Engine.openSession(Engine.java:176)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:154)
+	at org.h2.engine.Engine.createSession(Engine.java:137)
+	at org.h2.engine.Engine.createSession(Engine.java:27)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:349)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at org.h2.util.JdbcUtils.getConnection(JdbcUtils.java:281)
+	at org.h2.util.JdbcUtils.getConnection(JdbcUtils.java:263)
+	at org.h2.table.TableLinkConnection.open(TableLinkConnection.java:90)
+	at org.h2.table.TableLinkConnection.open(TableLinkConnection.java:77)
+	at org.h2.engine.Database.getLinkConnection(Database.java:2433)
+	at org.h2.table.TableLink.connect(TableLink.java:96)
+	at org.h2.table.TableLink.<init>(TableLink.java:79)
+	at org.h2.schema.Schema.createTableLink(Schema.java:614)
+	at org.h2.command.ddl.CreateLinkedTable.update(CreateLinkedTable.java:77)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:98)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.IllegalStateException: Could not open file nio:C:/Program Files (x86)/H2/bin/BudgetDB.mv.db [1.4.192/1]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:773)
+	at org.h2.mvstore.FileStore.open(FileStore.java:178)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:344)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2893)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:154)
+	... 36 more
+Caused by: java.io.FileNotFoundException: C:\Program Files (x86)\H2\bin\BudgetDB.mv.db (Access is denied)
+	at java.io.RandomAccessFile.open0(Native Method)
+	at java.io.RandomAccessFile.open(Unknown Source)
+	at java.io.RandomAccessFile.<init>(Unknown Source)
+	at java.io.RandomAccessFile.<init>(Unknown Source)
+	at org.h2.store.fs.FileNio.<init>(FilePathNio.java:43)
+	at org.h2.store.fs.FilePathNio.open(FilePathNio.java:23)
+	at org.h2.mvstore.FileStore.open(FileStore.java:153)
+	... 39 more
+2016-11-06 12:40:27 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE LINKED TABLE LINK('org.h2.Driver', .\BudgetDB', 'Daniel_m', '',
+    '(SELECT * FROM BUDGET_YEAR)[*]');"; SQL statement:
+CREATE LINKED TABLE LINK('org.h2.Driver', .\BudgetDB', 'Daniel_m', '',
+    '(SELECT * FROM BUDGET_YEAR)'); [42000-192]
+2016-11-06 13:02:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Method is only allowed for a query. Use execute or executeUpdate instead of executeQuery; SQL statement:
+CREATE LINKED TABLE LINK ('', 'jdbc:h2:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB','Daniel_m','', '(SELECT * FROM BUDGET_YEAR)') [90002-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.command.Prepared.query(Prepared.java:212)
+	at org.h2.command.CommandContainer.query(CommandContainer.java:110)
+	at org.h2.command.Command.executeQuery(Command.java:201)
+	at org.h2.jdbc.JdbcPreparedStatement.executeQuery(JdbcPreparedStatement.java:110)
+	at DAL.ActingBudgetDAL.copy(ActingBudgetDAL.java:27)
+	at BL.Test.main(Test.java:16)
+2016-11-06 13:33:19 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/ActingBudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.message.DbException.convert(DbException.java:295)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:94)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:375)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:358)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2893)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:154)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:99)
+	at org.h2.engine.Database.getPageStore(Database.java:2463)
+	at org.h2.engine.Database.open(Database.java:692)
+	at org.h2.engine.Database.openDatabase(Database.java:270)
+	at org.h2.engine.Database.<init>(Database.java:264)
+	at org.h2.engine.Engine.openSession(Engine.java:64)
+	at org.h2.engine.Engine.openSession(Engine.java:176)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:154)
+	at org.h2.engine.Engine.createSession(Engine.java:137)
+	at org.h2.engine.Engine.createSession(Engine.java:27)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:349)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at DAL.ActingBudgetDAL.getConnection(ActingBudgetDAL.java:13)
+	at DAL.ActingBudgetDAL.copy(ActingBudgetDAL.java:22)
+	at BL.Test.main(Test.java:16)
+Caused by: org.h2.jdbc.JdbcSQLException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/ActingBudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 26 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/ActingBudgetDB.mv.db [1.4.192/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:773)
+	at org.h2.mvstore.FileStore.open(FileStore.java:172)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:344)
+	... 21 more
+2016-11-06 13:35:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: A file path that is implicitly relative to the current working directory is not allowed in the database URL "jdbc:h2:~BudgetDB". Use an absolute path, ~/name, ./name, or the baseDir setting instead.; SQL statement:
+CREATE LINKED TABLE LINK ('', 'jdbc:h2:~BudgetDB','Daniel_m','', '(SELECT * FROM BUDGET_YEAR)') [90011-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.engine.ConnectionInfo.getName(ConnectionInfo.java:400)
+	at org.h2.engine.Engine.openSession(Engine.java:49)
+	at org.h2.engine.Engine.openSession(Engine.java:176)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:154)
+	at org.h2.engine.Engine.createSession(Engine.java:137)
+	at org.h2.engine.Engine.createSession(Engine.java:27)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:349)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at org.h2.util.JdbcUtils.getConnection(JdbcUtils.java:301)
+	at org.h2.util.JdbcUtils.getConnection(JdbcUtils.java:263)
+	at org.h2.table.TableLinkConnection.open(TableLinkConnection.java:90)
+	at org.h2.table.TableLinkConnection.open(TableLinkConnection.java:77)
+	at org.h2.engine.Database.getLinkConnection(Database.java:2433)
+	at org.h2.table.TableLink.connect(TableLink.java:96)
+	at org.h2.table.TableLink.<init>(TableLink.java:79)
+	at org.h2.schema.Schema.createTableLink(Schema.java:614)
+	at org.h2.command.ddl.CreateLinkedTable.update(CreateLinkedTable.java:77)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:98)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcPreparedStatement.execute(JdbcPreparedStatement.java:201)
+	at DAL.ActingBudgetDAL.copy(ActingBudgetDAL.java:27)
+	at BL.Test.main(Test.java:16)
+2016-11-06 13:37:08 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Error accessing linked table with SQL statement "SELECT * FROM null T", cause: "org.h2.jdbc.JdbcSQLException: IO Exception: null [90028-192]"; SQL statement:
+select * from link [90111-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.table.TableLink.wrapException(TableLink.java:476)
+	at org.h2.index.LinkedIndex.find(LinkedIndex.java:128)
+	at org.h2.index.BaseIndex.find(BaseIndex.java:128)
+	at org.h2.index.IndexCursor.find(IndexCursor.java:169)
+	at org.h2.table.TableFilter.next(TableFilter.java:466)
+	at org.h2.command.dml.Select.queryFlat(Select.java:541)
+	at org.h2.command.dml.Select.queryWithoutCache(Select.java:654)
+	at org.h2.command.dml.Query.query(Query.java:341)
+	at org.h2.command.dml.Query.query(Query.java:309)
+	at org.h2.command.dml.Query.query(Query.java:36)
+	at org.h2.command.CommandContainer.query(CommandContainer.java:110)
+	at org.h2.command.Command.executeQuery(Command.java:201)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:179)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.h2.jdbc.JdbcSQLException: IO Exception: null [90028-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.mvstore.db.MVTableEngine$Store.convertIllegalStateException(MVTableEngine.java:191)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:167)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:99)
+	at org.h2.engine.Database.getPageStore(Database.java:2463)
+	at org.h2.engine.Database.open(Database.java:692)
+	at org.h2.engine.Database.openDatabase(Database.java:270)
+	at org.h2.engine.Database.<init>(Database.java:264)
+	at org.h2.engine.Engine.openSession(Engine.java:64)
+	at org.h2.engine.Engine.openSession(Engine.java:176)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:154)
+	at org.h2.engine.Engine.createSession(Engine.java:137)
+	at org.h2.engine.Engine.createSession(Engine.java:27)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:349)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at org.h2.util.JdbcUtils.getConnection(JdbcUtils.java:301)
+	at org.h2.util.JdbcUtils.getConnection(JdbcUtils.java:263)
+	at org.h2.table.TableLinkConnection.open(TableLinkConnection.java:90)
+	at org.h2.table.TableLinkConnection.open(TableLinkConnection.java:77)
+	at org.h2.engine.Database.getLinkConnection(Database.java:2433)
+	at org.h2.table.TableLink.connect(TableLink.java:96)
+	at org.h2.table.TableLink.<init>(TableLink.java:79)
+	at org.h2.schema.Schema.createTableLink(Schema.java:614)
+	at org.h2.command.ddl.CreateLinkedTable.update(CreateLinkedTable.java:77)
+	at org.h2.engine.MetaRecord.execute(MetaRecord.java:58)
+	at org.h2.engine.Database.open(Database.java:758)
+	at org.h2.engine.Database.openDatabase(Database.java:270)
+	at org.h2.engine.Database.<init>(Database.java:264)
+	at org.h2.engine.Engine.openSession(Engine.java:64)
+	at org.h2.engine.Engine.openSession(Engine.java:176)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:154)
+	at org.h2.engine.Engine.createSession(Engine.java:137)
+	at org.h2.engine.Engine.createSession(Engine.java:27)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:349)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at org.h2.server.web.WebServer.getConnection(WebServer.java:735)
+	at org.h2.server.web.WebApp.login(WebApp.java:955)
+	at org.h2.server.web.WebApp.process(WebApp.java:211)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:170)
+	at org.h2.server.web.WebThread.process(WebThread.java:133)
+	... 2 more
+Caused by: java.lang.IllegalStateException: Could not open file nio:C:/Program Files (x86)/H2/bin/BudgetDB.mv.db [1.4.192/1]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:773)
+	at org.h2.mvstore.FileStore.open(FileStore.java:178)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:344)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2893)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:154)
+	... 45 more
+Caused by: java.io.FileNotFoundException: C:\Program Files (x86)\H2\bin\BudgetDB.mv.db (Access is denied)
+	at java.io.RandomAccessFile.open0(Native Method)
+	at java.io.RandomAccessFile.open(Unknown Source)
+	at java.io.RandomAccessFile.<init>(Unknown Source)
+	at java.io.RandomAccessFile.<init>(Unknown Source)
+	at org.h2.store.fs.FileNio.<init>(FilePathNio.java:43)
+	at org.h2.store.fs.FilePathNio.open(FilePathNio.java:23)
+	at org.h2.mvstore.FileStore.open(FileStore.java:153)
+	... 48 more
+2016-11-06 13:49:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE LINKED TABLE LINK ('', C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB','Daniel_m','', '(SELECT * FROM BUDGET_YEAR)[*]')"; SQL statement:
+CREATE LINKED TABLE LINK ('', C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB','Daniel_m','', '(SELECT * FROM BUDGET_YEAR)') [42000-192]
+2016-11-06 13:58:44 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/ActingBudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.message.DbException.convert(DbException.java:295)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:94)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:375)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:358)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2893)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:154)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:99)
+	at org.h2.engine.Database.getPageStore(Database.java:2463)
+	at org.h2.engine.Database.open(Database.java:692)
+	at org.h2.engine.Database.openDatabase(Database.java:270)
+	at org.h2.engine.Database.<init>(Database.java:264)
+	at org.h2.engine.Engine.openSession(Engine.java:64)
+	at org.h2.engine.Engine.openSession(Engine.java:176)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:154)
+	at org.h2.engine.Engine.createSession(Engine.java:137)
+	at org.h2.engine.Engine.createSession(Engine.java:27)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:349)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at DAL.ActingBudgetDAL.getConnection(ActingBudgetDAL.java:13)
+	at DAL.ActingBudgetDAL.copy(ActingBudgetDAL.java:22)
+	at BL.Test.main(Test.java:15)
+Caused by: org.h2.jdbc.JdbcSQLException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/ActingBudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 26 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/ActingBudgetDB.mv.db [1.4.192/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:773)
+	at org.h2.mvstore.FileStore.open(FileStore.java:172)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:344)
+	... 21 more
+2016-11-06 14:00:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Method is only allowed for a query. Use execute or executeUpdate instead of executeQuery; SQL statement:
+INSERT INTO BUDGET_YEAR  SELECT * FROM LINK [90002-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.command.Prepared.query(Prepared.java:212)
+	at org.h2.command.CommandContainer.query(CommandContainer.java:110)
+	at org.h2.command.Command.executeQuery(Command.java:201)
+	at org.h2.jdbc.JdbcPreparedStatement.executeQuery(JdbcPreparedStatement.java:110)
+	at DAL.ActingBudgetDAL.copy(ActingBudgetDAL.java:30)
+	at BL.Test.main(Test.java:15)
+2016-11-07 13:32:12 jdbc[3]: java.lang.Exception: Open Stack Trace
+	at org.h2.util.CloseWatcher.register(CloseWatcher.java:100)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:130)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at org.h2.server.web.WebServer.getConnection(WebServer.java:735)
+	at org.h2.server.web.WebApp.login(WebApp.java:955)
+	at org.h2.server.web.WebApp.process(WebApp.java:211)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:170)
+	at org.h2.server.web.WebThread.process(WebThread.java:133)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+
+org.h2.message.DbException: The connection was not closed by the application and is garbage collected [90018-192]
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:187)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:129)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at org.h2.server.web.WebServer.getConnection(WebServer.java:735)
+	at org.h2.server.web.WebApp.login(WebApp.java:955)
+	at org.h2.server.web.WebApp.process(WebApp.java:211)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:170)
+	at org.h2.server.web.WebThread.process(WebThread.java:133)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.h2.jdbc.JdbcSQLException: The connection was not closed by the application and is garbage collected [90018-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 14 more
+2016-11-07 13:32:12 jdbc[3]: java.lang.Exception: Open Stack Trace
+	at org.h2.util.CloseWatcher.register(CloseWatcher.java:100)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:130)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at org.h2.server.web.WebServer.getConnection(WebServer.java:735)
+	at org.h2.server.web.WebApp.login(WebApp.java:955)
+	at org.h2.server.web.WebApp.process(WebApp.java:211)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:170)
+	at org.h2.server.web.WebThread.process(WebThread.java:133)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+
+org.h2.message.DbException: The connection was not closed by the application and is garbage collected [90018-192]
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:187)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:129)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at org.h2.server.web.WebServer.getConnection(WebServer.java:735)
+	at org.h2.server.web.WebApp.login(WebApp.java:955)
+	at org.h2.server.web.WebApp.process(WebApp.java:211)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:170)
+	at org.h2.server.web.WebThread.process(WebThread.java:133)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.h2.jdbc.JdbcSQLException: The connection was not closed by the application and is garbage collected [90018-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 14 more
+2016-11-07 15:07:20 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/ActingBudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.message.DbException.convert(DbException.java:295)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:94)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:375)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:358)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2893)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:154)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:99)
+	at org.h2.engine.Database.getPageStore(Database.java:2463)
+	at org.h2.engine.Database.open(Database.java:692)
+	at org.h2.engine.Database.openDatabase(Database.java:270)
+	at org.h2.engine.Database.<init>(Database.java:264)
+	at org.h2.engine.Engine.openSession(Engine.java:64)
+	at org.h2.engine.Engine.openSession(Engine.java:176)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:154)
+	at org.h2.engine.Engine.createSession(Engine.java:137)
+	at org.h2.engine.Engine.createSession(Engine.java:27)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:349)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at DAL.ActingBudgetDAL.getConnection(ActingBudgetDAL.java:20)
+	at DAL.ActingBudgetDAL.copySeasonBudget(ActingBudgetDAL.java:29)
+	at BL.Test.main(Test.java:14)
+Caused by: org.h2.jdbc.JdbcSQLException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/ActingBudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 26 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/ActingBudgetDB.mv.db [1.4.192/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:773)
+	at org.h2.mvstore.FileStore.open(FileStore.java:172)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:344)
+	... 21 more
+2016-11-07 15:08:26 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/ActingBudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.message.DbException.convert(DbException.java:295)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:94)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:375)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:358)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2893)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:154)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:99)
+	at org.h2.engine.Database.getPageStore(Database.java:2463)
+	at org.h2.engine.Database.open(Database.java:692)
+	at org.h2.engine.Database.openDatabase(Database.java:270)
+	at org.h2.engine.Database.<init>(Database.java:264)
+	at org.h2.engine.Engine.openSession(Engine.java:64)
+	at org.h2.engine.Engine.openSession(Engine.java:176)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:154)
+	at org.h2.engine.Engine.createSession(Engine.java:137)
+	at org.h2.engine.Engine.createSession(Engine.java:27)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:349)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at DAL.ActingBudgetDAL.getConnection(ActingBudgetDAL.java:20)
+	at DAL.ActingBudgetDAL.copySeasonBudget(ActingBudgetDAL.java:29)
+	at BL.Test.main(Test.java:14)
+Caused by: org.h2.jdbc.JdbcSQLException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/ActingBudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 26 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/ActingBudgetDB.mv.db [1.4.192/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:773)
+	at org.h2.mvstore.FileStore.open(FileStore.java:172)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:344)
+	... 21 more
+2016-11-07 15:09:08 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/ActingBudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.message.DbException.convert(DbException.java:295)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:94)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:375)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:358)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2893)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:154)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:99)
+	at org.h2.engine.Database.getPageStore(Database.java:2463)
+	at org.h2.engine.Database.open(Database.java:692)
+	at org.h2.engine.Database.openDatabase(Database.java:270)
+	at org.h2.engine.Database.<init>(Database.java:264)
+	at org.h2.engine.Engine.openSession(Engine.java:64)
+	at org.h2.engine.Engine.openSession(Engine.java:176)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:154)
+	at org.h2.engine.Engine.createSession(Engine.java:137)
+	at org.h2.engine.Engine.createSession(Engine.java:27)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:349)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at DAL.ActingBudgetDAL.getConnection(ActingBudgetDAL.java:20)
+	at DAL.ActingBudgetDAL.copySeasonBudget(ActingBudgetDAL.java:29)
+	at BL.Test.main(Test.java:14)
+Caused by: org.h2.jdbc.JdbcSQLException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/ActingBudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 26 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/ActingBudgetDB.mv.db [1.4.192/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:773)
+	at org.h2.mvstore.FileStore.open(FileStore.java:172)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:344)
+	... 21 more
+2016-11-07 15:13:16 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/ActingBudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.message.DbException.convert(DbException.java:295)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:94)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:375)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:358)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2893)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:154)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:99)
+	at org.h2.engine.Database.getPageStore(Database.java:2463)
+	at org.h2.engine.Database.open(Database.java:692)
+	at org.h2.engine.Database.openDatabase(Database.java:270)
+	at org.h2.engine.Database.<init>(Database.java:264)
+	at org.h2.engine.Engine.openSession(Engine.java:64)
+	at org.h2.engine.Engine.openSession(Engine.java:176)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:154)
+	at org.h2.engine.Engine.createSession(Engine.java:137)
+	at org.h2.engine.Engine.createSession(Engine.java:27)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:349)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at DAL.ActingBudgetDAL.getConnection(ActingBudgetDAL.java:21)
+	at BL.Test.main(Test.java:17)
+Caused by: org.h2.jdbc.JdbcSQLException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/ActingBudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 25 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/ActingBudgetDB.mv.db [1.4.192/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:773)
+	at org.h2.mvstore.FileStore.open(FileStore.java:172)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:344)
+	... 20 more
+2016-11-07 15:18:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "(SELECT * FROM ASSUMPTION INNER JOIN ITEM ON ASSUMPTION.ID = ITEM.ID WHERE ITEM.B_YEAR = 16/17)(org.h2.jdbc.JdbcSQLException: Duplicate column name ""ID""; SQL statement:
+SELECT * FROM (SELECT * FROM ASSUMPTION INNER JOIN ITEM ON ASSUMPTION.ID = ITEM.ID WHERE ITEM.B_YEAR = 16/17) T WHERE 1=0 [42121-192])" not found; SQL statement:
+CREATE LINKED TABLE LINK ('','jdbc:h2:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB','Daniel_m','','(SELECT * FROM ASSUMPTION INNER JOIN ITEM ON ASSUMPTION.ID = ITEM.ID WHERE ITEM.B_YEAR = 16/17)') [42102-192]
+2016-11-07 15:29:20 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Invalid value "1" for parameter "parameterIndex" [90008-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.getInvalidValueException(DbException.java:228)
+	at org.h2.jdbc.JdbcPreparedStatement.setParameter(JdbcPreparedStatement.java:1406)
+	at org.h2.jdbc.JdbcPreparedStatement.setString(JdbcPreparedStatement.java:355)
+	at DAL.ActingBudgetDAL.copyToLinkTable(ActingBudgetDAL.java:109)
+	at DAL.ActingBudgetDAL.copySeasonBudget(ActingBudgetDAL.java:35)
+	at BL.Test.main(Test.java:17)
+2016-11-07 15:30:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Invalid value "0" for parameter "parameterIndex" [90008-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.getInvalidValueException(DbException.java:228)
+	at org.h2.jdbc.JdbcPreparedStatement.setParameter(JdbcPreparedStatement.java:1406)
+	at org.h2.jdbc.JdbcPreparedStatement.setString(JdbcPreparedStatement.java:355)
+	at DAL.ActingBudgetDAL.copyToLinkTable(ActingBudgetDAL.java:109)
+	at DAL.ActingBudgetDAL.copySeasonBudget(ActingBudgetDAL.java:35)
+	at BL.Test.main(Test.java:17)
+2016-11-07 15:30:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Invalid value "1" for parameter "parameterIndex" [90008-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.getInvalidValueException(DbException.java:228)
+	at org.h2.jdbc.JdbcPreparedStatement.setParameter(JdbcPreparedStatement.java:1406)
+	at org.h2.jdbc.JdbcPreparedStatement.setString(JdbcPreparedStatement.java:355)
+	at DAL.ActingBudgetDAL.copyToLinkTable(ActingBudgetDAL.java:109)
+	at DAL.ActingBudgetDAL.copySeasonBudget(ActingBudgetDAL.java:35)
+	at BL.Test.main(Test.java:17)
+2016-11-07 15:32:11 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE LINKED TABLE LINK ('','jdbc:h2:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB','Daniel_m','','(SELECT * FROM ITEM WHERE ITEM.B_YEAR = '16[*]/17')')"; expected "[, ::, *, /, %, +, -, ||, ~, !~, NOT, LIKE, REGEXP, IS, IN, BETWEEN, AND, OR, ,, )"; SQL statement:
+CREATE LINKED TABLE LINK ('','jdbc:h2:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB','Daniel_m','','(SELECT * FROM ITEM WHERE ITEM.B_YEAR = '16/17')') [42001-192]
+2016-11-07 15:36:47 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/ActingBudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.message.DbException.convert(DbException.java:295)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:94)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:375)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:358)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2893)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:154)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:99)
+	at org.h2.engine.Database.getPageStore(Database.java:2463)
+	at org.h2.engine.Database.open(Database.java:692)
+	at org.h2.engine.Database.openDatabase(Database.java:270)
+	at org.h2.engine.Database.<init>(Database.java:264)
+	at org.h2.engine.Engine.openSession(Engine.java:64)
+	at org.h2.engine.Engine.openSession(Engine.java:176)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:154)
+	at org.h2.engine.Engine.createSession(Engine.java:137)
+	at org.h2.engine.Engine.createSession(Engine.java:27)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:349)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at DAL.ActingBudgetDAL.getConnection(ActingBudgetDAL.java:21)
+	at DAL.ActingBudgetDAL.copySeasonBudget(ActingBudgetDAL.java:30)
+	at BL.Test.main(Test.java:17)
+Caused by: org.h2.jdbc.JdbcSQLException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/ActingBudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 26 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/ActingBudgetDB.mv.db [1.4.192/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:773)
+	at org.h2.mvstore.FileStore.open(FileStore.java:172)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:344)
+	... 21 more
+2016-11-07 15:36:57 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE LINKED TABLE LINK ('','jdbc:h2:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB','Daniel_m','','(SELECT * FROM ITEM WHERE ITEM.B_YEAR is '16[*]/17')')"; expected "[, ::, *, /, %, +, -, ||, ~, !~, NOT, LIKE, REGEXP, IS, IN, BETWEEN, AND, OR, ,, )"; SQL statement:
+CREATE LINKED TABLE LINK ('','jdbc:h2:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB','Daniel_m','','(SELECT * FROM ITEM WHERE ITEM.B_YEAR is '16/17')') [42001-192]
+2016-11-07 15:37:53 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE LINKED TABLE LINK ('','jdbc:h2:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB','Daniel_m','','(SELECT * FROM ITEM WHERE ITEM.B_YEAR = '16[*]/17')')"; expected "[, ::, *, /, %, +, -, ||, ~, !~, NOT, LIKE, REGEXP, IS, IN, BETWEEN, AND, OR, ,, )"; SQL statement:
+CREATE LINKED TABLE LINK ('','jdbc:h2:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB','Daniel_m','','(SELECT * FROM ITEM WHERE ITEM.B_YEAR = '16/17')') [42001-192]
+2016-11-07 15:38:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE LINKED TABLE LINK ('','jdbc:h2:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB','Daniel_m','','(SELECT * FROM ITEM WHERE ITEM.B_YEAR = '16[*]/17')')"; expected "[, ::, *, /, %, +, -, ||, ~, !~, NOT, LIKE, REGEXP, IS, IN, BETWEEN, AND, OR, ,, )"; SQL statement:
+CREATE LINKED TABLE LINK ('','jdbc:h2:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB','Daniel_m','','(SELECT * FROM ITEM WHERE ITEM.B_YEAR = '16/17')') [42001-192]
+2016-11-07 15:39:21 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE LINKED TABLE LINK ('','jdbc:h2:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB','Daniel_m','','(SELECT * FROM ITEM WHERE ITEM.B_YEAR = '16[*]/17')')"; expected "[, ::, *, /, %, +, -, ||, ~, !~, NOT, LIKE, REGEXP, IS, IN, BETWEEN, AND, OR, ,, )"; SQL statement:
+CREATE LINKED TABLE LINK ('','jdbc:h2:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB','Daniel_m','','(SELECT * FROM ITEM WHERE ITEM.B_YEAR = '16/17')') [42001-192]
+2016-11-07 15:41:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE LINKED TABLE LINK ('','jdbc:h2:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB','Daniel_m','','(SELECT * FROM ITEM WHERE B_YEAR = '16[*]/17')')"; expected "[, ::, *, /, %, +, -, ||, ~, !~, NOT, LIKE, REGEXP, IS, IN, BETWEEN, AND, OR, ,, )"; SQL statement:
+CREATE LINKED TABLE LINK ('','jdbc:h2:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB','Daniel_m','','(SELECT * FROM ITEM WHERE B_YEAR = '16/17')') [42001-192]
+2016-11-07 15:42:46 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE LINKED TABLE LINK ('','jdbc:h2:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB','Daniel_m','','(SELECT * FROM ITEM WHERE ITEM.B_YEAR = '16[*]/17')')"; expected "[, ::, *, /, %, +, -, ||, ~, !~, NOT, LIKE, REGEXP, IS, IN, BETWEEN, AND, OR, ,, )"; SQL statement:
+CREATE LINKED TABLE LINK ('','jdbc:h2:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB','Daniel_m','','(SELECT * FROM ITEM WHERE ITEM.B_YEAR = '16/17')') [42001-192]
+2016-11-07 15:43:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE LINKED TABLE LINK ('','jdbc:h2:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB','Daniel_m','','(SELECT * FROM ITEM WHERE ITEM.B_YEAR = '16[*]/17')')"; expected "[, ::, *, /, %, +, -, ||, ~, !~, NOT, LIKE, REGEXP, IS, IN, BETWEEN, AND, OR, ,, )"; SQL statement:
+CREATE LINKED TABLE LINK ('','jdbc:h2:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB','Daniel_m','','(SELECT * FROM ITEM WHERE ITEM.B_YEAR = '16/17')') [42001-192]
+2016-11-07 15:43:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE LINKED TABLE LINK ('','jdbc:h2:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB','Daniel_m','','(SELECT * FROM ITEM WHERE ITEM.B_YEAR is '16[*]/17')')"; expected "[, ::, *, /, %, +, -, ||, ~, !~, NOT, LIKE, REGEXP, IS, IN, BETWEEN, AND, OR, ,, )"; SQL statement:
+CREATE LINKED TABLE LINK ('','jdbc:h2:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB','Daniel_m','','(SELECT * FROM ITEM WHERE ITEM.B_YEAR is '16/17')') [42001-192]
+2016-11-07 15:45:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Invalid value "1" for parameter "parameterIndex" [90008-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.getInvalidValueException(DbException.java:228)
+	at org.h2.jdbc.JdbcPreparedStatement.setParameter(JdbcPreparedStatement.java:1406)
+	at org.h2.jdbc.JdbcPreparedStatement.setString(JdbcPreparedStatement.java:355)
+	at DAL.ActingBudgetDAL.copyToLinkTable(ActingBudgetDAL.java:109)
+	at DAL.ActingBudgetDAL.copySeasonBudget(ActingBudgetDAL.java:35)
+	at BL.Test.main(Test.java:17)
+2016-11-07 15:45:45 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "(SELECT * FROM ASSUMPTION INNER JOIN ITEM ON ASSUMPTION.ID = ITEM.ID WHERE ITEM.B_YEAR = 16/17)(org.h2.jdbc.JdbcSQLException: Duplicate column name ""ID""; SQL statement:
+SELECT * FROM (SELECT * FROM ASSUMPTION INNER JOIN ITEM ON ASSUMPTION.ID = ITEM.ID WHERE ITEM.B_YEAR = 16/17) T WHERE 1=0 [42121-192])" not found; SQL statement:
+CREATE LINKED TABLE LINK ('','jdbc:h2:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB','Daniel_m','','(SELECT * FROM ASSUMPTION INNER JOIN ITEM ON ASSUMPTION.ID = ITEM.ID WHERE ITEM.B_YEAR = 16/17)') [42102-192]
+2016-11-07 15:46:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "(SELECT COLUMN_ID,  FROM SUM_COLUMN INNER JOIN ITEM ON COLUMN_ID = ITEM.ID WHERE ITEM.B_YEAR = 16/17)(org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement ""SELECT * FROM (SELECT COLUMN_ID,  FROM SUM_COLUMN INNER JOIN ITEM ON COLUMN_ID = ITEM.ID WHERE[*] ITEM.B_YEAR = 16/17) T WHERE 1=0""; expected ""(, ., [, ::, *, /, %, +, -, ||, ~, !~, NOT, LIKE, REGEXP, IS, IN, BETWEEN, AND, OR, RIGHT, LEFT, FULL, INNER, JOIN, CROSS, NATURAL, ,, SELECT""; SQL statement:
+SELECT * FROM (SELECT COLUMN_ID,  FROM SUM_COLUMN INNER JOIN ITEM ON COLUMN_ID = ITEM.ID WHERE ITEM.B_YEAR = 16/17) T WHERE 1=0 [42001-192])" not found; SQL statement:
+CREATE LINKED TABLE LINK ('','jdbc:h2:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB','Daniel_m','','(SELECT COLUMN_ID,  FROM SUM_COLUMN INNER JOIN ITEM ON COLUMN_ID = ITEM.ID WHERE ITEM.B_YEAR = 16/17)') [42102-192]
+2016-11-07 18:47:57 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/ActingBudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.message.DbException.convert(DbException.java:295)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:94)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:375)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:358)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2893)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:154)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:99)
+	at org.h2.engine.Database.getPageStore(Database.java:2463)
+	at org.h2.engine.Database.open(Database.java:692)
+	at org.h2.engine.Database.openDatabase(Database.java:270)
+	at org.h2.engine.Database.<init>(Database.java:264)
+	at org.h2.engine.Engine.openSession(Engine.java:64)
+	at org.h2.engine.Engine.openSession(Engine.java:176)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:154)
+	at org.h2.engine.Engine.createSession(Engine.java:137)
+	at org.h2.engine.Engine.createSession(Engine.java:27)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:349)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at DAL.ActingBudgetDAL.getConnection(ActingBudgetDAL.java:21)
+	at DAL.ActingBudgetDAL.copySeasonBudget(ActingBudgetDAL.java:30)
+	at BL.Test.main(Test.java:17)
+Caused by: org.h2.jdbc.JdbcSQLException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/ActingBudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 26 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/ActingBudgetDB.mv.db [1.4.192/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:773)
+	at org.h2.mvstore.FileStore.open(FileStore.java:172)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:344)
+	... 21 more
+2016-11-07 18:48:17 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "(SELECT ITEM_ID ,POS_INDEX ,VALUE  FROM ITEM_VALUES INNER JOIN ITEM ON ITEM_ID ITEM_ID  = ITEM.ID WHERE B_YEAR = 16/17)(org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement ""SELECT * FROM (SELECT ITEM_ID ,POS_INDEX ,VALUE  FROM ITEM_VALUES INNER JOIN ITEM ON ITEM_ID ITEM_ID[*]  = ITEM.ID WHERE B_YEAR = 16/17) T WHERE 1=0""; expected ""., (, [, ::, *, /, %, +, -, ||, ~, !~, NOT, LIKE, REGEXP, IS, IN, BETWEEN, AND, OR, RIGHT, LEFT, FULL, INNER, JOIN, CROSS, NATURAL, ,, WHERE, GROUP, HAVING, UNION, MINUS, EXCEPT, INTERSECT, ORDER, OFFSET, FETCH, LIMIT, FOR, )""; SQL statement:
+SELECT * FROM (SELECT ITEM_ID ,POS_INDEX ,VALUE  FROM ITEM_VALUES INNER JOIN ITEM ON ITEM_ID ITEM_ID  = ITEM.ID WHERE B_YEAR = 16/17) T WHERE 1=0 [42001-192])" not found; SQL statement:
+CREATE LINKED TABLE LINK ('','jdbc:h2:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB','Daniel_m','','(SELECT ITEM_ID ,POS_INDEX ,VALUE  FROM ITEM_VALUES INNER JOIN ITEM ON ITEM_ID ITEM_ID  = ITEM.ID WHERE B_YEAR = 16/17)') [42102-192]
+2016-11-07 18:49:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "(SELECT REVIEW_TABLE.TABLE_ID, TRAINING_TABLE_ID FROM TRAINING_TABLE INNER JOIN REGULAR_TABLE ON REVIEW_TABLE.TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17)(org.h2.jdbc.JdbcSQLException: Column ""REVIEW_TABLE.TABLE_ID"" not found; SQL statement:
+CREATE FORCE VIEW PUBLIC._0 AS
+SELECT
+    REVIEW_TABLE.TABLE_ID,
+    TRAINING_TABLE_ID
+FROM PUBLIC.TRAINING_TABLE
+INNER JOIN PUBLIC.REGULAR_TABLE
+    ON 1=1
+WHERE (B_YEAR = (16 / 17))
+    AND (REVIEW_TABLE.TABLE_ID = REGULAR_TABLE.TABLE_ID) [42122-192])" not found; SQL statement:
+CREATE LINKED TABLE LINK ('','jdbc:h2:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB','Daniel_m','','(SELECT REVIEW_TABLE.TABLE_ID, TRAINING_TABLE_ID FROM TRAINING_TABLE INNER JOIN REGULAR_TABLE ON REVIEW_TABLE.TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17)') [42102-192]
+2016-11-07 18:50:37 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "(SELECT TABLE_ID, COLUMN_ID, COLID_IN_TABLE FROM COLUMNS_TO_TABLE INNER JOIN REGULAR_TABLE ON COLUMNS_TO_TABLE.TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17)(org.h2.jdbc.JdbcSQLException: Ambiguous column name ""TABLE_ID""; SQL statement:
+SELECT * FROM (SELECT TABLE_ID, COLUMN_ID, COLID_IN_TABLE FROM COLUMNS_TO_TABLE INNER JOIN REGULAR_TABLE ON COLUMNS_TO_TABLE.TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17) T WHERE 1=0 [90059-192])" not found; SQL statement:
+CREATE LINKED TABLE LINK ('','jdbc:h2:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB','Daniel_m','','(SELECT TABLE_ID, COLUMN_ID, COLID_IN_TABLE FROM COLUMNS_TO_TABLE INNER JOIN REGULAR_TABLE ON COLUMNS_TO_TABLE.TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17)') [42102-192]
+2016-11-07 18:52:36 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "(SELECT COLUMNS_TO_TABLE.TABLE_ID, COLUMN_ID, COL_ID_IN_TABLE FROM FIXED_COLUMNS_TO_TABLE INNER JOIN REGULAR_TABLE FIXED_COLUMNS_TO_TABLE.TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17)(org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement ""SELECT * FROM (SELECT COLUMNS_TO_TABLE.TABLE_ID, COLUMN_ID, COL_ID_IN_TABLE FROM FIXED_COLUMNS_TO_TABLE INNER JOIN REGULAR_TABLE FIXED_COLUMNS_TO_TABLE.[*]TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17) T WHERE 1=0""; expected ""RIGHT, LEFT, FULL, INNER, JOIN, CROSS, NATURAL, ON, RIGHT, LEFT, FULL, INNER, JOIN, CROSS, NATURAL, ,, WHERE, GROUP, HAVING, UNION, MINUS, EXCEPT, INTERSECT, ORDER, OFFSET, FETCH, LIMIT, FOR, )""; SQL statement:
+SELECT * FROM (SELECT COLUMNS_TO_TABLE.TABLE_ID, COLUMN_ID, COL_ID_IN_TABLE FROM FIXED_COLUMNS_TO_TABLE INNER JOIN REGULAR_TABLE FIXED_COLUMNS_TO_TABLE.TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17) T WHERE 1=0 [42001-192])" not found; SQL statement:
+CREATE LINKED TABLE LINK ('','jdbc:h2:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB','Daniel_m','','(SELECT COLUMNS_TO_TABLE.TABLE_ID, COLUMN_ID, COL_ID_IN_TABLE FROM FIXED_COLUMNS_TO_TABLE INNER JOIN REGULAR_TABLE FIXED_COLUMNS_TO_TABLE.TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17)') [42102-192]
+2016-11-07 18:53:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "(SELECT COLUMNS_TO_TABLE.TABLE_ID, COLUMN_ID, COL_ID_IN_TABLE FROM FIXED_COLUMNS_TO_TABLE INNER JOIN REGULAR_TABLE FIXED_COLUMNS_TO_TABLE.TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17)(org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement ""SELECT * FROM (SELECT COLUMNS_TO_TABLE.TABLE_ID, COLUMN_ID, COL_ID_IN_TABLE FROM FIXED_COLUMNS_TO_TABLE INNER JOIN REGULAR_TABLE FIXED_COLUMNS_TO_TABLE.[*]TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17) T WHERE 1=0""; expected ""RIGHT, LEFT, FULL, INNER, JOIN, CROSS, NATURAL, ON, RIGHT, LEFT, FULL, INNER, JOIN, CROSS, NATURAL, ,, WHERE, GROUP, HAVING, UNION, MINUS, EXCEPT, INTERSECT, ORDER, OFFSET, FETCH, LIMIT, FOR, )""; SQL statement:
+SELECT * FROM (SELECT COLUMNS_TO_TABLE.TABLE_ID, COLUMN_ID, COL_ID_IN_TABLE FROM FIXED_COLUMNS_TO_TABLE INNER JOIN REGULAR_TABLE FIXED_COLUMNS_TO_TABLE.TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17) T WHERE 1=0 [42001-192])" not found; SQL statement:
+CREATE LINKED TABLE LINK ('','jdbc:h2:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB','Daniel_m','','(SELECT COLUMNS_TO_TABLE.TABLE_ID, COLUMN_ID, COL_ID_IN_TABLE FROM FIXED_COLUMNS_TO_TABLE INNER JOIN REGULAR_TABLE FIXED_COLUMNS_TO_TABLE.TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17)') [42102-192]
+2016-11-07 18:54:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "(SELECT FIXED_COLUMNS_TO_TABLE.TABLE_ID, COLUMN_ID, COL_ID_IN_TABLE FROM FIXED_COLUMNS_TO_TABLE INNER JOIN REGULAR_TABLE FIXED_COLUMNS_TO_TABLE.TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17)(org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement ""SELECT * FROM (SELECT FIXED_COLUMNS_TO_TABLE.TABLE_ID, COLUMN_ID, COL_ID_IN_TABLE FROM FIXED_COLUMNS_TO_TABLE INNER JOIN REGULAR_TABLE FIXED_COLUMNS_TO_TABLE.[*]TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17) T WHERE 1=0""; expected ""RIGHT, LEFT, FULL, INNER, JOIN, CROSS, NATURAL, ON, RIGHT, LEFT, FULL, INNER, JOIN, CROSS, NATURAL, ,, WHERE, GROUP, HAVING, UNION, MINUS, EXCEPT, INTERSECT, ORDER, OFFSET, FETCH, LIMIT, FOR, )""; SQL statement:
+SELECT * FROM (SELECT FIXED_COLUMNS_TO_TABLE.TABLE_ID, COLUMN_ID, COL_ID_IN_TABLE FROM FIXED_COLUMNS_TO_TABLE INNER JOIN REGULAR_TABLE FIXED_COLUMNS_TO_TABLE.TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17) T WHERE 1=0 [42001-192])" not found; SQL statement:
+CREATE LINKED TABLE LINK ('','jdbc:h2:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB','Daniel_m','','(SELECT FIXED_COLUMNS_TO_TABLE.TABLE_ID, COLUMN_ID, COL_ID_IN_TABLE FROM FIXED_COLUMNS_TO_TABLE INNER JOIN REGULAR_TABLE FIXED_COLUMNS_TO_TABLE.TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17)') [42102-192]
+2016-11-07 20:16:51 jdbc[3]: null
+org.h2.message.DbException: The connection was not closed by the application and is garbage collected [90018-192]
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:187)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:129)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at org.h2.server.web.WebServer.getConnection(WebServer.java:735)
+	at org.h2.server.web.WebApp.login(WebApp.java:955)
+	at org.h2.server.web.WebApp.process(WebApp.java:211)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:170)
+	at org.h2.server.web.WebThread.process(WebThread.java:133)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.h2.jdbc.JdbcSQLException: The connection was not closed by the application and is garbage collected [90018-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 14 more
+2016-11-07 20:18:08 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INSERT INTO DEPARTMENT (1[*], 'Team') "; expected "identifier"; SQL statement:
+insert into department (1, 'Team') [42001-192]
+2016-11-07 20:18:08 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INSERT INTO DEPARTMENT (3[*] 'Player') "; expected "identifier"; SQL statement:
+insert into department (3 'Player') [42001-192]
+2016-11-07 20:18:20 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INSERT INTO DEPARTMENT VALUES(3 'Player'[*]) "; expected "[, ::, *, /, %, +, -, ||, ~, !~, NOT, LIKE, REGEXP, IS, IN, BETWEEN, AND, OR, ,, )"; SQL statement:
+insert into department values(3 'Player') [42001-192]
+2016-11-07 20:20:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "IF[*] NOT EXISTS 
+    (SELECT * 
+    FROM LINK 
+INSERT INTO  DEPARTMENT  VALUES(DEP_ID, NAME) "; expected "INSERT, {"; SQL statement:
+IF NOT EXISTS 
+    (SELECT * 
+    FROM link 
+INSERT INTO  DEPARTMENT  values(DEP_ID, NAME) [42001-192]
+2016-11-07 20:20:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "IF[*] NOT EXISTS 
+    (SELECT * 
+    FROM LINK)
+INSERT INTO  DEPARTMENT  VALUES(DEP_ID, NAME) "; expected "INSERT, {"; SQL statement:
+IF NOT EXISTS 
+    (SELECT * 
+    FROM link)
+INSERT INTO  DEPARTMENT  values(DEP_ID, NAME) [42001-192]
+2016-11-07 20:23:17 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "IF[*] NOT EXISTS 
+INSERT INTO DEPARTMENT SELECT * FROM LINK "; expected "INSERT, {"; SQL statement:
+IF NOT EXISTS 
+insert into DEPARTMENT select * from link [42001-192]
+2016-11-07 20:24:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "FORCE[*] INSERT INTO DEPARTMENT SELECT * FROM LINK "; expected "FROM, {"; SQL statement:
+force insert into DEPARTMENT select * from link [42001-192]
+2016-11-07 20:27:09 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "IF[*] NOT EXISTS 
+    (SELECT *
+    FROM  LINK)
+INSERT INTO DEPARTMENT"; expected "INSERT, {"; SQL statement:
+IF NOT EXISTS 
+    (SELECT *
+    FROM  LINK)
+INSERT INTO DEPARTMENT [42001-192]
+2016-11-07 20:31:21 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "DEPATMENT" not found; SQL statement:
+delete from depatment where dep_id>3 [42102-192]
+2016-11-07 20:39:16 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/ActingBudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.message.DbException.convert(DbException.java:295)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:94)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:375)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:358)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2893)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:154)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:99)
+	at org.h2.engine.Database.getPageStore(Database.java:2463)
+	at org.h2.engine.Database.open(Database.java:692)
+	at org.h2.engine.Database.openDatabase(Database.java:270)
+	at org.h2.engine.Database.<init>(Database.java:264)
+	at org.h2.engine.Engine.openSession(Engine.java:64)
+	at org.h2.engine.Engine.openSession(Engine.java:176)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:154)
+	at org.h2.engine.Engine.createSession(Engine.java:137)
+	at org.h2.engine.Engine.createSession(Engine.java:27)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:349)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at DAL.ActingBudgetDAL.getConnection(ActingBudgetDAL.java:21)
+	at DAL.ActingBudgetDAL.copySeasonBudget(ActingBudgetDAL.java:35)
+	at BL.Test.main(Test.java:14)
+Caused by: org.h2.jdbc.JdbcSQLException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/ActingBudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 26 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/ActingBudgetDB.mv.db [1.4.192/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:773)
+	at org.h2.mvstore.FileStore.open(FileStore.java:172)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:344)
+	... 21 more
+2016-11-07 20:44:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "LINK" already exists; SQL statement:
+CREATE LINKED TABLE LINK ('','jdbc:h2:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB','Daniel_m','','(SELECT * FROM DEPARTMENT)') [42101-192]
+2016-11-07 20:51:30 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/ActingBudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.message.DbException.convert(DbException.java:295)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:94)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:375)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:358)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2893)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:154)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:99)
+	at org.h2.engine.Database.getPageStore(Database.java:2463)
+	at org.h2.engine.Database.open(Database.java:692)
+	at org.h2.engine.Database.openDatabase(Database.java:270)
+	at org.h2.engine.Database.<init>(Database.java:264)
+	at org.h2.engine.Engine.openSession(Engine.java:64)
+	at org.h2.engine.Engine.openSession(Engine.java:176)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:154)
+	at org.h2.engine.Engine.createSession(Engine.java:137)
+	at org.h2.engine.Engine.createSession(Engine.java:27)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:349)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at DAL.BudgetDAL.getConnection(BudgetDAL.java:46)
+	at DAL.ActingBudgetDAL.copySeasonBudget(ActingBudgetDAL.java:29)
+	at BL.Test.main(Test.java:14)
+Caused by: org.h2.jdbc.JdbcSQLException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/ActingBudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 26 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/ActingBudgetDB.mv.db [1.4.192/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:773)
+	at org.h2.mvstore.FileStore.open(FileStore.java:172)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:344)
+	... 21 more

@@ -1,0 +1,1595 @@
+2016-08-25 15:22:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "ALTER TABLE REGULAR_TABLE([*]
+ADD TABLE_TYPE INT NOT NULL
+) "; expected "., ADD, SET, RENAME, DROP, CHANGE, MODIFY, ALTER"; SQL statement:
+ALTER TABLE REGULAR_TABLE(
+ADD TABLE_TYPE int not null
+) [42001-192]
+2016-08-29 15:09:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Column "TEAM" not found; SQL statement:
+SELECT NAME FROM DEPARTMENT WHERE DEPARTMENT.NAME = Team [42122-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.Comparison.optimize(Comparison.java:180)
+	at org.h2.command.dml.Select.prepare(Select.java:855)
+	at org.h2.command.Parser.prepareCommand(Parser.java:259)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1202)
+	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:73)
+	at DAL.BudgetDAL.isDepartmentExist(BudgetDAL.java:414)
+	at BL.Test.main(Test.java:15)
+2016-08-29 15:11:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Column "TEAM" not found; SQL statement:
+SELECT NAME FROM DEPARTMENT WHERE DEPARTMENT.NAME = Team [42122-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.Comparison.optimize(Comparison.java:180)
+	at org.h2.command.dml.Select.prepare(Select.java:855)
+	at org.h2.command.Parser.prepareCommand(Parser.java:259)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1202)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:73)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:290)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:1136)
+	at DAL.BudgetDAL.isDepartmentExist(BudgetDAL.java:413)
+	at BL.Test.main(Test.java:15)
+2016-08-29 15:11:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Column "TEAM" not found; SQL statement:
+SELECT NAME FROM DEPARTMENT WHERE DEPARTMENT.NAME = Team [42122-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.Comparison.optimize(Comparison.java:180)
+	at org.h2.command.dml.Select.prepare(Select.java:855)
+	at org.h2.command.Parser.prepareCommand(Parser.java:259)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1202)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:73)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:290)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:1136)
+	at DAL.BudgetDAL.isDepartmentExist(BudgetDAL.java:413)
+	at BL.Test.main(Test.java:15)
+2016-08-29 15:15:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FORM[*] DEPARTMENT "; SQL statement:
+select * form department [42000-192]
+2016-08-29 15:26:44 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.message.DbException.convert(DbException.java:295)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:94)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:375)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:358)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2893)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:154)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:99)
+	at org.h2.engine.Database.getPageStore(Database.java:2463)
+	at org.h2.engine.Database.open(Database.java:692)
+	at org.h2.engine.Database.openDatabase(Database.java:270)
+	at org.h2.engine.Database.<init>(Database.java:264)
+	at org.h2.engine.Engine.openSession(Engine.java:64)
+	at org.h2.engine.Engine.openSession(Engine.java:176)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:154)
+	at org.h2.engine.Engine.createSession(Engine.java:137)
+	at org.h2.engine.Engine.createSession(Engine.java:27)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:349)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at DAL.BudgetDAL.getConnection(BudgetDAL.java:48)
+	at DAL.BudgetDAL.isDepartmentExist(BudgetDAL.java:411)
+	at BL.Test.main(Test.java:16)
+Caused by: org.h2.jdbc.JdbcSQLException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 26 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB.mv.db [1.4.192/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:773)
+	at org.h2.mvstore.FileStore.open(FileStore.java:172)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:344)
+	... 21 more
+2016-08-29 15:27:33 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.message.DbException.convert(DbException.java:295)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:94)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:375)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:358)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2893)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:154)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:99)
+	at org.h2.engine.Database.getPageStore(Database.java:2463)
+	at org.h2.engine.Database.open(Database.java:692)
+	at org.h2.engine.Database.openDatabase(Database.java:270)
+	at org.h2.engine.Database.<init>(Database.java:264)
+	at org.h2.engine.Engine.openSession(Engine.java:64)
+	at org.h2.engine.Engine.openSession(Engine.java:176)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:154)
+	at org.h2.engine.Engine.createSession(Engine.java:137)
+	at org.h2.engine.Engine.createSession(Engine.java:27)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:349)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at DAL.BudgetDAL.getConnection(BudgetDAL.java:48)
+	at DAL.BudgetDAL.isDepartmentExist(BudgetDAL.java:411)
+	at BL.Test.main(Test.java:16)
+Caused by: org.h2.jdbc.JdbcSQLException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 26 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB.mv.db [1.4.192/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:773)
+	at org.h2.mvstore.FileStore.open(FileStore.java:172)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:344)
+	... 21 more
+2016-08-29 15:36:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Column "DEP_NAME" not found; SQL statement:
+SELECT * FROM DEPARTMENT WHERE DEP_NAME=Team [42122-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.Comparison.optimize(Comparison.java:178)
+	at org.h2.command.dml.Select.prepare(Select.java:855)
+	at org.h2.command.Parser.prepareCommand(Parser.java:259)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1202)
+	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:73)
+	at DAL.BudgetDAL.isDepartmentExist(BudgetDAL.java:416)
+	at BL.Test.main(Test.java:16)
+2016-08-29 15:37:20 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.message.DbException.convert(DbException.java:295)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:94)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:375)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:358)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2893)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:154)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:99)
+	at org.h2.engine.Database.getPageStore(Database.java:2463)
+	at org.h2.engine.Database.open(Database.java:692)
+	at org.h2.engine.Database.openDatabase(Database.java:270)
+	at org.h2.engine.Database.<init>(Database.java:264)
+	at org.h2.engine.Engine.openSession(Engine.java:64)
+	at org.h2.engine.Engine.openSession(Engine.java:176)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:154)
+	at org.h2.engine.Engine.createSession(Engine.java:137)
+	at org.h2.engine.Engine.createSession(Engine.java:27)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:349)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at DAL.BudgetDAL.getConnection(BudgetDAL.java:48)
+	at DAL.BudgetDAL.isDepartmentExist(BudgetDAL.java:411)
+	at BL.Test.main(Test.java:16)
+Caused by: org.h2.jdbc.JdbcSQLException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 26 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB.mv.db [1.4.192/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:773)
+	at org.h2.mvstore.FileStore.open(FileStore.java:172)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:344)
+	... 21 more
+2016-08-29 15:37:34 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Column "TEAM" not found; SQL statement:
+SELECT * FROM DEPARTMENT WHERE NAME=Team [42122-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.Comparison.optimize(Comparison.java:180)
+	at org.h2.command.dml.Select.prepare(Select.java:855)
+	at org.h2.command.Parser.prepareCommand(Parser.java:259)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1202)
+	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:73)
+	at DAL.BudgetDAL.isDepartmentExist(BudgetDAL.java:416)
+	at BL.Test.main(Test.java:16)
+2016-08-29 15:38:40 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Column "TEAM" not found; SQL statement:
+SELECT * FROM DEPARTMENT WHERE DEPARTMENT.NAME=Team [42122-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.Comparison.optimize(Comparison.java:180)
+	at org.h2.command.dml.Select.prepare(Select.java:855)
+	at org.h2.command.Parser.prepareCommand(Parser.java:259)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1202)
+	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:73)
+	at DAL.BudgetDAL.isDepartmentExist(BudgetDAL.java:416)
+	at BL.Test.main(Test.java:16)
+2016-08-29 15:40:35 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.message.DbException.convert(DbException.java:295)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:94)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:375)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:358)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2893)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:154)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:99)
+	at org.h2.engine.Database.getPageStore(Database.java:2463)
+	at org.h2.engine.Database.open(Database.java:692)
+	at org.h2.engine.Database.openDatabase(Database.java:270)
+	at org.h2.engine.Database.<init>(Database.java:264)
+	at org.h2.engine.Engine.openSession(Engine.java:64)
+	at org.h2.engine.Engine.openSession(Engine.java:176)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:154)
+	at org.h2.engine.Engine.createSession(Engine.java:137)
+	at org.h2.engine.Engine.createSession(Engine.java:27)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:349)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at DAL.BudgetDAL.getConnection(BudgetDAL.java:48)
+	at DAL.BudgetDAL.isDepartmentExist(BudgetDAL.java:411)
+	at BL.Test.main(Test.java:16)
+Caused by: org.h2.jdbc.JdbcSQLException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 26 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB.mv.db [1.4.192/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:773)
+	at org.h2.mvstore.FileStore.open(FileStore.java:172)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:344)
+	... 21 more
+2016-08-29 15:40:49 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: The object is already closed [90007-192]
+2016-08-29 15:44:46 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: The object is already closed [90007-192]
+2016-08-29 15:45:06 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: The object is already closed [90007-192]
+2016-08-31 14:47:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Column "TEAM" not found; SQL statement:
+SELECT * FROM CLASSIFICATION 
+INNER JOIN DEPARTMENT ON CLASSIFICATION.DEP_ID = DEPARTMENT.DEPID
+INNER JOIN SUB_DEPARTMENT ON  CLASSIFICATION.SUB_DEP_ID  = SUB_DEPARTMENTSUB_DEP_ID 
+WHERE DEPARTMENT .NAME  = "TEAM" AND SUB_DEPARTMENT.NAME  = "REVIEW" [42122-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.Comparison.optimize(Comparison.java:180)
+	at org.h2.expression.ConditionAndOr.optimize(ConditionAndOr.java:130)
+	at org.h2.expression.ConditionAndOr.optimize(ConditionAndOr.java:130)
+	at org.h2.command.dml.Select.prepare(Select.java:855)
+	at org.h2.command.Parser.prepareCommand(Parser.java:259)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1202)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2016-08-31 14:47:43 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Column "SUB_DEPARTMENTSUB_DEP_ID" not found; SQL statement:
+SELECT * FROM CLASSIFICATION 
+INNER JOIN DEPARTMENT ON CLASSIFICATION.DEP_ID = DEPARTMENT.DEPID
+INNER JOIN SUB_DEPARTMENT ON  CLASSIFICATION.SUB_DEP_ID  = SUB_DEPARTMENTSUB_DEP_ID 
+WHERE DEPARTMENT .NAME  = 'TEAM' AND SUB_DEPARTMENT.NAME  = 'REVIEW' [42122-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.Comparison.optimize(Comparison.java:180)
+	at org.h2.expression.ConditionAndOr.optimize(ConditionAndOr.java:130)
+	at org.h2.expression.ConditionAndOr.optimize(ConditionAndOr.java:131)
+	at org.h2.command.dml.Select.prepare(Select.java:855)
+	at org.h2.command.Parser.prepareCommand(Parser.java:259)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1202)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2016-08-31 14:48:09 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Column "DEPARTMENT.DEPID" not found; SQL statement:
+SELECT * FROM CLASSIFICATION 
+INNER JOIN DEPARTMENT ON CLASSIFICATION.DEP_ID = DEPARTMENT.DEPID
+INNER JOIN SUB_DEPARTMENT ON  CLASSIFICATION.SUB_DEP_ID  = SUB_DEPARTMENT.SUB_DEP_ID 
+WHERE DEPARTMENT .NAME  = 'TEAM' AND SUB_DEPARTMENT.NAME  = 'REVIEW' [42122-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.Comparison.optimize(Comparison.java:180)
+	at org.h2.expression.ConditionAndOr.optimize(ConditionAndOr.java:131)
+	at org.h2.expression.ConditionAndOr.optimize(ConditionAndOr.java:131)
+	at org.h2.command.dml.Select.prepare(Select.java:855)
+	at org.h2.command.Parser.prepareCommand(Parser.java:259)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1202)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2016-08-31 15:08:30 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.message.DbException.convert(DbException.java:295)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:94)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:375)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:358)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2893)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:154)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:99)
+	at org.h2.engine.Database.getPageStore(Database.java:2463)
+	at org.h2.engine.Database.open(Database.java:692)
+	at org.h2.engine.Database.openDatabase(Database.java:270)
+	at org.h2.engine.Database.<init>(Database.java:264)
+	at org.h2.engine.Engine.openSession(Engine.java:64)
+	at org.h2.engine.Engine.openSession(Engine.java:176)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:154)
+	at org.h2.engine.Engine.createSession(Engine.java:137)
+	at org.h2.engine.Engine.createSession(Engine.java:27)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:349)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at DAL.BudgetDAL.getConnection(BudgetDAL.java:45)
+	at DAL.BudgetDAL.getClassID(BudgetDAL.java:689)
+	at BL.Test.main(Test.java:16)
+Caused by: org.h2.jdbc.JdbcSQLException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 26 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB.mv.db [1.4.192/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:773)
+	at org.h2.mvstore.FileStore.open(FileStore.java:172)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:344)
+	... 21 more
+2016-08-31 15:08:47 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Column "DEPARTMENT.DEP_IDINNER" not found; SQL statement:
+SELECT * FROM CLASSIFICATION INNER JOIN DEPARTMENT ON CLASSIFICATION.DEP_ID = DEPARTMENT.DEP_IDINNER JOIN SUB_DEPARTMENT ON  CLASSIFICATION.SUB_DEP_ID  = SUB_DEPARTMENT.SUB_DEP_ID WHERE DEPARTMENT .NAME  = ? AND SUB_DEPARTMENT.NAME  = ? [42122-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.Comparison.optimize(Comparison.java:180)
+	at org.h2.expression.ConditionAndOr.optimize(ConditionAndOr.java:131)
+	at org.h2.expression.ConditionAndOr.optimize(ConditionAndOr.java:131)
+	at org.h2.command.dml.Select.prepare(Select.java:855)
+	at org.h2.command.Parser.prepareCommand(Parser.java:259)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1202)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:73)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:290)
+	at DAL.BudgetDAL.getClassificationID(BudgetDAL.java:698)
+	at DAL.BudgetDAL.getClassID(BudgetDAL.java:689)
+	at BL.Test.main(Test.java:16)
+2016-08-31 15:10:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Parameter "#2" is not set; SQL statement:
+SELECT * FROM CLASSIFICATION INNER JOIN DEPARTMENT ON CLASSIFICATION.DEP_ID = DEPARTMENT.DEP_ID INNER JOIN SUB_DEPARTMENT ON  CLASSIFICATION.SUB_DEP_ID  = SUB_DEPARTMENT.SUB_DEP_ID WHERE DEPARTMENT .NAME  = ? AND SUB_DEPARTMENT.NAME  = ? [90012-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.Parameter.checkSet(Parameter.java:81)
+	at org.h2.command.Prepared.checkParameters(Prepared.java:164)
+	at org.h2.command.CommandContainer.query(CommandContainer.java:109)
+	at org.h2.command.Command.executeQuery(Command.java:201)
+	at org.h2.jdbc.JdbcPreparedStatement.executeQuery(JdbcPreparedStatement.java:110)
+	at DAL.BudgetDAL.getClassificationID(BudgetDAL.java:701)
+	at DAL.BudgetDAL.getClassID(BudgetDAL.java:689)
+	at BL.Test.main(Test.java:16)
+2016-08-31 15:11:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: The object is already closed [90007-192]
+2016-08-31 16:28:52 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.message.DbException.convert(DbException.java:295)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:94)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:375)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:358)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2893)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:154)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:99)
+	at org.h2.engine.Database.getPageStore(Database.java:2463)
+	at org.h2.engine.Database.open(Database.java:692)
+	at org.h2.engine.Database.openDatabase(Database.java:270)
+	at org.h2.engine.Database.<init>(Database.java:264)
+	at org.h2.engine.Engine.openSession(Engine.java:64)
+	at org.h2.engine.Engine.openSession(Engine.java:176)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:154)
+	at org.h2.engine.Engine.createSession(Engine.java:137)
+	at org.h2.engine.Engine.createSession(Engine.java:27)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:349)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at DAL.BudgetDAL.getConnection(BudgetDAL.java:45)
+	at DAL.BudgetDAL.getClassID(BudgetDAL.java:694)
+	at BL.Test.main(Test.java:16)
+Caused by: org.h2.jdbc.JdbcSQLException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 26 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB.mv.db [1.4.192/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:773)
+	at org.h2.mvstore.FileStore.open(FileStore.java:172)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:344)
+	... 21 more
+2016-08-31 16:29:44 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.message.DbException.convert(DbException.java:295)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:94)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:375)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:358)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2893)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:154)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:99)
+	at org.h2.engine.Database.getPageStore(Database.java:2463)
+	at org.h2.engine.Database.open(Database.java:692)
+	at org.h2.engine.Database.openDatabase(Database.java:270)
+	at org.h2.engine.Database.<init>(Database.java:264)
+	at org.h2.engine.Engine.openSession(Engine.java:64)
+	at org.h2.engine.Engine.openSession(Engine.java:176)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:154)
+	at org.h2.engine.Engine.createSession(Engine.java:137)
+	at org.h2.engine.Engine.createSession(Engine.java:27)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:349)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at DAL.BudgetDAL.getConnection(BudgetDAL.java:45)
+	at DAL.BudgetDAL.getClassID(BudgetDAL.java:694)
+	at BL.Test.main(Test.java:16)
+Caused by: org.h2.jdbc.JdbcSQLException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 26 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB.mv.db [1.4.192/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:773)
+	at org.h2.mvstore.FileStore.open(FileStore.java:172)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:344)
+	... 21 more
+2016-08-31 16:31:40 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Data conversion error converting "Team" [22018-192]
+2016-08-31 16:33:10 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Data conversion error converting "Team" [22018-192]
+2016-08-31 16:36:18 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.message.DbException.convert(DbException.java:295)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:94)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:375)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:358)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2893)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:154)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:99)
+	at org.h2.engine.Database.getPageStore(Database.java:2463)
+	at org.h2.engine.Database.open(Database.java:692)
+	at org.h2.engine.Database.openDatabase(Database.java:270)
+	at org.h2.engine.Database.<init>(Database.java:264)
+	at org.h2.engine.Engine.openSession(Engine.java:64)
+	at org.h2.engine.Engine.openSession(Engine.java:176)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:154)
+	at org.h2.engine.Engine.createSession(Engine.java:137)
+	at org.h2.engine.Engine.createSession(Engine.java:27)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:349)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at DAL.BudgetDAL.getConnection(BudgetDAL.java:45)
+	at DAL.BudgetDAL.getClassID(BudgetDAL.java:694)
+	at BL.Test.main(Test.java:17)
+Caused by: org.h2.jdbc.JdbcSQLException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 26 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB.mv.db [1.4.192/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:773)
+	at org.h2.mvstore.FileStore.open(FileStore.java:172)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:344)
+	... 21 more
+2016-08-31 16:36:37 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Data conversion error converting "Team" [22018-192]
+2016-08-31 16:38:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Data conversion error converting "Team" [22018-192]
+2016-08-31 16:39:31 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: The object is already closed [90007-192]
+2016-08-31 16:41:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: The object is already closed [90007-192]
+2016-08-31 16:44:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "FORM" not found; SQL statement:
+delete form CLASSIFICATION  where CLASSIFICATION .ID = 21 [42102-192]
+2016-09-04 14:18:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: No data is available [2000-192]
+2016-09-04 14:20:02 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.message.DbException.convert(DbException.java:295)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:94)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:375)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:358)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2893)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:154)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:99)
+	at org.h2.engine.Database.getPageStore(Database.java:2463)
+	at org.h2.engine.Database.open(Database.java:692)
+	at org.h2.engine.Database.openDatabase(Database.java:270)
+	at org.h2.engine.Database.<init>(Database.java:264)
+	at org.h2.engine.Engine.openSession(Engine.java:64)
+	at org.h2.engine.Engine.openSession(Engine.java:176)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:154)
+	at org.h2.engine.Engine.createSession(Engine.java:137)
+	at org.h2.engine.Engine.createSession(Engine.java:27)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:349)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at DAL.BudgetDAL.getConnection(BudgetDAL.java:45)
+	at BL.Test.main(Test.java:17)
+Caused by: org.h2.jdbc.JdbcSQLException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 25 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB.mv.db [1.4.192/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:773)
+	at org.h2.mvstore.FileStore.open(FileStore.java:172)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:344)
+	... 20 more
+2016-09-04 14:20:10 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: No data is available [2000-192]
+2016-09-04 14:22:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: No data is available [2000-192]
+2016-09-04 14:27:25 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.message.DbException.convert(DbException.java:295)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:94)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:375)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:358)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2893)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:154)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:99)
+	at org.h2.engine.Database.getPageStore(Database.java:2463)
+	at org.h2.engine.Database.open(Database.java:692)
+	at org.h2.engine.Database.openDatabase(Database.java:270)
+	at org.h2.engine.Database.<init>(Database.java:264)
+	at org.h2.engine.Engine.openSession(Engine.java:64)
+	at org.h2.engine.Engine.openSession(Engine.java:176)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:154)
+	at org.h2.engine.Engine.createSession(Engine.java:137)
+	at org.h2.engine.Engine.createSession(Engine.java:27)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:349)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at DAL.BudgetDAL.getConnection(BudgetDAL.java:45)
+	at BL.Test.main(Test.java:17)
+Caused by: org.h2.jdbc.JdbcSQLException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 25 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/workspace1/BudgetTool/BudgetDB.mv.db [1.4.192/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:773)
+	at org.h2.mvstore.FileStore.open(FileStore.java:172)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:344)
+	... 20 more
+2016-09-04 14:28:05 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Invalid value "0" for parameter "columnIndex" [90008-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.getInvalidValueException(DbException.java:228)
+	at org.h2.jdbc.JdbcResultSet.checkColumnIndex(JdbcResultSet.java:3172)
+	at org.h2.jdbc.JdbcResultSet.get(JdbcResultSet.java:3200)
+	at org.h2.jdbc.JdbcResultSet.getString(JdbcResultSet.java:285)
+	at DAL.BudgetDAL.getClassification(BudgetDAL.java:478)
+	at BL.Test.main(Test.java:17)
+2016-09-04 14:40:36 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Invalid value "0" for parameter "columnIndex" [90008-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.getInvalidValueException(DbException.java:228)
+	at org.h2.jdbc.JdbcResultSet.checkColumnIndex(JdbcResultSet.java:3172)
+	at org.h2.jdbc.JdbcResultSet.get(JdbcResultSet.java:3200)
+	at org.h2.jdbc.JdbcResultSet.getString(JdbcResultSet.java:285)
+	at DAL.BudgetDAL.getClassification(BudgetDAL.java:478)
+	at BL.Test.main(Test.java:17)
+2016-09-04 14:40:50 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: No data is available [2000-192]
+2016-09-04 14:42:40 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: No data is available [2000-192]
+2016-09-04 14:43:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: No data is available [2000-192]
+2016-09-04 14:44:42 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT FROM CLASSIFICATION INNER JOIN DEPARTMENT ON DEPARTMENT.DEP_ID = CLASSIFICATION.DEP_ID INNER JOIN SUB_DEPARTMENT ON SUB_DEPARTMENT.SUB_DEP_ID = CLASSIFICATION.SUB_DEP_ID WHERE[*] CLASSIFICATION.ID = ? "; expected "(, ., [, ::, *, /, %, +, -, ||, ~, !~, NOT, LIKE, REGEXP, IS, IN, BETWEEN, AND, OR, RIGHT, LEFT, FULL, INNER, JOIN, CROSS, NATURAL, ,, SELECT"; SQL statement:
+Select FROM CLASSIFICATION INNER JOIN DEPARTMENT ON DEPARTMENT.DEP_ID = CLASSIFICATION.DEP_ID INNER JOIN SUB_DEPARTMENT ON SUB_DEPARTMENT.SUB_DEP_ID = CLASSIFICATION.SUB_DEP_ID WHERE CLASSIFICATION.ID = ? [42001-192]
+2016-09-05 11:43:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "COLUMN" not found; SQL statement:
+SELECT * FROM COLUMN [42102-192]
+2016-09-05 11:44:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "COLUMN" not found; SQL statement:
+SELECT * FROM Column [42102-192]
+2016-09-05 11:44:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM 'Column'[*]"; expected "identifier"; SQL statement:
+SELECT * FROM 'Column' [42001-192]
+2016-09-05 11:45:49 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM ?[*]"; expected "identifier"; SQL statement:
+SELECT * FROM ? [42001-192]
+2016-09-05 11:46:36 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM ?[*] "; expected "identifier"; SQL statement:
+SELECT * FROM ?  [42001-192]
+2016-09-05 11:46:57 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * ASSUMPTION[*] "; SQL statement:
+SELECT * Assumption [42000-192]
+2016-09-05 11:48:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "COLUMN" not found; SQL statement:
+SELECT * FROM COLUMN [42102-192]
+2016-09-05 11:48:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM ?[*]"; expected "identifier"; SQL statement:
+SELECT * FROM ? [42001-192]
+2016-09-05 11:49:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM 'COLUMN'[*]"; expected "identifier"; SQL statement:
+SELECT * FROM 'COLUMN' [42001-192]
+2016-09-05 11:50:50 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "COLUMN" not found; SQL statement:
+SELECT * FROM "COLUMN" [42102-192]
+2016-09-05 16:18:16 jdbc[5]: null
+org.h2.message.DbException: The connection was not closed by the application and is garbage collected [90018-192]
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:187)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:129)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at org.h2.server.web.WebServer.getConnection(WebServer.java:735)
+	at org.h2.server.web.WebApp.login(WebApp.java:955)
+	at org.h2.server.web.WebApp.process(WebApp.java:211)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:170)
+	at org.h2.server.web.WebThread.process(WebThread.java:133)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.h2.jdbc.JdbcSQLException: The connection was not closed by the application and is garbage collected [90018-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 14 more
+2016-09-06 14:52:04 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "ALTER REGULAR_TABLE[*] 
+ADD COL_INDEX INT "; expected "TABLE, USER, INDEX, SCHEMA, SEQUENCE, VIEW"; SQL statement:
+Alter REGULAR_TABLE 
+add COL_INDEX int [42001-192]
+2016-09-11 13:26:38 jdbc[3]: null
+org.h2.message.DbException: The connection was not closed by the application and is garbage collected [90018-192]
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:187)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:129)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at org.h2.server.web.WebServer.getConnection(WebServer.java:735)
+	at org.h2.server.web.WebApp.login(WebApp.java:955)
+	at org.h2.server.web.WebApp.process(WebApp.java:211)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:170)
+	at org.h2.server.web.WebThread.process(WebThread.java:133)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.h2.jdbc.JdbcSQLException: The connection was not closed by the application and is garbage collected [90018-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 14 more
+2016-11-03 12:41:49 jdbc[6]: null
+org.h2.message.DbException: The connection was not closed by the application and is garbage collected [90018-192]
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:187)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:129)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at org.h2.server.web.WebServer.getConnection(WebServer.java:735)
+	at org.h2.server.web.WebApp.login(WebApp.java:955)
+	at org.h2.server.web.WebApp.process(WebApp.java:211)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:170)
+	at org.h2.server.web.WebThread.process(WebThread.java:133)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.h2.jdbc.JdbcSQLException: The connection was not closed by the application and is garbage collected [90018-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 14 more
+2016-11-03 12:41:49 jdbc[6]: null
+org.h2.message.DbException: The connection was not closed by the application and is garbage collected [90018-192]
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:187)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:129)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at org.h2.server.web.WebServer.getConnection(WebServer.java:735)
+	at org.h2.server.web.WebApp.login(WebApp.java:955)
+	at org.h2.server.web.WebApp.process(WebApp.java:211)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:170)
+	at org.h2.server.web.WebThread.process(WebThread.java:133)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.h2.jdbc.JdbcSQLException: The connection was not closed by the application and is garbage collected [90018-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 14 more
+2016-11-03 12:41:49 jdbc[6]: null
+org.h2.message.DbException: The connection was not closed by the application and is garbage collected [90018-192]
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:187)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:129)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at org.h2.server.web.WebServer.getConnection(WebServer.java:735)
+	at org.h2.server.web.WebApp.login(WebApp.java:955)
+	at org.h2.server.web.WebApp.process(WebApp.java:211)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:170)
+	at org.h2.server.web.WebThread.process(WebThread.java:133)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.h2.jdbc.JdbcSQLException: The connection was not closed by the application and is garbage collected [90018-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 14 more
+2016-11-03 12:43:02 jdbc[6]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * 
+INTO[*] TEST..DEPARTMENT 
+FROM BUDGETDB..DEPARTMENT "; SQL statement:
+SELECT * 
+INTO Test..DEPARTMENT 
+FROM BudgetDB..DEPARTMENT [42000-192]
+2016-11-06 12:22:34 jdbc[3]: null
+org.h2.message.DbException: The connection was not closed by the application and is garbage collected [90018-192]
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:187)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:129)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at org.h2.util.JdbcUtils.getConnection(JdbcUtils.java:281)
+	at org.h2.util.JdbcUtils.getConnection(JdbcUtils.java:263)
+	at org.h2.table.TableLinkConnection.open(TableLinkConnection.java:90)
+	at org.h2.table.TableLinkConnection.open(TableLinkConnection.java:77)
+	at org.h2.engine.Database.getLinkConnection(Database.java:2433)
+	at org.h2.table.TableLink.connect(TableLink.java:96)
+	at org.h2.table.TableLink.<init>(TableLink.java:79)
+	at org.h2.schema.Schema.createTableLink(Schema.java:614)
+	at org.h2.command.ddl.CreateLinkedTable.update(CreateLinkedTable.java:77)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:98)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.h2.jdbc.JdbcSQLException: The connection was not closed by the application and is garbage collected [90018-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 29 more
+2016-11-06 12:22:34 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "TEST" not found; SQL statement:
+SELECT * FROM (SELECT * FROM TEST WHERE ID>0) T WHERE 1=0 [42102-192]
+2016-11-06 12:22:34 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "TEST" not found; SQL statement:
+SELECT * FROM (SELECT * FROM TEST WHERE ID>0) T WHERE 1=0 [42102-192]
+2016-11-06 12:22:34 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "TEST" not found; SQL statement:
+SELECT * FROM (SELECT * FROM TEST WHERE ID>0) T WHERE 1=0 [42102-192]
+2016-11-06 12:22:53 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Column "ID" not found; SQL statement:
+CREATE FORCE VIEW PUBLIC._0 AS
+SELECT
+    BUDGET_YEAR.B_YEAR
+FROM PUBLIC.BUDGET_YEAR
+WHERE ID > 0 [42122-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.Comparison.optimize(Comparison.java:178)
+	at org.h2.command.dml.Select.prepare(Select.java:855)
+	at org.h2.command.Parser.prepare(Parser.java:239)
+	at org.h2.engine.Session.prepare(Session.java:525)
+	at org.h2.engine.Session.prepare(Session.java:512)
+	at org.h2.table.TableView.compileViewQuery(TableView.java:105)
+	at org.h2.table.TableView.initColumnsAndTables(TableView.java:156)
+	at org.h2.table.TableView.init(TableView.java:98)
+	at org.h2.table.TableView.<init>(TableView.java:65)
+	at org.h2.table.TableView.createTempView(TableView.java:534)
+	at org.h2.command.Parser.readTableFilter(Parser.java:1192)
+	at org.h2.command.Parser.parseSelectSimpleFromPart(Parser.java:1896)
+	at org.h2.command.Parser.parseSelectSimple(Parser.java:2044)
+	at org.h2.command.Parser.parseSelectSub(Parser.java:1890)
+	at org.h2.command.Parser.parseSelectUnion(Parser.java:1711)
+	at org.h2.command.Parser.parseSelect(Parser.java:1699)
+	at org.h2.command.Parser.parsePrepared(Parser.java:445)
+	at org.h2.command.Parser.parse(Parser.java:317)
+	at org.h2.command.Parser.parse(Parser.java:289)
+	at org.h2.command.Parser.prepareCommand(Parser.java:254)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1202)
+	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:73)
+	at org.h2.table.TableLink.readMetaData(TableLink.java:175)
+	at org.h2.table.TableLink.connect(TableLink.java:99)
+	at org.h2.table.TableLink.<init>(TableLink.java:79)
+	at org.h2.schema.Schema.createTableLink(Schema.java:614)
+	at org.h2.command.ddl.CreateLinkedTable.update(CreateLinkedTable.java:77)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:98)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2016-11-06 12:22:53 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Column "ID" not found; SQL statement:
+CREATE FORCE VIEW PUBLIC._0 AS
+SELECT
+    BUDGET_YEAR.B_YEAR
+FROM PUBLIC.BUDGET_YEAR
+WHERE ID > 0 [42122-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.Comparison.optimize(Comparison.java:178)
+	at org.h2.command.dml.Select.prepare(Select.java:855)
+	at org.h2.command.Parser.prepare(Parser.java:239)
+	at org.h2.engine.Session.prepare(Session.java:525)
+	at org.h2.engine.Session.prepare(Session.java:512)
+	at org.h2.table.TableView.compileViewQuery(TableView.java:105)
+	at org.h2.table.TableView.initColumnsAndTables(TableView.java:156)
+	at org.h2.table.TableView.init(TableView.java:98)
+	at org.h2.table.TableView.<init>(TableView.java:65)
+	at org.h2.table.TableView.createTempView(TableView.java:534)
+	at org.h2.command.Parser.readTableFilter(Parser.java:1192)
+	at org.h2.command.Parser.parseSelectSimpleFromPart(Parser.java:1896)
+	at org.h2.command.Parser.parseSelectSimple(Parser.java:2044)
+	at org.h2.command.Parser.parseSelectSub(Parser.java:1890)
+	at org.h2.command.Parser.parseSelectUnion(Parser.java:1711)
+	at org.h2.command.Parser.parseSelect(Parser.java:1699)
+	at org.h2.command.Parser.parsePrepared(Parser.java:445)
+	at org.h2.command.Parser.parse(Parser.java:317)
+	at org.h2.command.Parser.parse(Parser.java:289)
+	at org.h2.command.Parser.prepareCommand(Parser.java:254)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1202)
+	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:73)
+	at org.h2.table.TableLink.readMetaData(TableLink.java:175)
+	at org.h2.table.TableLink.connect(TableLink.java:99)
+	at org.h2.table.TableLink.<init>(TableLink.java:79)
+	at org.h2.schema.Schema.createTableLink(Schema.java:614)
+	at org.h2.command.ddl.CreateLinkedTable.update(CreateLinkedTable.java:77)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:98)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2016-11-06 12:22:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Column "ID" not found; SQL statement:
+CREATE FORCE VIEW PUBLIC._0 AS
+SELECT
+    BUDGET_YEAR.B_YEAR
+FROM PUBLIC.BUDGET_YEAR
+WHERE ID > 0 [42122-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.Comparison.optimize(Comparison.java:178)
+	at org.h2.command.dml.Select.prepare(Select.java:855)
+	at org.h2.command.Parser.prepare(Parser.java:239)
+	at org.h2.engine.Session.prepare(Session.java:525)
+	at org.h2.engine.Session.prepare(Session.java:512)
+	at org.h2.table.TableView.compileViewQuery(TableView.java:105)
+	at org.h2.table.TableView.initColumnsAndTables(TableView.java:156)
+	at org.h2.table.TableView.init(TableView.java:98)
+	at org.h2.table.TableView.<init>(TableView.java:65)
+	at org.h2.table.TableView.createTempView(TableView.java:534)
+	at org.h2.command.Parser.readTableFilter(Parser.java:1192)
+	at org.h2.command.Parser.parseSelectSimpleFromPart(Parser.java:1896)
+	at org.h2.command.Parser.parseSelectSimple(Parser.java:2044)
+	at org.h2.command.Parser.parseSelectSub(Parser.java:1890)
+	at org.h2.command.Parser.parseSelectUnion(Parser.java:1711)
+	at org.h2.command.Parser.parseSelect(Parser.java:1699)
+	at org.h2.command.Parser.parsePrepared(Parser.java:445)
+	at org.h2.command.Parser.parse(Parser.java:317)
+	at org.h2.command.Parser.parse(Parser.java:289)
+	at org.h2.command.Parser.prepareCommand(Parser.java:254)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1202)
+	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:73)
+	at org.h2.table.TableLink.readMetaData(TableLink.java:175)
+	at org.h2.table.TableLink.connect(TableLink.java:99)
+	at org.h2.table.TableLink.<init>(TableLink.java:79)
+	at org.h2.schema.Schema.createTableLink(Schema.java:614)
+	at org.h2.command.ddl.CreateLinkedTable.update(CreateLinkedTable.java:77)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:98)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2016-11-07 12:16:02 jdbc[4]: null
+org.h2.message.DbException: The connection was not closed by the application and is garbage collected [90018-192]
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:187)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:129)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at org.h2.server.web.WebServer.getConnection(WebServer.java:735)
+	at org.h2.server.web.WebApp.login(WebApp.java:955)
+	at org.h2.server.web.WebApp.process(WebApp.java:211)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:170)
+	at org.h2.server.web.WebThread.process(WebThread.java:133)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.h2.jdbc.JdbcSQLException: The connection was not closed by the application and is garbage collected [90018-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 14 more
+2016-11-07 12:17:24 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Ambiguous column name "ID"; SQL statement:
+select ID, ASSUMPTION_TYPE  from assumption inner join item on ASSUMPTION .ID  = ITEM.id [90059-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.mapColumn(ExpressionColumn.java:124)
+	at org.h2.expression.ExpressionColumn.mapColumns(ExpressionColumn.java:94)
+	at org.h2.command.dml.Select.mapColumns(Select.java:1228)
+	at org.h2.command.dml.Select.init(Select.java:827)
+	at org.h2.command.Parser.parseSelect(Parser.java:1705)
+	at org.h2.command.Parser.parsePrepared(Parser.java:445)
+	at org.h2.command.Parser.parse(Parser.java:317)
+	at org.h2.command.Parser.parse(Parser.java:289)
+	at org.h2.command.Parser.prepareCommand(Parser.java:254)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1202)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2016-11-07 13:26:53 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLException: Table "ATOM_ASSUMPTION" not found; SQL statement:
+SELECT * FROM ATOM_ASSUMPTION INNER JOIN ITEM ON ASSUMPTION.ID = ITEM.ID [42102-192]
+2016-11-07 13:27:23 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLException: Column "ASSUMPTION.ID" not found; SQL statement:
+SELECT * FROM ATOM_ASSUMTION INNER JOIN ITEM ON ASSUMPTION.ID = ITEM.ID [42122-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.Comparison.optimize(Comparison.java:178)
+	at org.h2.command.dml.Select.prepare(Select.java:855)
+	at org.h2.command.Parser.prepareCommand(Parser.java:259)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1202)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2016-11-07 13:30:22 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLException: Table "TEST" not found; SQL statement:
+ALTER TABLE TEST RENAME CONSTRAINT ATOM_ASSUMTION  TO ATOM_ASSUMPTION [42102-192]
+2016-11-07 15:18:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Duplicate column name "ID"; SQL statement:
+SELECT * FROM (SELECT * FROM ASSUMPTION INNER JOIN ITEM ON ASSUMPTION.ID = ITEM.ID WHERE ITEM.B_YEAR = 16/17) T WHERE 1=0 [42121-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.table.Table.setColumns(Table.java:431)
+	at org.h2.table.TableView.initColumnsAndTables(TableView.java:220)
+	at org.h2.table.TableView.init(TableView.java:98)
+	at org.h2.table.TableView.<init>(TableView.java:65)
+	at org.h2.table.TableView.createTempView(TableView.java:534)
+	at org.h2.command.Parser.readTableFilter(Parser.java:1192)
+	at org.h2.command.Parser.parseSelectSimpleFromPart(Parser.java:1896)
+	at org.h2.command.Parser.parseSelectSimple(Parser.java:2044)
+	at org.h2.command.Parser.parseSelectSub(Parser.java:1890)
+	at org.h2.command.Parser.parseSelectUnion(Parser.java:1711)
+	at org.h2.command.Parser.parseSelect(Parser.java:1699)
+	at org.h2.command.Parser.parsePrepared(Parser.java:445)
+	at org.h2.command.Parser.parse(Parser.java:317)
+	at org.h2.command.Parser.parse(Parser.java:289)
+	at org.h2.command.Parser.prepareCommand(Parser.java:254)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1202)
+	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:73)
+	at org.h2.table.TableLink.readMetaData(TableLink.java:175)
+	at org.h2.table.TableLink.connect(TableLink.java:99)
+	at org.h2.table.TableLink.<init>(TableLink.java:79)
+	at org.h2.schema.Schema.createTableLink(Schema.java:614)
+	at org.h2.command.ddl.CreateLinkedTable.update(CreateLinkedTable.java:77)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:98)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcPreparedStatement.execute(JdbcPreparedStatement.java:201)
+	at DAL.ActingBudgetDAL.executeSQL(ActingBudgetDAL.java:109)
+	at DAL.ActingBudgetDAL.copyToLinkTable(ActingBudgetDAL.java:95)
+	at DAL.ActingBudgetDAL.copySeasonBudget(ActingBudgetDAL.java:40)
+	at BL.Test.main(Test.java:17)
+2016-11-07 15:18:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Duplicate column name "ID"; SQL statement:
+SELECT * FROM (SELECT * FROM ASSUMPTION INNER JOIN ITEM ON ASSUMPTION.ID = ITEM.ID WHERE ITEM.B_YEAR = 16/17) T WHERE 1=0 [42121-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.table.Table.setColumns(Table.java:431)
+	at org.h2.table.TableView.initColumnsAndTables(TableView.java:220)
+	at org.h2.table.TableView.init(TableView.java:98)
+	at org.h2.table.TableView.<init>(TableView.java:65)
+	at org.h2.table.TableView.createTempView(TableView.java:534)
+	at org.h2.command.Parser.readTableFilter(Parser.java:1192)
+	at org.h2.command.Parser.parseSelectSimpleFromPart(Parser.java:1896)
+	at org.h2.command.Parser.parseSelectSimple(Parser.java:2044)
+	at org.h2.command.Parser.parseSelectSub(Parser.java:1890)
+	at org.h2.command.Parser.parseSelectUnion(Parser.java:1711)
+	at org.h2.command.Parser.parseSelect(Parser.java:1699)
+	at org.h2.command.Parser.parsePrepared(Parser.java:445)
+	at org.h2.command.Parser.parse(Parser.java:317)
+	at org.h2.command.Parser.parse(Parser.java:289)
+	at org.h2.command.Parser.prepareCommand(Parser.java:254)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1202)
+	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:73)
+	at org.h2.table.TableLink.readMetaData(TableLink.java:175)
+	at org.h2.table.TableLink.connect(TableLink.java:99)
+	at org.h2.table.TableLink.<init>(TableLink.java:79)
+	at org.h2.schema.Schema.createTableLink(Schema.java:614)
+	at org.h2.command.ddl.CreateLinkedTable.update(CreateLinkedTable.java:77)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:98)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcPreparedStatement.execute(JdbcPreparedStatement.java:201)
+	at DAL.ActingBudgetDAL.executeSQL(ActingBudgetDAL.java:109)
+	at DAL.ActingBudgetDAL.copyToLinkTable(ActingBudgetDAL.java:95)
+	at DAL.ActingBudgetDAL.copySeasonBudget(ActingBudgetDAL.java:40)
+	at BL.Test.main(Test.java:17)
+2016-11-07 15:18:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Duplicate column name "ID"; SQL statement:
+SELECT * FROM (SELECT * FROM ASSUMPTION INNER JOIN ITEM ON ASSUMPTION.ID = ITEM.ID WHERE ITEM.B_YEAR = 16/17) T WHERE 1=0 [42121-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.table.Table.setColumns(Table.java:431)
+	at org.h2.table.TableView.initColumnsAndTables(TableView.java:220)
+	at org.h2.table.TableView.init(TableView.java:98)
+	at org.h2.table.TableView.<init>(TableView.java:65)
+	at org.h2.table.TableView.createTempView(TableView.java:534)
+	at org.h2.command.Parser.readTableFilter(Parser.java:1192)
+	at org.h2.command.Parser.parseSelectSimpleFromPart(Parser.java:1896)
+	at org.h2.command.Parser.parseSelectSimple(Parser.java:2044)
+	at org.h2.command.Parser.parseSelectSub(Parser.java:1890)
+	at org.h2.command.Parser.parseSelectUnion(Parser.java:1711)
+	at org.h2.command.Parser.parseSelect(Parser.java:1699)
+	at org.h2.command.Parser.parsePrepared(Parser.java:445)
+	at org.h2.command.Parser.parse(Parser.java:317)
+	at org.h2.command.Parser.parse(Parser.java:289)
+	at org.h2.command.Parser.prepareCommand(Parser.java:254)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1202)
+	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:73)
+	at org.h2.table.TableLink.readMetaData(TableLink.java:175)
+	at org.h2.table.TableLink.connect(TableLink.java:99)
+	at org.h2.table.TableLink.<init>(TableLink.java:79)
+	at org.h2.schema.Schema.createTableLink(Schema.java:614)
+	at org.h2.command.ddl.CreateLinkedTable.update(CreateLinkedTable.java:77)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:98)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcPreparedStatement.execute(JdbcPreparedStatement.java:201)
+	at DAL.ActingBudgetDAL.executeSQL(ActingBudgetDAL.java:109)
+	at DAL.ActingBudgetDAL.copyToLinkTable(ActingBudgetDAL.java:95)
+	at DAL.ActingBudgetDAL.copySeasonBudget(ActingBudgetDAL.java:40)
+	at BL.Test.main(Test.java:17)
+2016-11-07 15:45:45 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Duplicate column name "ID"; SQL statement:
+SELECT * FROM (SELECT * FROM ASSUMPTION INNER JOIN ITEM ON ASSUMPTION.ID = ITEM.ID WHERE ITEM.B_YEAR = 16/17) T WHERE 1=0 [42121-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.table.Table.setColumns(Table.java:431)
+	at org.h2.table.TableView.initColumnsAndTables(TableView.java:220)
+	at org.h2.table.TableView.init(TableView.java:98)
+	at org.h2.table.TableView.<init>(TableView.java:65)
+	at org.h2.table.TableView.createTempView(TableView.java:534)
+	at org.h2.command.Parser.readTableFilter(Parser.java:1192)
+	at org.h2.command.Parser.parseSelectSimpleFromPart(Parser.java:1896)
+	at org.h2.command.Parser.parseSelectSimple(Parser.java:2044)
+	at org.h2.command.Parser.parseSelectSub(Parser.java:1890)
+	at org.h2.command.Parser.parseSelectUnion(Parser.java:1711)
+	at org.h2.command.Parser.parseSelect(Parser.java:1699)
+	at org.h2.command.Parser.parsePrepared(Parser.java:445)
+	at org.h2.command.Parser.parse(Parser.java:317)
+	at org.h2.command.Parser.parse(Parser.java:289)
+	at org.h2.command.Parser.prepareCommand(Parser.java:254)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1202)
+	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:73)
+	at org.h2.table.TableLink.readMetaData(TableLink.java:175)
+	at org.h2.table.TableLink.connect(TableLink.java:99)
+	at org.h2.table.TableLink.<init>(TableLink.java:79)
+	at org.h2.schema.Schema.createTableLink(Schema.java:614)
+	at org.h2.command.ddl.CreateLinkedTable.update(CreateLinkedTable.java:77)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:98)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcPreparedStatement.execute(JdbcPreparedStatement.java:201)
+	at DAL.ActingBudgetDAL.copyToLinkTable(ActingBudgetDAL.java:109)
+	at DAL.ActingBudgetDAL.copySeasonBudget(ActingBudgetDAL.java:40)
+	at BL.Test.main(Test.java:17)
+2016-11-07 15:45:45 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Duplicate column name "ID"; SQL statement:
+SELECT * FROM (SELECT * FROM ASSUMPTION INNER JOIN ITEM ON ASSUMPTION.ID = ITEM.ID WHERE ITEM.B_YEAR = 16/17) T WHERE 1=0 [42121-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.table.Table.setColumns(Table.java:431)
+	at org.h2.table.TableView.initColumnsAndTables(TableView.java:220)
+	at org.h2.table.TableView.init(TableView.java:98)
+	at org.h2.table.TableView.<init>(TableView.java:65)
+	at org.h2.table.TableView.createTempView(TableView.java:534)
+	at org.h2.command.Parser.readTableFilter(Parser.java:1192)
+	at org.h2.command.Parser.parseSelectSimpleFromPart(Parser.java:1896)
+	at org.h2.command.Parser.parseSelectSimple(Parser.java:2044)
+	at org.h2.command.Parser.parseSelectSub(Parser.java:1890)
+	at org.h2.command.Parser.parseSelectUnion(Parser.java:1711)
+	at org.h2.command.Parser.parseSelect(Parser.java:1699)
+	at org.h2.command.Parser.parsePrepared(Parser.java:445)
+	at org.h2.command.Parser.parse(Parser.java:317)
+	at org.h2.command.Parser.parse(Parser.java:289)
+	at org.h2.command.Parser.prepareCommand(Parser.java:254)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1202)
+	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:73)
+	at org.h2.table.TableLink.readMetaData(TableLink.java:175)
+	at org.h2.table.TableLink.connect(TableLink.java:99)
+	at org.h2.table.TableLink.<init>(TableLink.java:79)
+	at org.h2.schema.Schema.createTableLink(Schema.java:614)
+	at org.h2.command.ddl.CreateLinkedTable.update(CreateLinkedTable.java:77)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:98)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcPreparedStatement.execute(JdbcPreparedStatement.java:201)
+	at DAL.ActingBudgetDAL.copyToLinkTable(ActingBudgetDAL.java:109)
+	at DAL.ActingBudgetDAL.copySeasonBudget(ActingBudgetDAL.java:40)
+	at BL.Test.main(Test.java:17)
+2016-11-07 15:45:45 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Duplicate column name "ID"; SQL statement:
+SELECT * FROM (SELECT * FROM ASSUMPTION INNER JOIN ITEM ON ASSUMPTION.ID = ITEM.ID WHERE ITEM.B_YEAR = 16/17) T WHERE 1=0 [42121-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.table.Table.setColumns(Table.java:431)
+	at org.h2.table.TableView.initColumnsAndTables(TableView.java:220)
+	at org.h2.table.TableView.init(TableView.java:98)
+	at org.h2.table.TableView.<init>(TableView.java:65)
+	at org.h2.table.TableView.createTempView(TableView.java:534)
+	at org.h2.command.Parser.readTableFilter(Parser.java:1192)
+	at org.h2.command.Parser.parseSelectSimpleFromPart(Parser.java:1896)
+	at org.h2.command.Parser.parseSelectSimple(Parser.java:2044)
+	at org.h2.command.Parser.parseSelectSub(Parser.java:1890)
+	at org.h2.command.Parser.parseSelectUnion(Parser.java:1711)
+	at org.h2.command.Parser.parseSelect(Parser.java:1699)
+	at org.h2.command.Parser.parsePrepared(Parser.java:445)
+	at org.h2.command.Parser.parse(Parser.java:317)
+	at org.h2.command.Parser.parse(Parser.java:289)
+	at org.h2.command.Parser.prepareCommand(Parser.java:254)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1202)
+	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:73)
+	at org.h2.table.TableLink.readMetaData(TableLink.java:175)
+	at org.h2.table.TableLink.connect(TableLink.java:99)
+	at org.h2.table.TableLink.<init>(TableLink.java:79)
+	at org.h2.schema.Schema.createTableLink(Schema.java:614)
+	at org.h2.command.ddl.CreateLinkedTable.update(CreateLinkedTable.java:77)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:98)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcPreparedStatement.execute(JdbcPreparedStatement.java:201)
+	at DAL.ActingBudgetDAL.copyToLinkTable(ActingBudgetDAL.java:109)
+	at DAL.ActingBudgetDAL.copySeasonBudget(ActingBudgetDAL.java:40)
+	at BL.Test.main(Test.java:17)
+2016-11-07 15:46:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM (SELECT COLUMN_ID,  FROM SUM_COLUMN INNER JOIN ITEM ON COLUMN_ID = ITEM.ID WHERE[*] ITEM.B_YEAR = 16/17) T WHERE 1=0"; expected "(, ., [, ::, *, /, %, +, -, ||, ~, !~, NOT, LIKE, REGEXP, IS, IN, BETWEEN, AND, OR, RIGHT, LEFT, FULL, INNER, JOIN, CROSS, NATURAL, ,, SELECT"; SQL statement:
+SELECT * FROM (SELECT COLUMN_ID,  FROM SUM_COLUMN INNER JOIN ITEM ON COLUMN_ID = ITEM.ID WHERE ITEM.B_YEAR = 16/17) T WHERE 1=0 [42001-192]
+2016-11-07 15:46:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM (SELECT COLUMN_ID,  FROM SUM_COLUMN INNER JOIN ITEM ON COLUMN_ID = ITEM.ID WHERE[*] ITEM.B_YEAR = 16/17) T WHERE 1=0"; expected "(, ., [, ::, *, /, %, +, -, ||, ~, !~, NOT, LIKE, REGEXP, IS, IN, BETWEEN, AND, OR, RIGHT, LEFT, FULL, INNER, JOIN, CROSS, NATURAL, ,, SELECT"; SQL statement:
+SELECT * FROM (SELECT COLUMN_ID,  FROM SUM_COLUMN INNER JOIN ITEM ON COLUMN_ID = ITEM.ID WHERE ITEM.B_YEAR = 16/17) T WHERE 1=0 [42001-192]
+2016-11-07 15:46:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM (SELECT COLUMN_ID,  FROM SUM_COLUMN INNER JOIN ITEM ON COLUMN_ID = ITEM.ID WHERE[*] ITEM.B_YEAR = 16/17) T WHERE 1=0"; expected "(, ., [, ::, *, /, %, +, -, ||, ~, !~, NOT, LIKE, REGEXP, IS, IN, BETWEEN, AND, OR, RIGHT, LEFT, FULL, INNER, JOIN, CROSS, NATURAL, ,, SELECT"; SQL statement:
+SELECT * FROM (SELECT COLUMN_ID,  FROM SUM_COLUMN INNER JOIN ITEM ON COLUMN_ID = ITEM.ID WHERE ITEM.B_YEAR = 16/17) T WHERE 1=0 [42001-192]
+2016-11-07 18:48:17 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM (SELECT ITEM_ID ,POS_INDEX ,VALUE  FROM ITEM_VALUES INNER JOIN ITEM ON ITEM_ID ITEM_ID[*]  = ITEM.ID WHERE B_YEAR = 16/17) T WHERE 1=0"; expected "., (, [, ::, *, /, %, +, -, ||, ~, !~, NOT, LIKE, REGEXP, IS, IN, BETWEEN, AND, OR, RIGHT, LEFT, FULL, INNER, JOIN, CROSS, NATURAL, ,, WHERE, GROUP, HAVING, UNION, MINUS, EXCEPT, INTERSECT, ORDER, OFFSET, FETCH, LIMIT, FOR, )"; SQL statement:
+SELECT * FROM (SELECT ITEM_ID ,POS_INDEX ,VALUE  FROM ITEM_VALUES INNER JOIN ITEM ON ITEM_ID ITEM_ID  = ITEM.ID WHERE B_YEAR = 16/17) T WHERE 1=0 [42001-192]
+2016-11-07 18:48:17 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM (SELECT ITEM_ID ,POS_INDEX ,VALUE  FROM ITEM_VALUES INNER JOIN ITEM ON ITEM_ID ITEM_ID[*]  = ITEM.ID WHERE B_YEAR = 16/17) T WHERE 1=0"; expected "., (, [, ::, *, /, %, +, -, ||, ~, !~, NOT, LIKE, REGEXP, IS, IN, BETWEEN, AND, OR, RIGHT, LEFT, FULL, INNER, JOIN, CROSS, NATURAL, ,, WHERE, GROUP, HAVING, UNION, MINUS, EXCEPT, INTERSECT, ORDER, OFFSET, FETCH, LIMIT, FOR, )"; SQL statement:
+SELECT * FROM (SELECT ITEM_ID ,POS_INDEX ,VALUE  FROM ITEM_VALUES INNER JOIN ITEM ON ITEM_ID ITEM_ID  = ITEM.ID WHERE B_YEAR = 16/17) T WHERE 1=0 [42001-192]
+2016-11-07 18:48:17 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM (SELECT ITEM_ID ,POS_INDEX ,VALUE  FROM ITEM_VALUES INNER JOIN ITEM ON ITEM_ID ITEM_ID[*]  = ITEM.ID WHERE B_YEAR = 16/17) T WHERE 1=0"; expected "., (, [, ::, *, /, %, +, -, ||, ~, !~, NOT, LIKE, REGEXP, IS, IN, BETWEEN, AND, OR, RIGHT, LEFT, FULL, INNER, JOIN, CROSS, NATURAL, ,, WHERE, GROUP, HAVING, UNION, MINUS, EXCEPT, INTERSECT, ORDER, OFFSET, FETCH, LIMIT, FOR, )"; SQL statement:
+SELECT * FROM (SELECT ITEM_ID ,POS_INDEX ,VALUE  FROM ITEM_VALUES INNER JOIN ITEM ON ITEM_ID ITEM_ID  = ITEM.ID WHERE B_YEAR = 16/17) T WHERE 1=0 [42001-192]
+2016-11-07 18:49:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Column "REVIEW_TABLE.TABLE_ID" not found; SQL statement:
+CREATE FORCE VIEW PUBLIC._0 AS
+SELECT
+    REVIEW_TABLE.TABLE_ID,
+    TRAINING_TABLE_ID
+FROM PUBLIC.TRAINING_TABLE
+INNER JOIN PUBLIC.REGULAR_TABLE
+    ON 1=1
+WHERE (B_YEAR = (16 / 17))
+    AND (REVIEW_TABLE.TABLE_ID = REGULAR_TABLE.TABLE_ID) [42122-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.command.dml.Select.prepare(Select.java:852)
+	at org.h2.command.Parser.prepare(Parser.java:239)
+	at org.h2.engine.Session.prepare(Session.java:525)
+	at org.h2.engine.Session.prepare(Session.java:512)
+	at org.h2.table.TableView.compileViewQuery(TableView.java:105)
+	at org.h2.table.TableView.initColumnsAndTables(TableView.java:156)
+	at org.h2.table.TableView.init(TableView.java:98)
+	at org.h2.table.TableView.<init>(TableView.java:65)
+	at org.h2.table.TableView.createTempView(TableView.java:534)
+	at org.h2.command.Parser.readTableFilter(Parser.java:1192)
+	at org.h2.command.Parser.parseSelectSimpleFromPart(Parser.java:1896)
+	at org.h2.command.Parser.parseSelectSimple(Parser.java:2044)
+	at org.h2.command.Parser.parseSelectSub(Parser.java:1890)
+	at org.h2.command.Parser.parseSelectUnion(Parser.java:1711)
+	at org.h2.command.Parser.parseSelect(Parser.java:1699)
+	at org.h2.command.Parser.parsePrepared(Parser.java:445)
+	at org.h2.command.Parser.parse(Parser.java:317)
+	at org.h2.command.Parser.parse(Parser.java:289)
+	at org.h2.command.Parser.prepareCommand(Parser.java:254)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1202)
+	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:73)
+	at org.h2.table.TableLink.readMetaData(TableLink.java:175)
+	at org.h2.table.TableLink.connect(TableLink.java:99)
+	at org.h2.table.TableLink.<init>(TableLink.java:79)
+	at org.h2.schema.Schema.createTableLink(Schema.java:614)
+	at org.h2.command.ddl.CreateLinkedTable.update(CreateLinkedTable.java:77)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:98)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcPreparedStatement.execute(JdbcPreparedStatement.java:201)
+	at DAL.ActingBudgetDAL.executeSQL(ActingBudgetDAL.java:204)
+	at DAL.ActingBudgetDAL.copyToLinkTable(ActingBudgetDAL.java:190)
+	at DAL.ActingBudgetDAL.copySeasonBudget(ActingBudgetDAL.java:105)
+	at BL.Test.main(Test.java:17)
+2016-11-07 18:49:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Column "REVIEW_TABLE.TABLE_ID" not found; SQL statement:
+CREATE FORCE VIEW PUBLIC._0 AS
+SELECT
+    REVIEW_TABLE.TABLE_ID,
+    TRAINING_TABLE_ID
+FROM PUBLIC.TRAINING_TABLE
+INNER JOIN PUBLIC.REGULAR_TABLE
+    ON 1=1
+WHERE (B_YEAR = (16 / 17))
+    AND (REVIEW_TABLE.TABLE_ID = REGULAR_TABLE.TABLE_ID) [42122-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.command.dml.Select.prepare(Select.java:852)
+	at org.h2.command.Parser.prepare(Parser.java:239)
+	at org.h2.engine.Session.prepare(Session.java:525)
+	at org.h2.engine.Session.prepare(Session.java:512)
+	at org.h2.table.TableView.compileViewQuery(TableView.java:105)
+	at org.h2.table.TableView.initColumnsAndTables(TableView.java:156)
+	at org.h2.table.TableView.init(TableView.java:98)
+	at org.h2.table.TableView.<init>(TableView.java:65)
+	at org.h2.table.TableView.createTempView(TableView.java:534)
+	at org.h2.command.Parser.readTableFilter(Parser.java:1192)
+	at org.h2.command.Parser.parseSelectSimpleFromPart(Parser.java:1896)
+	at org.h2.command.Parser.parseSelectSimple(Parser.java:2044)
+	at org.h2.command.Parser.parseSelectSub(Parser.java:1890)
+	at org.h2.command.Parser.parseSelectUnion(Parser.java:1711)
+	at org.h2.command.Parser.parseSelect(Parser.java:1699)
+	at org.h2.command.Parser.parsePrepared(Parser.java:445)
+	at org.h2.command.Parser.parse(Parser.java:317)
+	at org.h2.command.Parser.parse(Parser.java:289)
+	at org.h2.command.Parser.prepareCommand(Parser.java:254)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1202)
+	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:73)
+	at org.h2.table.TableLink.readMetaData(TableLink.java:175)
+	at org.h2.table.TableLink.connect(TableLink.java:99)
+	at org.h2.table.TableLink.<init>(TableLink.java:79)
+	at org.h2.schema.Schema.createTableLink(Schema.java:614)
+	at org.h2.command.ddl.CreateLinkedTable.update(CreateLinkedTable.java:77)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:98)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcPreparedStatement.execute(JdbcPreparedStatement.java:201)
+	at DAL.ActingBudgetDAL.executeSQL(ActingBudgetDAL.java:204)
+	at DAL.ActingBudgetDAL.copyToLinkTable(ActingBudgetDAL.java:190)
+	at DAL.ActingBudgetDAL.copySeasonBudget(ActingBudgetDAL.java:105)
+	at BL.Test.main(Test.java:17)
+2016-11-07 18:49:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Column "REVIEW_TABLE.TABLE_ID" not found; SQL statement:
+CREATE FORCE VIEW PUBLIC._0 AS
+SELECT
+    REVIEW_TABLE.TABLE_ID,
+    TRAINING_TABLE_ID
+FROM PUBLIC.TRAINING_TABLE
+INNER JOIN PUBLIC.REGULAR_TABLE
+    ON 1=1
+WHERE (B_YEAR = (16 / 17))
+    AND (REVIEW_TABLE.TABLE_ID = REGULAR_TABLE.TABLE_ID) [42122-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.command.dml.Select.prepare(Select.java:852)
+	at org.h2.command.Parser.prepare(Parser.java:239)
+	at org.h2.engine.Session.prepare(Session.java:525)
+	at org.h2.engine.Session.prepare(Session.java:512)
+	at org.h2.table.TableView.compileViewQuery(TableView.java:105)
+	at org.h2.table.TableView.initColumnsAndTables(TableView.java:156)
+	at org.h2.table.TableView.init(TableView.java:98)
+	at org.h2.table.TableView.<init>(TableView.java:65)
+	at org.h2.table.TableView.createTempView(TableView.java:534)
+	at org.h2.command.Parser.readTableFilter(Parser.java:1192)
+	at org.h2.command.Parser.parseSelectSimpleFromPart(Parser.java:1896)
+	at org.h2.command.Parser.parseSelectSimple(Parser.java:2044)
+	at org.h2.command.Parser.parseSelectSub(Parser.java:1890)
+	at org.h2.command.Parser.parseSelectUnion(Parser.java:1711)
+	at org.h2.command.Parser.parseSelect(Parser.java:1699)
+	at org.h2.command.Parser.parsePrepared(Parser.java:445)
+	at org.h2.command.Parser.parse(Parser.java:317)
+	at org.h2.command.Parser.parse(Parser.java:289)
+	at org.h2.command.Parser.prepareCommand(Parser.java:254)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1202)
+	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:73)
+	at org.h2.table.TableLink.readMetaData(TableLink.java:175)
+	at org.h2.table.TableLink.connect(TableLink.java:99)
+	at org.h2.table.TableLink.<init>(TableLink.java:79)
+	at org.h2.schema.Schema.createTableLink(Schema.java:614)
+	at org.h2.command.ddl.CreateLinkedTable.update(CreateLinkedTable.java:77)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:98)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcPreparedStatement.execute(JdbcPreparedStatement.java:201)
+	at DAL.ActingBudgetDAL.executeSQL(ActingBudgetDAL.java:204)
+	at DAL.ActingBudgetDAL.copyToLinkTable(ActingBudgetDAL.java:190)
+	at DAL.ActingBudgetDAL.copySeasonBudget(ActingBudgetDAL.java:105)
+	at BL.Test.main(Test.java:17)
+2016-11-07 18:50:37 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ambiguous column name "TABLE_ID"; SQL statement:
+SELECT * FROM (SELECT TABLE_ID, COLUMN_ID, COLID_IN_TABLE FROM COLUMNS_TO_TABLE INNER JOIN REGULAR_TABLE ON COLUMNS_TO_TABLE.TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17) T WHERE 1=0 [90059-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.mapColumn(ExpressionColumn.java:124)
+	at org.h2.expression.ExpressionColumn.mapColumns(ExpressionColumn.java:94)
+	at org.h2.command.dml.Select.mapColumns(Select.java:1228)
+	at org.h2.command.dml.Select.init(Select.java:827)
+	at org.h2.command.Parser.readTableFilter(Parser.java:1184)
+	at org.h2.command.Parser.parseSelectSimpleFromPart(Parser.java:1896)
+	at org.h2.command.Parser.parseSelectSimple(Parser.java:2044)
+	at org.h2.command.Parser.parseSelectSub(Parser.java:1890)
+	at org.h2.command.Parser.parseSelectUnion(Parser.java:1711)
+	at org.h2.command.Parser.parseSelect(Parser.java:1699)
+	at org.h2.command.Parser.parsePrepared(Parser.java:445)
+	at org.h2.command.Parser.parse(Parser.java:317)
+	at org.h2.command.Parser.parse(Parser.java:289)
+	at org.h2.command.Parser.prepareCommand(Parser.java:254)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1202)
+	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:73)
+	at org.h2.table.TableLink.readMetaData(TableLink.java:175)
+	at org.h2.table.TableLink.connect(TableLink.java:99)
+	at org.h2.table.TableLink.<init>(TableLink.java:79)
+	at org.h2.schema.Schema.createTableLink(Schema.java:614)
+	at org.h2.command.ddl.CreateLinkedTable.update(CreateLinkedTable.java:77)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:98)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcPreparedStatement.execute(JdbcPreparedStatement.java:201)
+	at DAL.ActingBudgetDAL.executeSQL(ActingBudgetDAL.java:204)
+	at DAL.ActingBudgetDAL.copyToLinkTable(ActingBudgetDAL.java:190)
+	at DAL.ActingBudgetDAL.copySeasonBudget(ActingBudgetDAL.java:141)
+	at BL.Test.main(Test.java:17)
+2016-11-07 18:50:37 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ambiguous column name "TABLE_ID"; SQL statement:
+SELECT * FROM (SELECT TABLE_ID, COLUMN_ID, COLID_IN_TABLE FROM COLUMNS_TO_TABLE INNER JOIN REGULAR_TABLE ON COLUMNS_TO_TABLE.TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17) T WHERE 1=0 [90059-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.mapColumn(ExpressionColumn.java:124)
+	at org.h2.expression.ExpressionColumn.mapColumns(ExpressionColumn.java:94)
+	at org.h2.command.dml.Select.mapColumns(Select.java:1228)
+	at org.h2.command.dml.Select.init(Select.java:827)
+	at org.h2.command.Parser.readTableFilter(Parser.java:1184)
+	at org.h2.command.Parser.parseSelectSimpleFromPart(Parser.java:1896)
+	at org.h2.command.Parser.parseSelectSimple(Parser.java:2044)
+	at org.h2.command.Parser.parseSelectSub(Parser.java:1890)
+	at org.h2.command.Parser.parseSelectUnion(Parser.java:1711)
+	at org.h2.command.Parser.parseSelect(Parser.java:1699)
+	at org.h2.command.Parser.parsePrepared(Parser.java:445)
+	at org.h2.command.Parser.parse(Parser.java:317)
+	at org.h2.command.Parser.parse(Parser.java:289)
+	at org.h2.command.Parser.prepareCommand(Parser.java:254)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1202)
+	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:73)
+	at org.h2.table.TableLink.readMetaData(TableLink.java:175)
+	at org.h2.table.TableLink.connect(TableLink.java:99)
+	at org.h2.table.TableLink.<init>(TableLink.java:79)
+	at org.h2.schema.Schema.createTableLink(Schema.java:614)
+	at org.h2.command.ddl.CreateLinkedTable.update(CreateLinkedTable.java:77)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:98)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcPreparedStatement.execute(JdbcPreparedStatement.java:201)
+	at DAL.ActingBudgetDAL.executeSQL(ActingBudgetDAL.java:204)
+	at DAL.ActingBudgetDAL.copyToLinkTable(ActingBudgetDAL.java:190)
+	at DAL.ActingBudgetDAL.copySeasonBudget(ActingBudgetDAL.java:141)
+	at BL.Test.main(Test.java:17)
+2016-11-07 18:50:37 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ambiguous column name "TABLE_ID"; SQL statement:
+SELECT * FROM (SELECT TABLE_ID, COLUMN_ID, COLID_IN_TABLE FROM COLUMNS_TO_TABLE INNER JOIN REGULAR_TABLE ON COLUMNS_TO_TABLE.TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17) T WHERE 1=0 [90059-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.mapColumn(ExpressionColumn.java:124)
+	at org.h2.expression.ExpressionColumn.mapColumns(ExpressionColumn.java:94)
+	at org.h2.command.dml.Select.mapColumns(Select.java:1228)
+	at org.h2.command.dml.Select.init(Select.java:827)
+	at org.h2.command.Parser.readTableFilter(Parser.java:1184)
+	at org.h2.command.Parser.parseSelectSimpleFromPart(Parser.java:1896)
+	at org.h2.command.Parser.parseSelectSimple(Parser.java:2044)
+	at org.h2.command.Parser.parseSelectSub(Parser.java:1890)
+	at org.h2.command.Parser.parseSelectUnion(Parser.java:1711)
+	at org.h2.command.Parser.parseSelect(Parser.java:1699)
+	at org.h2.command.Parser.parsePrepared(Parser.java:445)
+	at org.h2.command.Parser.parse(Parser.java:317)
+	at org.h2.command.Parser.parse(Parser.java:289)
+	at org.h2.command.Parser.prepareCommand(Parser.java:254)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1202)
+	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:73)
+	at org.h2.table.TableLink.readMetaData(TableLink.java:175)
+	at org.h2.table.TableLink.connect(TableLink.java:99)
+	at org.h2.table.TableLink.<init>(TableLink.java:79)
+	at org.h2.schema.Schema.createTableLink(Schema.java:614)
+	at org.h2.command.ddl.CreateLinkedTable.update(CreateLinkedTable.java:77)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:98)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcPreparedStatement.execute(JdbcPreparedStatement.java:201)
+	at DAL.ActingBudgetDAL.executeSQL(ActingBudgetDAL.java:204)
+	at DAL.ActingBudgetDAL.copyToLinkTable(ActingBudgetDAL.java:190)
+	at DAL.ActingBudgetDAL.copySeasonBudget(ActingBudgetDAL.java:141)
+	at BL.Test.main(Test.java:17)
+2016-11-07 18:52:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM (SELECT COLUMNS_TO_TABLE.TABLE_ID, COLUMN_ID, COL_ID_IN_TABLE FROM FIXED_COLUMNS_TO_TABLE INNER JOIN REGULAR_TABLE FIXED_COLUMNS_TO_TABLE.[*]TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17) T WHERE 1=0"; expected "RIGHT, LEFT, FULL, INNER, JOIN, CROSS, NATURAL, ON, RIGHT, LEFT, FULL, INNER, JOIN, CROSS, NATURAL, ,, WHERE, GROUP, HAVING, UNION, MINUS, EXCEPT, INTERSECT, ORDER, OFFSET, FETCH, LIMIT, FOR, )"; SQL statement:
+SELECT * FROM (SELECT COLUMNS_TO_TABLE.TABLE_ID, COLUMN_ID, COL_ID_IN_TABLE FROM FIXED_COLUMNS_TO_TABLE INNER JOIN REGULAR_TABLE FIXED_COLUMNS_TO_TABLE.TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17) T WHERE 1=0 [42001-192]
+2016-11-07 18:52:36 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM (SELECT COLUMNS_TO_TABLE.TABLE_ID, COLUMN_ID, COL_ID_IN_TABLE FROM FIXED_COLUMNS_TO_TABLE INNER JOIN REGULAR_TABLE FIXED_COLUMNS_TO_TABLE.[*]TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17) T WHERE 1=0"; expected "RIGHT, LEFT, FULL, INNER, JOIN, CROSS, NATURAL, ON, RIGHT, LEFT, FULL, INNER, JOIN, CROSS, NATURAL, ,, WHERE, GROUP, HAVING, UNION, MINUS, EXCEPT, INTERSECT, ORDER, OFFSET, FETCH, LIMIT, FOR, )"; SQL statement:
+SELECT * FROM (SELECT COLUMNS_TO_TABLE.TABLE_ID, COLUMN_ID, COL_ID_IN_TABLE FROM FIXED_COLUMNS_TO_TABLE INNER JOIN REGULAR_TABLE FIXED_COLUMNS_TO_TABLE.TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17) T WHERE 1=0 [42001-192]
+2016-11-07 18:52:36 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM (SELECT COLUMNS_TO_TABLE.TABLE_ID, COLUMN_ID, COL_ID_IN_TABLE FROM FIXED_COLUMNS_TO_TABLE INNER JOIN REGULAR_TABLE FIXED_COLUMNS_TO_TABLE.[*]TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17) T WHERE 1=0"; expected "RIGHT, LEFT, FULL, INNER, JOIN, CROSS, NATURAL, ON, RIGHT, LEFT, FULL, INNER, JOIN, CROSS, NATURAL, ,, WHERE, GROUP, HAVING, UNION, MINUS, EXCEPT, INTERSECT, ORDER, OFFSET, FETCH, LIMIT, FOR, )"; SQL statement:
+SELECT * FROM (SELECT COLUMNS_TO_TABLE.TABLE_ID, COLUMN_ID, COL_ID_IN_TABLE FROM FIXED_COLUMNS_TO_TABLE INNER JOIN REGULAR_TABLE FIXED_COLUMNS_TO_TABLE.TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17) T WHERE 1=0 [42001-192]
+2016-11-07 18:53:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM (SELECT COLUMNS_TO_TABLE.TABLE_ID, COLUMN_ID, COL_ID_IN_TABLE FROM FIXED_COLUMNS_TO_TABLE INNER JOIN REGULAR_TABLE FIXED_COLUMNS_TO_TABLE.[*]TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17) T WHERE 1=0"; expected "RIGHT, LEFT, FULL, INNER, JOIN, CROSS, NATURAL, ON, RIGHT, LEFT, FULL, INNER, JOIN, CROSS, NATURAL, ,, WHERE, GROUP, HAVING, UNION, MINUS, EXCEPT, INTERSECT, ORDER, OFFSET, FETCH, LIMIT, FOR, )"; SQL statement:
+SELECT * FROM (SELECT COLUMNS_TO_TABLE.TABLE_ID, COLUMN_ID, COL_ID_IN_TABLE FROM FIXED_COLUMNS_TO_TABLE INNER JOIN REGULAR_TABLE FIXED_COLUMNS_TO_TABLE.TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17) T WHERE 1=0 [42001-192]
+2016-11-07 18:53:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM (SELECT COLUMNS_TO_TABLE.TABLE_ID, COLUMN_ID, COL_ID_IN_TABLE FROM FIXED_COLUMNS_TO_TABLE INNER JOIN REGULAR_TABLE FIXED_COLUMNS_TO_TABLE.[*]TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17) T WHERE 1=0"; expected "RIGHT, LEFT, FULL, INNER, JOIN, CROSS, NATURAL, ON, RIGHT, LEFT, FULL, INNER, JOIN, CROSS, NATURAL, ,, WHERE, GROUP, HAVING, UNION, MINUS, EXCEPT, INTERSECT, ORDER, OFFSET, FETCH, LIMIT, FOR, )"; SQL statement:
+SELECT * FROM (SELECT COLUMNS_TO_TABLE.TABLE_ID, COLUMN_ID, COL_ID_IN_TABLE FROM FIXED_COLUMNS_TO_TABLE INNER JOIN REGULAR_TABLE FIXED_COLUMNS_TO_TABLE.TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17) T WHERE 1=0 [42001-192]
+2016-11-07 18:53:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM (SELECT COLUMNS_TO_TABLE.TABLE_ID, COLUMN_ID, COL_ID_IN_TABLE FROM FIXED_COLUMNS_TO_TABLE INNER JOIN REGULAR_TABLE FIXED_COLUMNS_TO_TABLE.[*]TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17) T WHERE 1=0"; expected "RIGHT, LEFT, FULL, INNER, JOIN, CROSS, NATURAL, ON, RIGHT, LEFT, FULL, INNER, JOIN, CROSS, NATURAL, ,, WHERE, GROUP, HAVING, UNION, MINUS, EXCEPT, INTERSECT, ORDER, OFFSET, FETCH, LIMIT, FOR, )"; SQL statement:
+SELECT * FROM (SELECT COLUMNS_TO_TABLE.TABLE_ID, COLUMN_ID, COL_ID_IN_TABLE FROM FIXED_COLUMNS_TO_TABLE INNER JOIN REGULAR_TABLE FIXED_COLUMNS_TO_TABLE.TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17) T WHERE 1=0 [42001-192]
+2016-11-07 18:54:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM (SELECT FIXED_COLUMNS_TO_TABLE.TABLE_ID, COLUMN_ID, COL_ID_IN_TABLE FROM FIXED_COLUMNS_TO_TABLE INNER JOIN REGULAR_TABLE FIXED_COLUMNS_TO_TABLE.[*]TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17) T WHERE 1=0"; expected "RIGHT, LEFT, FULL, INNER, JOIN, CROSS, NATURAL, ON, RIGHT, LEFT, FULL, INNER, JOIN, CROSS, NATURAL, ,, WHERE, GROUP, HAVING, UNION, MINUS, EXCEPT, INTERSECT, ORDER, OFFSET, FETCH, LIMIT, FOR, )"; SQL statement:
+SELECT * FROM (SELECT FIXED_COLUMNS_TO_TABLE.TABLE_ID, COLUMN_ID, COL_ID_IN_TABLE FROM FIXED_COLUMNS_TO_TABLE INNER JOIN REGULAR_TABLE FIXED_COLUMNS_TO_TABLE.TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17) T WHERE 1=0 [42001-192]
+2016-11-07 18:54:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM (SELECT FIXED_COLUMNS_TO_TABLE.TABLE_ID, COLUMN_ID, COL_ID_IN_TABLE FROM FIXED_COLUMNS_TO_TABLE INNER JOIN REGULAR_TABLE FIXED_COLUMNS_TO_TABLE.[*]TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17) T WHERE 1=0"; expected "RIGHT, LEFT, FULL, INNER, JOIN, CROSS, NATURAL, ON, RIGHT, LEFT, FULL, INNER, JOIN, CROSS, NATURAL, ,, WHERE, GROUP, HAVING, UNION, MINUS, EXCEPT, INTERSECT, ORDER, OFFSET, FETCH, LIMIT, FOR, )"; SQL statement:
+SELECT * FROM (SELECT FIXED_COLUMNS_TO_TABLE.TABLE_ID, COLUMN_ID, COL_ID_IN_TABLE FROM FIXED_COLUMNS_TO_TABLE INNER JOIN REGULAR_TABLE FIXED_COLUMNS_TO_TABLE.TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17) T WHERE 1=0 [42001-192]
+2016-11-07 18:54:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM (SELECT FIXED_COLUMNS_TO_TABLE.TABLE_ID, COLUMN_ID, COL_ID_IN_TABLE FROM FIXED_COLUMNS_TO_TABLE INNER JOIN REGULAR_TABLE FIXED_COLUMNS_TO_TABLE.[*]TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17) T WHERE 1=0"; expected "RIGHT, LEFT, FULL, INNER, JOIN, CROSS, NATURAL, ON, RIGHT, LEFT, FULL, INNER, JOIN, CROSS, NATURAL, ,, WHERE, GROUP, HAVING, UNION, MINUS, EXCEPT, INTERSECT, ORDER, OFFSET, FETCH, LIMIT, FOR, )"; SQL statement:
+SELECT * FROM (SELECT FIXED_COLUMNS_TO_TABLE.TABLE_ID, COLUMN_ID, COL_ID_IN_TABLE FROM FIXED_COLUMNS_TO_TABLE INNER JOIN REGULAR_TABLE FIXED_COLUMNS_TO_TABLE.TABLE_ID = REGULAR_TABLE.TABLE_ID WHERE B_YEAR = 16/17) T WHERE 1=0 [42001-192]
+2016-11-07 19:02:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INSERT INTO BUDGET_YEAR VALUES '16/17'[*]"; expected "("; SQL statement:
+INSERT INTO BUDGET_YEAR VALUES '16/17' [42001-192]
+2016-11-07 20:14:14 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Column "ID" not found; SQL statement:
+delete from department where id<4 [42122-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.Comparison.optimize(Comparison.java:178)
+	at org.h2.command.dml.Delete.prepare(Delete.java:131)
+	at org.h2.command.Parser.prepareCommand(Parser.java:259)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1202)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
