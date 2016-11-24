@@ -1,4 +1,4 @@
-package BL;
+package bl;
 
 public abstract class Assumption extends Item {
 	

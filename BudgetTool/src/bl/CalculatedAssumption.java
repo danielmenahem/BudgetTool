@@ -1,4 +1,4 @@
-package BL;
+package bl;
 
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;

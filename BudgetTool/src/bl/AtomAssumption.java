@@ -1,4 +1,4 @@
-package BL;
+package bl;
 
 public class AtomAssumption extends Assumption {
 	private boolean isPeriodical;

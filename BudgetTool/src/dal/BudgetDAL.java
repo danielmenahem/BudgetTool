@@ -1,11 +1,11 @@
-package DAL;
+package dal;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import BL.*;
+import bl.*;
 
 public class BudgetDAL {
 	

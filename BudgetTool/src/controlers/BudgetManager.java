@@ -1,14 +1,14 @@
-package Controlers;
+package controlers;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import DAL.DataContainer;
-import IF.*;
-import BL.*;
+import bl.*;
+import dal.DataContainer;
+import interfaces.*;
 
-public class BudgetManager implements EnteranceManagerIF  {
+public class BudgetManager implements EnteranceManagerIF, AssumptionsMangerIF  {
 		
 	private static BudgetManager singleton;
 	

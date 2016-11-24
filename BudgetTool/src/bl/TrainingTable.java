@@ -1,10 +1,10 @@
-package BL;
+package bl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import BL.Column.ColumnType;
+import bl.Column.ColumnType;
 
 public class TrainingTable extends Table {
 	public static final String SUB_DEPARTMENT = "Training";

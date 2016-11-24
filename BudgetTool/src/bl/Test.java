@@ -1,10 +1,10 @@
-package BL;
+package bl;
 
 import java.sql.SQLException;
 
-import Controlers.BudgetManager;
-import DAL.ActingBudgetDAL;
-import DAL.BudgetDAL;
+import controlers.BudgetManager;
+import dal.ActingBudgetDAL;
+import dal.BudgetDAL;
 
 public class Test {
 
