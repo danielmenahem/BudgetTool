@@ -3,7 +3,6 @@ package ui;
 import java.sql.SQLException;
 
 import interfaces.EnteranceManagerIF;
-import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -155,6 +154,7 @@ public class Enterance extends Scene{
 					application.startMainContainerScene();
 				} catch (Exception e1) {
 					newInformation("Problem wuth DB, please try again later");
+					e1.printStackTrace();
 				}
 			}
 		});

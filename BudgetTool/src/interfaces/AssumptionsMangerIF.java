@@ -14,4 +14,6 @@ public interface AssumptionsMangerIF {
 	ArrayList<String> getBudgetYears();
 	ArrayList<String> getDepartments();
 	ArrayList<String> getSubDepartments();
+	void updateAssumptionInActual(Assumption assumption);
+	void updateAssumptionInPlanning(Assumption assumption);
 }

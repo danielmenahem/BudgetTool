@@ -1,6 +1,7 @@
 package bl;
 
 import java.sql.SQLException;
+import java.util.Map.Entry;
 
 import controlers.BudgetManager;
 import dal.ActingBudgetDAL;
@@ -17,10 +18,15 @@ public class Test {
 				System.out.println(s);
 			System.out.println("\n" + (System.currentTimeMillis()-start));
 			bm.readAllData(bm.getBudgetYears().get(0));
+			//Assumption assumption  = new AtomAssumption("Minimum wage", 25.6, new Classification("Team", "Reports"), new AssumptionType(AssumptionType.Type.Quantity), false, "16/17");
+			//bm.saveAssumtionToPlanning(assumption);
+			for(Entry<Integer, Assumption> e : bm.getPlanningAssumptions().entrySet()){
+				System.out.println(e.getKey());
+			}
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}
+		}		
 	
 		
 /*		ActingBudgetDAL dal = new ActingBudgetDAL();

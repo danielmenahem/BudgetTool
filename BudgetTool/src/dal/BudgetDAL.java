@@ -1075,7 +1075,7 @@ public class BudgetDAL {
 			String title = rs.getString("TITLE");
 			Classification classification = getClassification(connection, rs.getInt("CLASS_ID"));
 			String bYear = rs.getString("B_YEAR");
-			int values [] = getItemValues(connection,id);
+			double values [] = getItemValues(connection,id);
 			
 			if(type == 1){
 				AtomAssumption assumption = new AtomAssumption(id);
@@ -1134,17 +1134,17 @@ public class BudgetDAL {
 				int id = generatedKeys.getInt(1);
 				return id;
 			} else {
-				throw new SQLException("Writing object failed, no ID obtained.");
+				return 0;
 			}
 		}
 	}
 	
-	private void initItem(Item item, String title, Classification classification, int values [], String bYear){
+	private void initItem(Item item, String title, Classification classification, double values [], String bYear){
 		item.setTitle(title);
 		item.setBudgetYear(bYear);
 		item.setClassification(classification);
 		for(int i = 0; i<values.length; i++){
-			item.setValue(i+1, values[i]);
+			item.setValue(values[i],i+1 );
 		}
 	}
 	
@@ -1160,15 +1160,15 @@ public class BudgetDAL {
 		return new Classification(rs.getString(1), rs.getString(2));
 	}
 	
-	private int[] getItemValues(Connection connection, int id) throws SQLException{
-		String query = "SELECT POS_INDEX, VALUE FORM ITEM_VALUES "
+	private double[] getItemValues(Connection connection, int id) throws SQLException{
+		String query = "SELECT POS_INDEX, VALUE FROM ITEM_VALUES "
 				+ "WHERE ITEM_ID = ?";
 		PreparedStatement statement = connection.prepareStatement(query);
 		statement.setInt(1, id);
 		ResultSet rs =  statement.executeQuery();
-		int values [] = new int [12];
+		double values [] = new double [12];
 		while(rs.next()){
-			values[rs.getInt("POS_INDEX")-1] = rs.getInt("VALUE");
+			values[rs.getInt("POS_INDEX")-1] = rs.getDouble("VALUE");
 		}
 		return values;
 	}
@@ -1752,7 +1752,7 @@ public class BudgetDAL {
 	}
 	
 	private PreparedStatement atomAssumptionStatement (Connection connection, AtomAssumption assumption)throws SQLException{
-		String statement = "INSERT INTO ATOM_ASSUMPTION (ID,IS_PERIODICAL) Values (?,?)";
+		String statement = "INSERT INTO ATOM_ASSUMPTION (ASSUMPTION_ID,IS_PERIODICAL) Values (?,?)";
 		PreparedStatement ps = connection.prepareStatement(statement, Statement.RETURN_GENERATED_KEYS);
 		ps.setInt(1, assumption.getId());
 		ps.setBoolean(2, assumption.isPerdiocal());

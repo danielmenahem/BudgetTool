@@ -107,6 +107,24 @@ public class BudgetManager implements EnteranceManagerIF, AssumptionsMangerIF  {
 		actualData.addTable(table);
 	}
 	
+	public void updateAssumptionInPlanning(Assumption assumption){
+		try {
+			planningData.updateObject(assumption);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void updateAssumptionInActual(Assumption assumption){
+		try {
+			actualData.updateObject(assumption);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public void createNewBudgetYear(String bYear) throws SQLException{
 		this.budgetYears = actualData.addBudgetYear(bYear);
 	}
