@@ -20,10 +20,14 @@ public abstract class Item implements ActionListener{
 	
 	private ArrayList<ActionListener> listeners;
 	
-	public Item(int id){
-		setId(id);
-		listeners = new ArrayList<>();
+	public Item(){
 		this.values = new double [NUMBER_OF_MONTHS];
+		listeners = new ArrayList<>();
+	}
+	
+	public Item(int id){
+		this();
+		setId(id);
 	}
 
 	public Item(String title, Classification classification, String budgetYear) {

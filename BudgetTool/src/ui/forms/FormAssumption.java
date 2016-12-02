@@ -3,6 +3,8 @@ package ui.forms;
 
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import com.panemu.tiwulfx.common.TableCriteria;
 import com.panemu.tiwulfx.common.TableData;
@@ -12,18 +14,22 @@ import com.panemu.tiwulfx.table.TableControl;
 import com.panemu.tiwulfx.table.TableController;
 import com.panemu.tiwulfx.table.TextColumn;
 import com.panemu.tiwulfx.table.BaseColumn;
+import javafx.scene.control.cell.*;
 
 import bl.Assumption;
 import bl.AtomAssumption;
 import interfaces.AssumptionsMangerIF;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableColumn.SortType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import javafx.beans.*;
 import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.beans.property.*;
 import com.panemu.tiwulfx.table.CheckBoxColumn;
@@ -32,8 +38,8 @@ import com.panemu.tiwulfx.table.ComboBoxColumn;
 public class FormAssumption extends Form{
 	
 	private AssumptionsMangerIF manager;
-	private TableControl<bl.Assumption> table = new TableControl<>(bl.Assumption.class);
-	//private TableView <Assumption> table = new TableView <>();
+	//private TableControl<bl.Assumption> table = new TableControl<>(bl.Assumption.class);
+	private TableView <Assumption> table;
 
 	
 
@@ -46,8 +52,8 @@ public class FormAssumption extends Form{
 			this.setStyle("-fx-background-color: yellow;");
 		else
 			this.setStyle("-fx-background-color: blue;");
-		
-/*		TableColumn <Assumption, Integer> col1 = new TableColumn<>("ID");
+		table = new TableView<>(getObsevableData());
+		TableColumn <Assumption, Integer> col1 = new TableColumn<>("ID");
 		TableColumn <Assumption, String> col2 = new TableColumn<>("Title");
 		TableColumn <Assumption, Double> col3 = new TableColumn<>("Jul");
 		TableColumn <Assumption, Double> col4 = new TableColumn<>("Aug");
@@ -64,8 +70,29 @@ public class FormAssumption extends Form{
 
 		col1.setCellValueFactory(new PropertyValueFactory<Assumption, Integer>("id"));
 		col2.setCellValueFactory(new PropertyValueFactory<Assumption, String>("title"));
+		col2.setCellFactory(TextFieldTableCell.<Assumption>forTableColumn());
 		//col3.setCellValueFactory(new PropertyValueFactory<Assumption, Integer>("values"));
 		col3.setCellValueFactory(new MonthValues(1));
+		//col3.setCellFactory(TextFieldTableCell.forTableColumn());
+		//col3.setCellFactory(TextFieldTableCell.<Assumption>forTableColumn());
+		col3.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Assumption,Double>>() {
+			@Override
+			public void handle(CellEditEvent<Assumption, Double> event) {
+				(event.getTableView().getItems().get(event.getTablePosition().getRow())).setValue(event.getNewValue(), 1);
+			}
+		});
+		col3.setCellFactory(col -> new TableCell<Assumption, Double>() {
+	        @Override 
+	        public void updateItem(Double value, boolean empty) {
+	            super.updateItem(value, empty);
+	            if (empty) {
+	                setText(null);
+	            } else {
+	                setText(""+value);
+	            }
+	        }
+	    });
+		col3.setEditable(true);
 		col4.setCellValueFactory(new MonthValues(2));
 		col5.setCellValueFactory(new MonthValues(3));
 		col6.setCellValueFactory(new MonthValues(4));
@@ -77,15 +104,14 @@ public class FormAssumption extends Form{
 		col12.setCellValueFactory(new MonthValues(10));
 		col13.setCellValueFactory(new MonthValues(11));
 		col14.setCellValueFactory(new MonthValues(12));
-
 		
-
 		table.getColumns().addAll(col1, col2, col3, col4, col5, col6, col7, col8, col9, col10, col11, col12, col13, col14);
-		table.getItems().addAll(getData());
-		this.getChildren().add(table);*/
+		table.setEditable(true);
+
+		this.getChildren().add(table);
 		
 		
-		table.setAgileEditing(true);
+/*		table.setAgileEditing(true);
 		NumberColumn<bl.Assumption,Integer> col1 = new NumberColumn<>("id", Integer.class,50);
 		col1.setText("ID");
 		col1.setEditable(false);
@@ -94,6 +120,14 @@ public class FormAssumption extends Form{
 		col2.setAlignment(Pos.CENTER);
 		NumberColumn<bl.Assumption,Double> col3 = new NumberColumn<>("Jul", Double.class,50);
 		col3.setCellValueFactory(new MonthValues(1));
+		col3.setRequired(false);
+		col3.setPropertyName(null);
+		col3.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Assumption,Double>>() {
+			@Override
+			public void handle(CellEditEvent<Assumption, Double> event) {
+				(event.getTableView().getItems().get(event.getTablePosition().getRow())).setValue(event.getNewValue(), 1);
+			}
+		});
 		NumberColumn<bl.Assumption,Double> col4 = new NumberColumn<>("Aug", Double.class,50);
 		col4.setCellValueFactory(new MonthValues(2));
 		NumberColumn<bl.Assumption,Double> col5 = new NumberColumn<>("Sep", Double.class,50);
@@ -116,7 +150,7 @@ public class FormAssumption extends Form{
 		col13.setCellValueFactory(new MonthValues(11));
 		NumberColumn<bl.Assumption,Double> col14 = new NumberColumn<>("Jun", Double.class,50);
 		col14.setCellValueFactory(new MonthValues(12));
-/*		CheckBoxColumn <Assumption> isClaculated = new CheckBoxColumn<>("Calculated");
+		CheckBoxColumn <Assumption> isClaculated = new CheckBoxColumn<>("Calculated");
 		isClaculated.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Assumption,Boolean>, ObservableValue<Boolean>>() {
 			
 			@Override
@@ -128,8 +162,8 @@ public class FormAssumption extends Form{
 					isCalc = true;
 				return new ReadOnlyObjectWrapper<>(isCalc);
 			}
-		});*/
-		ComboBoxColumn<Assumption, String> type = new ComboBoxColumn<>("Assumption Type");
+		});
+		ComboBoxColumn<Assumption, String> type = new ComboBoxColumn<>("assumptionType");
 		type.addItem("Atom", "Atom");
 		type.addItem("Complex", "Complex");
 		type.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Assumption,String>, ObservableValue<String>>() {
@@ -146,7 +180,7 @@ public class FormAssumption extends Form{
 		table.getColumns().addAll(col1, type, col2, col3, col4, col5, col6, col7, col8, col9, col10, col11, col12, col13, col14);
 		table.reloadFirstPage();
 		table.setConfigurationID("FrmTstTextColumn");
-		this.getChildren().add(table);
+		this.getChildren().add(table);*/
 	}
 	
 	private void updateAssumption(Assumption a) {
@@ -154,6 +188,18 @@ public class FormAssumption extends Form{
 			manager.updateAssumptionInPlanning(a);
 		else
 			manager.updateAssumptionInActual(a);	
+	}
+	public ObservableList<Assumption> getObsevableData(){
+		ArrayList<Assumption> lst = new ArrayList<>();
+		if(isPlanning())
+			for(int id : manager.getPlanningAssumptions().keySet()){
+				lst.add(manager.getPlanningAssumptions().get(id));
+			}
+		else
+			for(int id : manager.getActualAssumptions().keySet()){
+				lst.add(manager.getActualAssumptions().get(id));
+			}
+		return FXCollections.observableArrayList(lst);
 	}
 	
 	public ArrayList<Assumption> getData(){
@@ -176,6 +222,7 @@ public class FormAssumption extends Form{
 		public MonthValues(int index) {
 			this.index = index;
 		}
+		
 		@Override
 		public ObservableValue<Double> call(CellDataFeatures<Assumption, Double> param) {
 			return new ReadOnlyObjectWrapper<>(param.getValue().getValue(index));
@@ -196,10 +243,21 @@ public class FormAssumption extends Form{
 		public List<Assumption> update(List<Assumption> records){
 			for(Assumption a : records){
 				if(!a.isUpdated()){
-					updateAssumption(a);
+					try{						
+						updateAssumption(a);
+					}
+					catch(Exception e){}
 				}
 			}
 			return getData();
+		}
+		
+		@Override
+		public List<Assumption> insert(List<Assumption> newRecords){
+			for(Assumption a : newRecords){
+				
+			}
+			return null;
 		}
 		
 	}
