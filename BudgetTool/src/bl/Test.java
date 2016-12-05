@@ -3,6 +3,8 @@ package bl;
 import java.sql.SQLException;
 import java.util.Map.Entry;
 
+import bl.AssumptionType.Type;
+import bl.CalculatedAssumption.Action;
 import controlers.BudgetManager;
 import dal.ActingBudgetDAL;
 import dal.BudgetDAL;
@@ -20,6 +22,8 @@ public class Test {
 			bm.readAllData(bm.getBudgetYears().get(0));
 			//Assumption assumption  = new AtomAssumption("Minimum wage", 25.6, new Classification("Team", "Reports"), new AssumptionType(AssumptionType.Type.Quantity), false, "16/17");
 			//bm.saveAssumtionToPlanning(assumption);
+			CalculatedAssumption ca = new CalculatedAssumption("Live cost/Hour",new Classification("Team", "Reports"), new AssumptionType(Type.Costs), Action.mult,"16/17");
+			bm.saveAssumtionToPlanning(ca);
 			for(Entry<Integer, Assumption> e : bm.getPlanningAssumptions().entrySet()){
 				System.out.println(e.getKey());
 			}

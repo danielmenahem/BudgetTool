@@ -1016,7 +1016,7 @@ public class BudgetDAL {
 	}
 	
 	private void readCalculatedAssumption(CalculatedAssumption assumption, Connection connection, DataContainer data) throws Exception  {
-		String query = "SELECT * FROM ATOM_ASSUMPTION "
+		String query = "SELECT * FROM CALCULATED_ASSUMPTION "
 				+ "WHERE ASSUMPTION_ID = ?";
 		PreparedStatement statement = connection.prepareStatement(query);
 		statement.setInt(1, assumption.getId());
@@ -1716,7 +1716,7 @@ public class BudgetDAL {
 	
 	private PreparedStatement calculatedAssumptionStatement(Connection connection, CalculatedAssumption ca) throws Exception{
 		String statement = "INSERT INTO CALCULATED_ASSUMPTION (ASSUMPTION_ID ,\"Action\" ,SPECIAL_OP";
-		if(ca.getSpecialOperationAssumption()==null){
+		if(ca.getSpecialOperationAssumption()!=null){
 			statement+= ",SPECIAL_ASSUMPTION_ID) values(?,?,?,?)";
 		}
 		else{
@@ -1726,7 +1726,7 @@ public class BudgetDAL {
 		ps.setInt(1, ca.getId());
 		ps.setInt(2, ca.getAction().ordinal());
 		ps.setInt(3, ca.getSpecialOperationAction().ordinal());
-		if(ca.getSpecialOperationAssumption()==null)
+		if(ca.getSpecialOperationAssumption()!=null)
 			ps.setInt(4, ca.getSpecialOperationAssumption().getId());
 		return ps;
 	}

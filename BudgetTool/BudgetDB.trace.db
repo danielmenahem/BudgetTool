@@ -2090,3 +2090,203 @@ Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/Dan
 	at org.h2.mvstore.FileStore.open(FileStore.java:172)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:344)
 	... 39 more
+2016-12-05 11:44:58 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Parameter "#4" is not set; SQL statement:
+INSERT INTO CALCULATED_ASSUMPTION (ASSUMPTION_ID ,"Action" ,SPECIAL_OP,SPECIAL_ASSUMPTION_ID) values(?,?,?,?) [90012-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.Parameter.checkSet(Parameter.java:81)
+	at org.h2.command.Prepared.checkParameters(Prepared.java:164)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:97)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:160)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:146)
+	at dal.BudgetDAL.executeCreateStatment(BudgetDAL.java:1125)
+	at dal.BudgetDAL.create(BudgetDAL.java:107)
+	at dal.BudgetDAL.create(BudgetDAL.java:58)
+	at dal.DataContainer.saveToDB(DataContainer.java:230)
+	at dal.DataContainer.addAssumption(DataContainer.java:65)
+	at controlers.BudgetManager.saveAssumtionToPlanning(BudgetManager.java:87)
+	at bl.Test.main(Test.java:26)
+2016-12-05 11:50:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Column "ID" not found; SQL statement:
+delete from item_values where id=12 [42122-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.Comparison.optimize(Comparison.java:178)
+	at org.h2.command.dml.Delete.prepare(Delete.java:131)
+	at org.h2.command.Parser.prepareCommand(Parser.java:259)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1202)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2016-12-05 11:51:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Column "ITEM_ID" not found; SQL statement:
+delete from item where item_id=12 [42122-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.Comparison.optimize(Comparison.java:178)
+	at org.h2.command.dml.Delete.prepare(Delete.java:131)
+	at org.h2.command.Parser.prepareCommand(Parser.java:259)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1202)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2016-12-05 11:51:54 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/git/BudgetTool/BudgetTool/BudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.message.DbException.convert(DbException.java:295)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:94)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:375)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:358)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2893)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:154)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:99)
+	at org.h2.engine.Database.getPageStore(Database.java:2463)
+	at org.h2.engine.Database.open(Database.java:692)
+	at org.h2.engine.Database.openDatabase(Database.java:270)
+	at org.h2.engine.Database.<init>(Database.java:264)
+	at org.h2.engine.Engine.openSession(Engine.java:64)
+	at org.h2.engine.Engine.openSession(Engine.java:176)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:154)
+	at org.h2.engine.Engine.createSession(Engine.java:137)
+	at org.h2.engine.Engine.createSession(Engine.java:27)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:349)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at dal.BudgetDAL.getConnection(BudgetDAL.java:46)
+	at dal.BudgetDAL.getAllBudgetYears(BudgetDAL.java:1808)
+	at dal.DataContainer.getBudgetYears(DataContainer.java:127)
+	at controlers.BudgetManager.loadInitialInformation(BudgetManager.java:69)
+	at controlers.BudgetManager.<init>(BudgetManager.java:23)
+	at controlers.BudgetManager.createBudgetManager(BudgetManager.java:33)
+	at bl.Test.main(Test.java:17)
+Caused by: org.h2.jdbc.JdbcSQLException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/git/BudgetTool/BudgetTool/BudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 30 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/git/BudgetTool/BudgetTool/BudgetDB.mv.db [1.4.192/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:773)
+	at org.h2.mvstore.FileStore.open(FileStore.java:172)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:344)
+	... 25 more
+2016-12-05 11:52:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Parameter "#4" is not set; SQL statement:
+INSERT INTO CALCULATED_ASSUMPTION (ASSUMPTION_ID ,"Action" ,SPECIAL_OP,SPECIAL_ASSUMPTION_ID) values(?,?,?,?) [90012-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.Parameter.checkSet(Parameter.java:81)
+	at org.h2.command.Prepared.checkParameters(Prepared.java:164)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:97)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:160)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:146)
+	at dal.BudgetDAL.executeCreateStatment(BudgetDAL.java:1125)
+	at dal.BudgetDAL.create(BudgetDAL.java:107)
+	at dal.BudgetDAL.create(BudgetDAL.java:58)
+	at dal.DataContainer.saveToDB(DataContainer.java:230)
+	at dal.DataContainer.addAssumption(DataContainer.java:65)
+	at controlers.BudgetManager.saveAssumtionToPlanning(BudgetManager.java:87)
+	at bl.Test.main(Test.java:26)
+2016-12-05 11:53:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "DELETE  FROM ASSUMPTION WHERE ID=12
+DELETE[*] FROM ITEM_VALUES WHERE ITEM_ID=12
+DELETE FROM ITEM WHERE ID=12 "; SQL statement:
+delete  from assumption where id=12
+delete from item_values where item_id=12
+delete from item where id=12 [42000-192]
+2016-12-05 11:53:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "DELETE  FROM ASSUMPTION WHERE ID=13
+DELETE[*] FROM ITEM_VALUES WHERE ITEM_ID=13
+DELETE FROM ITEM WHERE ID=13 "; SQL statement:
+delete  from assumption where id=13
+delete from item_values where item_id=13
+delete from item where id=13 [42000-192]
+2016-12-05 11:59:40 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Parameter "#4" is not set; SQL statement:
+INSERT INTO CALCULATED_ASSUMPTION (ASSUMPTION_ID ,"Action" ,SPECIAL_OP,SPECIAL_ASSUMPTION_ID) values(?,?,?,?) [90012-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.Parameter.checkSet(Parameter.java:81)
+	at org.h2.command.Prepared.checkParameters(Prepared.java:164)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:97)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:160)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:146)
+	at dal.BudgetDAL.executeCreateStatment(BudgetDAL.java:1125)
+	at dal.BudgetDAL.create(BudgetDAL.java:107)
+	at dal.BudgetDAL.create(BudgetDAL.java:58)
+	at dal.DataContainer.saveToDB(DataContainer.java:230)
+	at dal.DataContainer.addAssumption(DataContainer.java:65)
+	at controlers.BudgetManager.saveAssumtionToPlanning(BudgetManager.java:87)
+	at bl.Test.main(Test.java:26)
+2016-12-05 12:00:14 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/git/BudgetTool/BudgetTool/BudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.message.DbException.convert(DbException.java:295)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:94)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:375)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:358)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2893)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:154)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:99)
+	at org.h2.engine.Database.getPageStore(Database.java:2463)
+	at org.h2.engine.Database.open(Database.java:692)
+	at org.h2.engine.Database.openDatabase(Database.java:270)
+	at org.h2.engine.Database.<init>(Database.java:264)
+	at org.h2.engine.Engine.openSession(Engine.java:64)
+	at org.h2.engine.Engine.openSession(Engine.java:176)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:154)
+	at org.h2.engine.Engine.createSession(Engine.java:137)
+	at org.h2.engine.Engine.createSession(Engine.java:27)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:349)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at dal.BudgetDAL.getConnection(BudgetDAL.java:46)
+	at dal.BudgetDAL.getAllBudgetYears(BudgetDAL.java:1808)
+	at dal.DataContainer.getBudgetYears(DataContainer.java:127)
+	at controlers.BudgetManager.loadInitialInformation(BudgetManager.java:69)
+	at controlers.BudgetManager.<init>(BudgetManager.java:23)
+	at controlers.BudgetManager.createBudgetManager(BudgetManager.java:33)
+	at bl.Test.main(Test.java:17)
+Caused by: org.h2.jdbc.JdbcSQLException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/git/BudgetTool/BudgetTool/BudgetDB.mv.db [1.4.192/7]" [50000-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 30 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/Daniel_m/git/BudgetTool/BudgetTool/BudgetDB.mv.db [1.4.192/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:773)
+	at org.h2.mvstore.FileStore.open(FileStore.java:172)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:344)
+	... 25 more
+2016-12-05 12:00:21 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: No data is available [2000-192]
+2016-12-05 12:03:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CLACULATED_ASSUMPTION" not found; SQL statement:
+select * from claculated_assumption [42102-192]
