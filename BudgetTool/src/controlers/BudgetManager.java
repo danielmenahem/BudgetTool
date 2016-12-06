@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import bl.*;
+import bl.AssumptionType.Type;
+import bl.CalculatedAssumption.Action;
 import dal.DataContainer;
 import interfaces.*;
 
-public class BudgetManager implements EnteranceManagerIF, AssumptionsMangerIF  {
+public class BudgetManager implements EnteranceManagerIF, AssumptionsManagerIF  {
 		
 	private static BudgetManager singleton;
 	
@@ -111,7 +113,6 @@ public class BudgetManager implements EnteranceManagerIF, AssumptionsMangerIF  {
 		try {
 			planningData.updateObject(assumption);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -120,13 +121,48 @@ public class BudgetManager implements EnteranceManagerIF, AssumptionsMangerIF  {
 		try {
 			actualData.updateObject(assumption);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
 	public void createNewBudgetYear(String bYear) throws SQLException{
 		this.budgetYears = actualData.addBudgetYear(bYear);
+	}
+
+	@Override
+	public Assumption createAtomAssumptionInPlanning(String title, String department, String subDepartment, double value,
+			Type type) throws Exception {
+		AtomAssumption assumption = new AtomAssumption(title, value, new Classification(department, subDepartment), 
+				new AssumptionType(type), true, this.planningData.getBudgetYear());
+		planningData.addAssumption(assumption);
+		return assumption;
+	}
+
+	@Override
+	public Assumption createAtomAssumptionInActual(String title, String department, String subDepartment, double value,
+			Type type) throws Exception {
+		AtomAssumption assumption = new AtomAssumption(title, value, new Classification(department, subDepartment), 
+				new AssumptionType(type), true, this.planningData.getBudgetYear());
+		actualData.addAssumption(assumption);
+		return assumption;
+	}
+
+	@Override
+	public Assumption createClaculatedAssumptionInPlanning(String title, String department, String subDepartment,
+			Action action, Type type) throws Exception {
+		CalculatedAssumption assumption = new CalculatedAssumption(title, new Classification(department, subDepartment),
+				new AssumptionType(type),action, this.planningData.getBudgetYear());
+		planningData.addAssumption(assumption);
+		return assumption;
+	}
+
+	@Override
+	public Assumption createCalculatedAssumptionInActual(String title, String department, String subDepartment, Action action,
+			Type type) throws Exception {
+		CalculatedAssumption assumption = new CalculatedAssumption(title, new Classification(department, subDepartment),
+				new AssumptionType(type),action, this.planningData.getBudgetYear());
+		actualData.addAssumption(assumption);
+		return assumption;
 	}
 	
 }

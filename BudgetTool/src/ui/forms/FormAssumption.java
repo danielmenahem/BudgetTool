@@ -7,15 +7,20 @@ import java.util.Comparator;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.TextField;
 
 import javafx.scene.control.cell.*;
 
 import bl.Assumption;
 import bl.AssumptionType;
 import bl.AtomAssumption;
+import bl.CalculatedAssumption;
+import bl.CalculatedAssumption.Action;
 import bl.AssumptionType.Type;
-import interfaces.AssumptionsMangerIF;
+import interfaces.AssumptionsManagerIF;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn.CellDataFeatures;
@@ -33,6 +38,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.beans.property.*;
 import javafx.util.converter.DefaultStringConverter;
+import javafx.application.Platform;
 import ui.interfaces.FormListener;
 import ui.supports.DoubleEditingCell;
 import ui.supports.FormEvent;
@@ -43,10 +49,32 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 	private static final int VALUE_COLUMN_WIDTH  = 50;
 	private static final int STRING_COLUMN_WIDTH  = 120;
 	
-	private AssumptionsMangerIF manager;
+	private AssumptionsManagerIF manager;
 	private VBox paneMain = new VBox();
-	private HBox paneFilters = new HBox(); 
-	private GridPane paneNew = new GridPane();
+	private HBox paneFilters = new HBox();
+	private VBox paneNew = new VBox();
+	private GridPane paneNewDefenitions = new GridPane();
+	private HBox paneNewValues = new HBox();
+	private GridPane paneNewValuesLeft = new GridPane();
+	private GridPane paneNewValuesRight = new GridPane();
+	private Label lblNewAssumptionHeader = new Label("Create New Assumption");
+	private Label lblNewAssumptionType = new Label("Type");
+	private Label lblNewAssumptionTitle = new Label("Title");
+	private Label lblNewAssumptionValue = new Label("Value");
+	private Label lblNewAssumptionDepartment = new Label("Department");
+	private Label lblNewAssumptionSubDep = new Label("Sub Department");
+	private Label lblNewAssumptionDataType = new Label("Data Type");
+	private Label lblNewAssumptionAction = new Label("Action");
+	private Label lblMsg = new Label("");
+	private ComboBox<String> cmbNewAssumptionType;
+	private ComboBox<String> cmbNewAssumptionDepartment;
+	private ComboBox<String> cmbNewAssumptionSubDepartment;
+	private ComboBox<String> cmbNewAssumptionDataType;
+	private ComboBox<String> cmbNewAssumptionAction;
+	private TextField tfNewAssumptionTitle = new TextField();
+	private TextField tfNewAssumptionValue = new TextField();
+	private Button btnNewAssumptionAdd = new Button("Add Assumption");
+	
 	private TableView <Assumption> table;
 	private TableColumn <Assumption, Integer> colID = new TableColumn<>("ID");
 	private TableColumn <Assumption, String> colType = new TableColumn<>("Type");
@@ -70,9 +98,9 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 	private ObservableList<String> types;
 	private ObservableList<String> deps;
 	private ObservableList<String> subDeps;
+	private ObservableList<String> actions;
 	
-
-	public FormAssumption(AssumptionsMangerIF manager, boolean isPlanning){
+	public FormAssumption(AssumptionsManagerIF manager, boolean isPlanning){
 		
 		super(isPlanning);
 		this.manager = manager;
@@ -90,6 +118,7 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 				colOct, colNov, colDec, colJan, colFeb, colMar, colApr, colMay, colJun, colDataType);
 		table.setEditable(true);
 		setColsSizesAndAlignment();
+		buildNewAssumptionGUI();
 		paneMain.getChildren().addAll(paneFilters, new ScrollPane(table), paneNew);
 		this.getChildren().add(paneMain);
 	}
@@ -137,6 +166,163 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 		}
 	}
 	
+	private void buildNewAssumptionGUI(){
+		cmbNewAssumptionType = new ComboBox<>(FXCollections.observableArrayList("Atom","Complex"));
+		cmbNewAssumptionType.setOnAction(e -> typeChangedAction());
+		btnNewAssumptionAdd.setOnAction(e -> addAssumptionAction());
+		tfNewAssumptionTitle.setMinWidth(300);
+		tfNewAssumptionValue.setMaxWidth(VALUE_COLUMN_WIDTH);
+		paneNewDefenitions.add(lblNewAssumptionType, 0, 0);
+		paneNewDefenitions.add(cmbNewAssumptionType, 1, 0);
+		paneNewDefenitions.add(lblNewAssumptionTitle, 0, 1);
+		paneNewDefenitions.add(tfNewAssumptionTitle, 1, 1);
+		
+		cmbNewAssumptionDataType = new ComboBox<>(types);
+		cmbNewAssumptionDepartment = new ComboBox<>(deps);
+		cmbNewAssumptionSubDepartment = new ComboBox<>(subDeps);
+		cmbNewAssumptionAction = new ComboBox<>(actions);
+		
+		paneNewValuesLeft.add(lblNewAssumptionDataType, 0, 0);
+		paneNewValuesLeft.add(cmbNewAssumptionDataType, 1, 0);
+		
+		paneNewValuesRight.add(lblNewAssumptionDepartment, 0, 0);
+		paneNewValuesRight.add(cmbNewAssumptionDepartment, 1, 0);
+		paneNewValuesRight.add(lblNewAssumptionSubDep, 0, 1);
+		paneNewValuesRight.add(cmbNewAssumptionSubDepartment, 1, 1);
+		
+		paneNewValues.getChildren().addAll(paneNewValuesLeft,paneNewValuesRight);
+		paneNewValues.setVisible(false);
+		paneNew.getChildren().addAll(lblNewAssumptionHeader, paneNewDefenitions, paneNewValues, btnNewAssumptionAdd,lblMsg);
+		
+	}
+	
+	private void clearAfterTypeSwitch(){
+		if(cmbNewAssumptionType.getSelectionModel().getSelectedIndex()==0){
+			clearAfterSwitchToAtom();
+		}
+		else if(cmbNewAssumptionType.getSelectionModel().getSelectedIndex()==1) {
+			clearAfterSwitchToComplex();
+		}
+	}
+	
+	private void clearAfterSwitchToComplex() {
+		Platform.runLater(() -> {
+			cmbNewAssumptionAction.getSelectionModel().select(-1);
+		});
+	}
+
+	private void clearAfterSwitchToAtom() {
+		Platform.runLater(() -> {
+			tfNewAssumptionValue.setText("");
+		});
+	}
+
+	private void addAssumptionAction() {
+		if(cmbNewAssumptionType.getSelectionModel().getSelectedIndex()==-1)
+			printMessage("Please inset assumption type");
+		else{
+			if(tfNewAssumptionTitle.getText().equals(""))
+				printMessage("Please insert assumption title");
+			else if(cmbNewAssumptionDepartment.getSelectionModel().getSelectedIndex()==-1)
+				printMessage("Please select department");
+			else if(cmbNewAssumptionSubDepartment.getSelectionModel().getSelectedIndex()==-1)
+				printMessage("Please select sub department");
+			else if(cmbNewAssumptionDataType.getSelectionModel().getSelectedIndex()==-1)
+				printMessage("please select data type");
+			else {				
+				if(cmbNewAssumptionType.getSelectionModel().getSelectedIndex()==0){
+					if(tfNewAssumptionValue.getText().equals(""))
+						printMessage("Please insert assumption value");
+					try{					
+						Double.parseDouble(tfNewAssumptionValue.getText());
+						assumptions.add(saveAtomAssumption());
+						clearAfterCreation();
+					}
+					catch(Exception e){
+						printMessage("Value must be a number");
+					}
+				}
+				else{
+					if(cmbNewAssumptionAction.getSelectionModel().getSelectedIndex()==-1)
+						printMessage("Please choose assumption Action");
+					else{
+						assumptions.add(saveCalculatedAssumption());
+						clearAfterCreation();
+					}
+				}
+			}		
+		} 
+	}
+	
+	private void clearAfterCreation() {
+		clearAfterSwitchToAtom();
+		clearAfterSwitchToComplex();
+		Platform.runLater(() -> {
+			tfNewAssumptionTitle.setText("");
+			cmbNewAssumptionDataType.getSelectionModel().select(-1);
+		});
+	}
+
+	private Assumption saveCalculatedAssumption() {
+		try{			
+			if(isPlanning())
+				return manager.createClaculatedAssumptionInPlanning(tfNewAssumptionTitle.getText(),cmbNewAssumptionDepartment.getSelectionModel().getSelectedItem(),
+						cmbNewAssumptionSubDepartment.getSelectionModel().getSelectedItem(), Action.values()[cmbNewAssumptionAction.getSelectionModel().getSelectedIndex()],
+						AssumptionType.Type.values()[cmbNewAssumptionDataType.getSelectionModel().getSelectedIndex()]);
+			
+			return manager.createCalculatedAssumptionInActual(tfNewAssumptionTitle.getText(),cmbNewAssumptionDepartment.getSelectionModel().getSelectedItem(),
+					cmbNewAssumptionSubDepartment.getSelectionModel().getSelectedItem(), Action.values()[cmbNewAssumptionAction.getSelectionModel().getSelectedIndex()],
+					AssumptionType.Type.values()[cmbNewAssumptionDataType.getSelectionModel().getSelectedIndex()]);
+		}
+		catch (Exception e) {
+			printMessage("Problem with saving to DB");
+			return null;
+		}	
+	}
+	
+
+	private Assumption saveAtomAssumption(){
+		try {
+			if(isPlanning())
+				return manager.createAtomAssumptionInPlanning(tfNewAssumptionTitle.getText(),cmbNewAssumptionDepartment.getSelectionModel().getSelectedItem(),
+						cmbNewAssumptionSubDepartment.getSelectionModel().getSelectedItem(), Double.parseDouble(tfNewAssumptionValue.getText()),
+						AssumptionType.Type.values()[cmbNewAssumptionDataType.getSelectionModel().getSelectedIndex()]);
+			
+			return manager.createAtomAssumptionInActual(tfNewAssumptionTitle.getText(),cmbNewAssumptionDepartment.getSelectionModel().getSelectedItem(),
+					cmbNewAssumptionSubDepartment.getSelectionModel().getSelectedItem(), Double.parseDouble(tfNewAssumptionValue.getText()),
+					AssumptionType.Type.values()[cmbNewAssumptionDataType.getSelectionModel().getSelectedIndex()]);
+			} 
+		catch (Exception e) {
+				printMessage("Problem with saving to DB");
+				return null;
+		}
+	}
+	
+	private void printMessage(String msg){
+		Platform.runLater(() -> {
+			lblMsg.setText(msg);
+		});
+	}
+
+	private void typeChangedAction() {
+		clearAfterTypeSwitch();
+		if(cmbNewAssumptionType.getSelectionModel().getSelectedIndex()==-1){
+			paneNewValues.setVisible(false);
+		}
+		else if(cmbNewAssumptionType.getSelectionModel().getSelectedIndex()==0){
+			paneNewValuesLeft.getChildren().removeAll(lblNewAssumptionAction,cmbNewAssumptionAction);
+			paneNewValuesLeft.add(lblNewAssumptionValue, 0, 1);
+			paneNewValuesLeft.add(tfNewAssumptionValue, 1, 1);
+			paneNewValues.setVisible(true);
+		}
+		else if(cmbNewAssumptionType.getSelectionModel().getSelectedIndex()==1){
+			paneNewValuesLeft.getChildren().removeAll(lblNewAssumptionValue,tfNewAssumptionValue);
+			paneNewValuesLeft.add(lblNewAssumptionAction, 0, 1);
+			paneNewValuesLeft.add(cmbNewAssumptionAction, 1, 1);
+			paneNewValues.setVisible(true);
+		}
+	}
+
 	private void setColumnsActions(){
 		colDataType.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Assumption,String>>() {
 			@Override
@@ -224,10 +410,12 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 	
 	private void setObsLists(){
 		assumptions = getObsevableData();
-		types = FXCollections.observableArrayList(AssumptionType.Type.Costs.toString(),
-				AssumptionType.Type.Percentage.toString(), AssumptionType.Type.Quantity.toString());
+		types = FXCollections.observableArrayList(AssumptionType.Type.Costs.toString()
+				, AssumptionType.Type.Quantity.toString(), AssumptionType.Type.Percentage.toString());
 		deps = FXCollections.observableArrayList(manager.getDepartments());
 		subDeps = FXCollections.observableArrayList(manager.getSubDepartments());
+		actions = FXCollections.observableArrayList(CalculatedAssumption.Action.add.toString()
+				,CalculatedAssumption.Action.sub.toString(),CalculatedAssumption.Action.mult.toString());
 	}
 	
 	private void updateAssumption(Assumption a) {

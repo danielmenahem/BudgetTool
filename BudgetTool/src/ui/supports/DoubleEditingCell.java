@@ -2,12 +2,10 @@ package ui.supports;
 
 import java.util.regex.Pattern;
 
-import bl.Assumption;
 import bl.AtomAssumption;
 import javafx.application.Platform;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TextField;
-import ui.forms.Form;
 import ui.interfaces.FormListener;
 import bl.Item;
 

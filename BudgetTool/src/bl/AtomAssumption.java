@@ -20,7 +20,6 @@ public class AtomAssumption extends Assumption {
 		}
 		else
 			throw new Exception(MONTH_NOT_VALID);
-
 	}
 	
 	public boolean isPerdiocal() {
