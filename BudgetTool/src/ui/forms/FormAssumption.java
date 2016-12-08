@@ -4,7 +4,6 @@ package ui.forms;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -27,14 +26,19 @@ import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableColumn.SortType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.Glow;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.text.Text;
 import javafx.util.Callback;
 import javafx.beans.value.ObservableValue;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.beans.property.*;
 import javafx.util.converter.DefaultStringConverter;
@@ -42,22 +46,30 @@ import javafx.application.Platform;
 import ui.interfaces.FormListener;
 import ui.supports.DoubleEditingCell;
 import ui.supports.FormEvent;
+import ui.supports.StylePatterns;
 
 
 
 public class FormAssumption extends Form implements FormListener<Assumption>{
+	
 	private static final int VALUE_COLUMN_WIDTH  = 50;
 	private static final int STRING_COLUMN_WIDTH  = 120;
-	
 	private AssumptionsManagerIF manager;
 	private VBox paneMain = new VBox();
 	private HBox paneFilters = new HBox();
+	private HBox paneFilterByType = new HBox();
+	private HBox paneFilterByDepartment = new HBox();
+	private HBox paneFilterBySubDepartment = new HBox();
+	private HBox paneFilterByDataType = new HBox();
 	private VBox paneNew = new VBox();
 	private GridPane paneNewDefenitions = new GridPane();
 	private HBox paneNewValues = new HBox();
 	private GridPane paneNewValuesLeft = new GridPane();
 	private GridPane paneNewValuesRight = new GridPane();
-	private Label lblNewAssumptionHeader = new Label("Create New Assumption");
+	private StackPane paneNewAssumptionHeader = new StackPane();
+	private StackPane paneNewAssumptionAddButton = new StackPane();
+	private StackPane paneNewAssumptionMessage = new StackPane();
+	private Text lblNewAssumptionHeader = new Text("Create New Assumption");
 	private Label lblNewAssumptionType = new Label("Type");
 	private Label lblNewAssumptionTitle = new Label("Title");
 	private Label lblNewAssumptionValue = new Label("Value");
@@ -66,15 +78,23 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 	private Label lblNewAssumptionDataType = new Label("Data Type");
 	private Label lblNewAssumptionAction = new Label("Action");
 	private Label lblMsg = new Label("");
+	private Label lblFilterByType = new Label ("Type");
+	private Label lblFilterByDepartment = new Label("Department");
+	private Label lblFilterBySubDepartment = new Label("Sub Department");
+	private Label lblFilterByDataType = new Label("Data Type");
 	private ComboBox<String> cmbNewAssumptionType;
 	private ComboBox<String> cmbNewAssumptionDepartment;
 	private ComboBox<String> cmbNewAssumptionSubDepartment;
 	private ComboBox<String> cmbNewAssumptionDataType;
 	private ComboBox<String> cmbNewAssumptionAction;
+	private ComboBox<String> cmbFilterByType;
+	private ComboBox<String> cmbFilterByDepartment;
+	private ComboBox<String> cmbFilterBySubDepartment;
+	private ComboBox<String> cmbFilterByDataType;
 	private TextField tfNewAssumptionTitle = new TextField();
 	private TextField tfNewAssumptionValue = new TextField();
 	private Button btnNewAssumptionAdd = new Button("Add Assumption");
-	
+
 	private TableView <Assumption> table;
 	private TableColumn <Assumption, Integer> colID = new TableColumn<>("ID");
 	private TableColumn <Assumption, String> colType = new TableColumn<>("Type");
@@ -96,92 +116,80 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 	private TableColumn <Assumption, String> colDataType = new TableColumn<>("Data Type");
 	private ObservableList<Assumption> assumptions;
 	private ObservableList<String> types;
+	private ObservableList<String> dataTypes;
 	private ObservableList<String> deps;
 	private ObservableList<String> subDeps;
 	private ObservableList<String> actions;
 	
 	public FormAssumption(AssumptionsManagerIF manager, boolean isPlanning){
-		
 		super(isPlanning);
 		this.manager = manager;
 		if(isPlanning)
-			this.setStyle("-fx-background-color: yellow;");
+			this.setStyle("-fx-background-color: #FFFAD4;"); 
 		else
 			this.setStyle("-fx-background-color: blue;");
 		setObsLists();
+		buildFiltersGUI();
 		table = new TableView<>(assumptions);
 		setColumnsCellsValueFactory();
 		setColumnsCellsFactory();
 		setColumnsActions();
-
-		table.getColumns().addAll(colID, colType,colDepartment, colSubDepartment, colTitle, colJul, colAug, colSep, 
-				colOct, colNov, colDec, colJan, colFeb, colMar, colApr, colMay, colJun, colDataType);
+		setTableColumns();
 		table.setEditable(true);
 		setColsSizesAndAlignment();
 		buildNewAssumptionGUI();
-		paneMain.getChildren().addAll(paneFilters, new ScrollPane(table), paneNew);
+		ScrollPane scrlNew = new ScrollPane(paneNew);
+		scrlNew.setMaxWidth(470);
+		scrlNew.setMaxHeight(180);
+		paneMain.getChildren().addAll(paneFilters, new ScrollPane(table), scrlNew);
 		this.getChildren().add(paneMain);
 	}
-	
-	private void setColumnsCellsFactory() {
-		colDataType.setCellFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), types));
-		colJul.setCellFactory(col -> new DoubleEditingCell<Assumption>(1,this));
-		colAug.setCellFactory(col -> new DoubleEditingCell<Assumption>(2,this));
-		colSep.setCellFactory(col -> new DoubleEditingCell<Assumption>(3,this));
-		colOct.setCellFactory(col -> new DoubleEditingCell<Assumption>(4,this));
-		colNov.setCellFactory(col -> new DoubleEditingCell<Assumption>(5,this));
-		colDec.setCellFactory(col -> new DoubleEditingCell<Assumption>(6,this));
-		colJan.setCellFactory(col -> new DoubleEditingCell<Assumption>(7,this));
-		colFeb.setCellFactory(col -> new DoubleEditingCell<Assumption>(8,this));
-		colMar.setCellFactory(col -> new DoubleEditingCell<Assumption>(9,this));
-		colApr.setCellFactory(col -> new DoubleEditingCell<Assumption>(10,this));
-		colMay.setCellFactory(col -> new DoubleEditingCell<Assumption>(11,this));
-		colJun.setCellFactory(col -> new DoubleEditingCell<Assumption>(12,this));
-		colTitle.setCellFactory(TextFieldTableCell.<Assumption>forTableColumn());
-		colSubDepartment.setCellFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), subDeps));
-		colDepartment.setCellFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), deps));
-	}
 
-	private void setColsSizesAndAlignment(){
-		colID.setPrefWidth(45);
-		colDataType.setPrefWidth(STRING_COLUMN_WIDTH);
-		colDepartment.setPrefWidth(STRING_COLUMN_WIDTH);
-		colSubDepartment.setPrefWidth(STRING_COLUMN_WIDTH);
-		colType.setPrefWidth(STRING_COLUMN_WIDTH);
-		colTitle.setPrefWidth(200);
-		colJul.setPrefWidth(VALUE_COLUMN_WIDTH);
-		colAug.setPrefWidth(VALUE_COLUMN_WIDTH);
-		colSep.setPrefWidth(VALUE_COLUMN_WIDTH);
-		colOct.setPrefWidth(VALUE_COLUMN_WIDTH);
-		colNov.setPrefWidth(VALUE_COLUMN_WIDTH);
-		colDec.setPrefWidth(VALUE_COLUMN_WIDTH);
-		colJan.setPrefWidth(VALUE_COLUMN_WIDTH);
-		colFeb.setPrefWidth(VALUE_COLUMN_WIDTH);
-		colMar.setPrefWidth(VALUE_COLUMN_WIDTH);
-		colApr.setPrefWidth(VALUE_COLUMN_WIDTH);
-		colMay.setPrefWidth(VALUE_COLUMN_WIDTH);
-		colJun.setPrefWidth(VALUE_COLUMN_WIDTH);
-		for(TableColumn<?,?> tc : table.getColumns()){
-			tc.setStyle( "-fx-alignment: CENTER;");
-		}
+	@SuppressWarnings("unchecked")
+	private boolean setTableColumns() {
+		return table.getColumns().addAll(colID, colType,colDepartment, colSubDepartment, colTitle, colJul, colAug, colSep, 
+				colOct, colNov, colDec, colJan, colFeb, colMar, colApr, colMay, colJun, colDataType);
+	}
+	
+	private void buildFiltersGUI(){
+		cmbFilterByType = new ComboBox<>(types);
+		cmbFilterByDataType = new ComboBox<>(dataTypes);
+		cmbFilterByDepartment = new ComboBox<>(deps);
+		cmbFilterBySubDepartment = new ComboBox<>(subDeps);
+		paneFilterByDepartment.getChildren().addAll(lblFilterByDepartment, cmbFilterByDepartment);
+		paneFilterBySubDepartment.getChildren().addAll(lblFilterBySubDepartment, cmbFilterBySubDepartment);
+		paneFilterByType.getChildren().addAll(lblFilterByType, cmbFilterByType);
+		paneFilterByDataType.getChildren().addAll(lblFilterByDataType, cmbFilterByDataType);
+		
+		paneFilterByDepartment.setSpacing(5);
+		paneFilterBySubDepartment.setSpacing(5);
+		paneFilterByType.setSpacing(5);
+		paneFilterByDataType.setSpacing(5);
+		
+		paneFilters.getChildren().addAll(paneFilterByDepartment, paneFilterBySubDepartment, paneFilterByType, paneFilterByDataType);
+		paneFilters.setSpacing(25);
 	}
 	
 	private void buildNewAssumptionGUI(){
-		cmbNewAssumptionType = new ComboBox<>(FXCollections.observableArrayList("Atom","Complex"));
+		cmbNewAssumptionType = new ComboBox<>(types);
 		cmbNewAssumptionType.setOnAction(e -> typeChangedAction());
 		btnNewAssumptionAdd.setOnAction(e -> addAssumptionAction());
-		tfNewAssumptionTitle.setMinWidth(300);
+		tfNewAssumptionTitle.setMinWidth(385);
+
 		tfNewAssumptionValue.setMaxWidth(VALUE_COLUMN_WIDTH);
+		paneNewAssumptionHeader.getChildren().add(lblNewAssumptionHeader);
+		
 		paneNewDefenitions.add(lblNewAssumptionType, 0, 0);
 		paneNewDefenitions.add(cmbNewAssumptionType, 1, 0);
 		paneNewDefenitions.add(lblNewAssumptionTitle, 0, 1);
 		paneNewDefenitions.add(tfNewAssumptionTitle, 1, 1);
 		
-		cmbNewAssumptionDataType = new ComboBox<>(types);
+		cmbNewAssumptionDataType = new ComboBox<>(dataTypes);
 		cmbNewAssumptionDepartment = new ComboBox<>(deps);
 		cmbNewAssumptionSubDepartment = new ComboBox<>(subDeps);
 		cmbNewAssumptionAction = new ComboBox<>(actions);
-		
+		cmbNewAssumptionDepartment.setMinWidth(130);
+		cmbNewAssumptionSubDepartment.setMinWidth(130);
 		paneNewValuesLeft.add(lblNewAssumptionDataType, 0, 0);
 		paneNewValuesLeft.add(cmbNewAssumptionDataType, 1, 0);
 		
@@ -189,11 +197,56 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 		paneNewValuesRight.add(cmbNewAssumptionDepartment, 1, 0);
 		paneNewValuesRight.add(lblNewAssumptionSubDep, 0, 1);
 		paneNewValuesRight.add(cmbNewAssumptionSubDepartment, 1, 1);
-		
 		paneNewValues.getChildren().addAll(paneNewValuesLeft,paneNewValuesRight);
+		paneNewAssumptionAddButton.getChildren().add(btnNewAssumptionAdd);
+		paneNewAssumptionMessage.getChildren().add(lblMsg);
 		paneNewValues.setVisible(false);
-		paneNew.getChildren().addAll(lblNewAssumptionHeader, paneNewDefenitions, paneNewValues, btnNewAssumptionAdd,lblMsg);
-		
+		paneNewAssumptionAddButton.setVisible(false);
+		paneNewDefenitions.setPadding(new Insets(10,10,10,10));
+		paneNewDefenitions.setHgap(10);
+		paneNewDefenitions.setVgap(5);
+		paneNewValuesLeft.setPadding(new Insets(0,10,10,10));
+		paneNewValuesLeft.setHgap(10);
+		paneNewValuesLeft.setVgap(5);
+		paneNewValuesRight.setPadding(new Insets(0,10,10,10));
+		paneNewAssumptionMessage.setPadding(new Insets(0,10,0,10));
+
+		paneNewValuesRight.setHgap(10);
+		paneNewValuesRight.setVgap(5);
+		lblNewAssumptionAction.setStyle(StylePatterns.LABEL_CSS);
+		lblNewAssumptionDataType.setStyle(StylePatterns.LABEL_CSS);
+		lblNewAssumptionDepartment.setStyle(StylePatterns.LABEL_CSS);
+		lblNewAssumptionSubDep.setStyle(StylePatterns.LABEL_CSS);
+		lblNewAssumptionTitle.setStyle(StylePatterns.LABEL_CSS);
+		lblNewAssumptionType.setStyle(StylePatterns.LABEL_CSS);
+		lblNewAssumptionValue.setStyle(StylePatterns.LABEL_CSS);
+		lblNewAssumptionHeader.setStyle(StylePatterns.HEADER_CSS);
+		btnNewAssumptionAdd.setStyle(StylePatterns.BUTTON_CSS);
+		lblMsg.setStyle(StylePatterns.LABEL_MESSAGE_CSS);
+		paneNew.setStyle("-fx-background-color: #FFFBE2;"
+				+"-fx-border-width: 1;"
+				+ "-fx-border-style: solid inside;"
+				+ "-fx-border-color:#ADB4B6;");
+		btnNewAssumptionAdd.setOnMousePressed(e -> {
+			btnNewAssumptionAdd.setStyle(StylePatterns.BUTTON_HOVERD_CSS);
+		});
+		btnNewAssumptionAdd.setOnMouseReleased(e -> {
+			btnNewAssumptionAdd.setStyle(StylePatterns.BUTTON_CSS);
+		});
+		paneNew.setMaxWidth(460);
+		paneNewAssumptionHeader.setMaxWidth(430);
+		paneNewAssumptionAddButton.setMaxWidth(430);
+		StackPane.setAlignment(lblNewAssumptionHeader, Pos.CENTER);
+		StackPane.setAlignment(btnNewAssumptionAdd, Pos.CENTER_RIGHT);
+		StackPane.setAlignment(lblMsg, Pos.CENTER_LEFT);
+		cmbNewAssumptionType.setStyle(StylePatterns.COMBO_BOX_CSS);
+		cmbNewAssumptionAction.setStyle(StylePatterns.COMBO_BOX_CSS);
+		cmbNewAssumptionDataType.setStyle(StylePatterns.COMBO_BOX_CSS);
+		cmbNewAssumptionDepartment.setStyle(StylePatterns.COMBO_BOX_CSS);
+		cmbNewAssumptionSubDepartment.setStyle(StylePatterns.COMBO_BOX_CSS);
+		paneMain.setSpacing(5);
+		paneMain.setPadding(new Insets(10,0,10,10));
+		paneNew.getChildren().addAll(paneNewAssumptionHeader, paneNewDefenitions, paneNewValues, paneNewAssumptionAddButton, paneNewAssumptionMessage);
 	}
 	
 	private void clearAfterTypeSwitch(){
@@ -219,7 +272,7 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 
 	private void addAssumptionAction() {
 		if(cmbNewAssumptionType.getSelectionModel().getSelectedIndex()==-1)
-			printMessage("Please inset assumption type");
+			printMessage("Please insret assumption type");
 		else{
 			if(tfNewAssumptionTitle.getText().equals(""))
 				printMessage("Please insert assumption title");
@@ -308,18 +361,21 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 		clearAfterTypeSwitch();
 		if(cmbNewAssumptionType.getSelectionModel().getSelectedIndex()==-1){
 			paneNewValues.setVisible(false);
+			paneNewAssumptionAddButton.setVisible(false);
 		}
 		else if(cmbNewAssumptionType.getSelectionModel().getSelectedIndex()==0){
 			paneNewValuesLeft.getChildren().removeAll(lblNewAssumptionAction,cmbNewAssumptionAction);
 			paneNewValuesLeft.add(lblNewAssumptionValue, 0, 1);
 			paneNewValuesLeft.add(tfNewAssumptionValue, 1, 1);
 			paneNewValues.setVisible(true);
+			paneNewAssumptionAddButton.setVisible(true);
 		}
 		else if(cmbNewAssumptionType.getSelectionModel().getSelectedIndex()==1){
 			paneNewValuesLeft.getChildren().removeAll(lblNewAssumptionValue,tfNewAssumptionValue);
 			paneNewValuesLeft.add(lblNewAssumptionAction, 0, 1);
 			paneNewValuesLeft.add(cmbNewAssumptionAction, 1, 1);
 			paneNewValues.setVisible(true);
+			paneNewAssumptionAddButton.setVisible(true);
 		}
 	}
 
@@ -366,6 +422,49 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 		});
 	}
 	
+	private void setColumnsCellsFactory() {
+		colDataType.setCellFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), dataTypes));
+		colJul.setCellFactory(col -> new DoubleEditingCell<Assumption>(1,this));
+		colAug.setCellFactory(col -> new DoubleEditingCell<Assumption>(2,this));
+		colSep.setCellFactory(col -> new DoubleEditingCell<Assumption>(3,this));
+		colOct.setCellFactory(col -> new DoubleEditingCell<Assumption>(4,this));
+		colNov.setCellFactory(col -> new DoubleEditingCell<Assumption>(5,this));
+		colDec.setCellFactory(col -> new DoubleEditingCell<Assumption>(6,this));
+		colJan.setCellFactory(col -> new DoubleEditingCell<Assumption>(7,this));
+		colFeb.setCellFactory(col -> new DoubleEditingCell<Assumption>(8,this));
+		colMar.setCellFactory(col -> new DoubleEditingCell<Assumption>(9,this));
+		colApr.setCellFactory(col -> new DoubleEditingCell<Assumption>(10,this));
+		colMay.setCellFactory(col -> new DoubleEditingCell<Assumption>(11,this));
+		colJun.setCellFactory(col -> new DoubleEditingCell<Assumption>(12,this));
+		colTitle.setCellFactory(TextFieldTableCell.<Assumption>forTableColumn());
+		colSubDepartment.setCellFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), subDeps));
+		colDepartment.setCellFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), deps));
+	}
+
+	private void setColsSizesAndAlignment(){
+		colID.setPrefWidth(45);
+		colDataType.setPrefWidth(STRING_COLUMN_WIDTH);
+		colDepartment.setPrefWidth(STRING_COLUMN_WIDTH);
+		colSubDepartment.setPrefWidth(STRING_COLUMN_WIDTH);
+		colType.setPrefWidth(STRING_COLUMN_WIDTH);
+		colTitle.setPrefWidth(200);
+		colJul.setPrefWidth(VALUE_COLUMN_WIDTH);
+		colAug.setPrefWidth(VALUE_COLUMN_WIDTH);
+		colSep.setPrefWidth(VALUE_COLUMN_WIDTH);
+		colOct.setPrefWidth(VALUE_COLUMN_WIDTH);
+		colNov.setPrefWidth(VALUE_COLUMN_WIDTH);
+		colDec.setPrefWidth(VALUE_COLUMN_WIDTH);
+		colJan.setPrefWidth(VALUE_COLUMN_WIDTH);
+		colFeb.setPrefWidth(VALUE_COLUMN_WIDTH);
+		colMar.setPrefWidth(VALUE_COLUMN_WIDTH);
+		colApr.setPrefWidth(VALUE_COLUMN_WIDTH);
+		colMay.setPrefWidth(VALUE_COLUMN_WIDTH);
+		colJun.setPrefWidth(VALUE_COLUMN_WIDTH);
+		for(TableColumn<?,?> tc : table.getColumns()){
+			tc.setStyle( "-fx-alignment: CENTER;");
+		}
+	}
+	
 	private void setColumnsCellsValueFactory(){
 		colID.setCellValueFactory(new PropertyValueFactory<Assumption, Integer>("id"));
 		colTitle.setCellValueFactory(new PropertyValueFactory<Assumption, String>("title"));
@@ -410,7 +509,8 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 	
 	private void setObsLists(){
 		assumptions = getObsevableData();
-		types = FXCollections.observableArrayList(AssumptionType.Type.Costs.toString()
+		types = FXCollections.observableArrayList("Atom","Complex");
+		dataTypes = FXCollections.observableArrayList(AssumptionType.Type.Costs.toString()
 				, AssumptionType.Type.Quantity.toString(), AssumptionType.Type.Percentage.toString());
 		deps = FXCollections.observableArrayList(manager.getDepartments());
 		subDeps = FXCollections.observableArrayList(manager.getSubDepartments());

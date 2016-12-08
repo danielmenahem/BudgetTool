@@ -5,6 +5,8 @@ import javafx.application.Application;
 import java.util.HashMap;
 
 import controlers.BudgetManager;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,9 +15,11 @@ import javafx.stage.Screen;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.layout.StackPane;
 import ui.forms.Form;
 import ui.forms.FormAssumption;
 import ui.forms.FormProperties;
+import ui.supports.StylePatterns;
 
 public class MainContainer extends Scene{
 
@@ -24,7 +28,7 @@ public class MainContainer extends Scene{
 	
 	private static BorderPane paneMain = new BorderPane();
 	private static Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-
+	
 	private MenuBar menuBar = new MenuBar();
 	private Menu menuPlanning = new Menu("Planning");
 	private Menu menuActual = new Menu("Actual");
@@ -37,6 +41,7 @@ public class MainContainer extends Scene{
 	private MenuItem aColumn = new MenuItem("Columns");
 	private MenuItem aTable = new MenuItem("Tables");
 	private MenuItem showBudget = new MenuItem("Show Budget");
+	private StackPane paneRemove = new StackPane();
 	private Button btnRemove = new Button("Remove Current Form");
 	
 	private HashMap <Form, MenuItem> openPanes = new HashMap<>();
@@ -59,8 +64,15 @@ public class MainContainer extends Scene{
 		menuOverview.getItems().add(showBudget);
 		menuBar.getMenus().addAll(menuPlanning, menuActual, menuOverview, menuOpen);
 		menuBar.setMinWidth(this.getWidth());
+		btnRemove.setStyle(StylePatterns.BUTTON_CSS);
+		paneRemove.getChildren().add(btnRemove);
+		StackPane.setAlignment(btnRemove, Pos.CENTER_LEFT);
+		paneRemove.setStyle("-fx-background-color: #46475a;"
+				+ "-fx-border-color: #aaaab2;"
+				+ "-fx-border-width: 2px");
+		paneRemove.setPadding(new Insets(5,10,5,10));
 		paneMain.setTop(menuBar);
-		paneMain.setBottom(btnRemove);
+		paneMain.setBottom(paneRemove);
 	}
 	
 	private void initFromsNames(){
