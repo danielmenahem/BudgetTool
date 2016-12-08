@@ -511,7 +511,7 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 			}
 		});
 	}
-	s
+	
 	private void setColumnsCellsFactory() {
 		colDataType.setCellFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), dataTypes));
 		colJul.setCellFactory(col -> new DoubleEditingCell<Assumption>(1,this));
