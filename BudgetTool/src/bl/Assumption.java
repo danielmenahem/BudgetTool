@@ -1,6 +1,6 @@
 package bl;
 
-public class Assumption extends Item implements Comparable{
+public class Assumption extends Item implements Comparable<Assumption>{
 	
 	private AssumptionType type;
 	
@@ -29,20 +29,16 @@ public class Assumption extends Item implements Comparable{
 	}
 
 	@Override
-	public int compareTo(Object o) {
-		if(o instanceof Assumption){
-			Assumption other = (Assumption)o;
-			if(this.getId()==other.getId())
-				return 0;
-			if(this.getClassification().equals(other.getClassification())){
-				if(this instanceof CalculatedAssumption && other instanceof AtomAssumption)
-					return 1;
-				if(this instanceof AtomAssumption && other instanceof CalculatedAssumption)
-					return -1;
-				return this.getId()-this.getId();
-			}
-			return this.getClassification().compareTo(other.getClassification());
+	public int compareTo(Assumption other) {
+		if(this.getId()==other.getId())
+			return 0;
+		if(this.getClassification().equals(other.getClassification())){
+			if(this instanceof CalculatedAssumption && other instanceof AtomAssumption)
+				return 1;
+			if(this instanceof AtomAssumption && other instanceof CalculatedAssumption)
+				return -1;
+			return this.getId()-this.getId();
 		}
-		return 1;
+		return this.getClassification().compareTo(other.getClassification());
 	}
 }

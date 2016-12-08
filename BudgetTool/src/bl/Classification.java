@@ -1,6 +1,6 @@
 package bl;
 
-public class Classification implements Comparable {
+public class Classification implements Comparable<Classification> {
 	
 	private String department;
 	private String subDepartment;
@@ -43,14 +43,11 @@ public class Classification implements Comparable {
 	}
 
 	@Override
-	public int compareTo(Object o) {
-		if(o instanceof Classification){
-			if(this.equals(o))
-				return 0;
-			else if(this.getDepartment().equals(((Classification)o).getDepartment()))
-				return this.getSubDepartment().compareTo(((Classification)o).getSubDepartment());
-			return this.getDepartment().compareTo(((Classification)o).getDepartment());
-		}
-		return 1;
+	public int compareTo(Classification c) {
+		if(this.equals(c))
+			return 0;
+		else if(this.getDepartment().equals(c.getDepartment()))
+			return this.getSubDepartment().compareTo(c.getSubDepartment());
+		return this.getDepartment().compareTo(c.getDepartment());
 	}	
 }

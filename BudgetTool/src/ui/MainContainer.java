@@ -59,11 +59,16 @@ public class MainContainer extends Scene{
 	}
 	
 	private void buildGUI(){
+		this.getStylesheets().add("/ui/supports/MenuStyle.css");
 		menuPlanning.getItems().addAll(pAssumpation, pColumn, pTable);
+		menuPlanning.getStyleClass().add("menu");
 		menuActual.getItems().addAll(aAssumpation, aColumn, aTable);
 		menuOverview.getItems().add(showBudget);
 		menuBar.getMenus().addAll(menuPlanning, menuActual, menuOverview, menuOpen);
 		menuBar.setMinWidth(this.getWidth());
+		menuBar.setStyle("-fx-background-color: #46475a;"
+				+ "-fx-border-color: #aaaab2;"
+				+ "-fx-border-width: 2px;");
 		btnRemove.setStyle(StylePatterns.BUTTON_CSS);
 		paneRemove.getChildren().add(btnRemove);
 		StackPane.setAlignment(btnRemove, Pos.CENTER_LEFT);

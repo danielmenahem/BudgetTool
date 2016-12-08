@@ -2,16 +2,8 @@ package ui;
 
 import controlers.BudgetManager;
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.scene.*;
-import javafx.scene.layout.*;
-import javafx.scene.control.*;
 
 public class BudgetApplication extends Application {
 

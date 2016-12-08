@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.cell.*;
 
 import bl.Assumption;
+import bl.AssumptionComperator;
 import bl.AssumptionType;
 import bl.AtomAssumption;
 import bl.CalculatedAssumption;
@@ -94,6 +95,8 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 	private TextField tfNewAssumptionTitle = new TextField();
 	private TextField tfNewAssumptionValue = new TextField();
 	private Button btnNewAssumptionAdd = new Button("Add Assumption");
+	private Button btnSearch = new Button("Search");
+	private Button btnClearFilters = new Button("Clear Filters");
 
 	private TableView <Assumption> table;
 	private TableColumn <Assumption, Integer> colID = new TableColumn<>("ID");
@@ -121,6 +124,8 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 	private ObservableList<String> subDeps;
 	private ObservableList<String> actions;
 	
+	private boolean hasFilterChange = false;
+	
 	public FormAssumption(AssumptionsManagerIF manager, boolean isPlanning){
 		super(isPlanning);
 		this.manager = manager;
@@ -138,10 +143,8 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 		table.setEditable(true);
 		setColsSizesAndAlignment();
 		buildNewAssumptionGUI();
-		ScrollPane scrlNew = new ScrollPane(paneNew);
-		scrlNew.setMaxWidth(470);
-		scrlNew.setMaxHeight(180);
-		paneMain.getChildren().addAll(paneFilters, new ScrollPane(table), scrlNew);
+		table.setMaxHeight(360);
+		paneMain.getChildren().addAll(paneFilters, table, paneNew);
 		this.getChildren().add(paneMain);
 	}
 
@@ -156,6 +159,10 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 		cmbFilterByDataType = new ComboBox<>(dataTypes);
 		cmbFilterByDepartment = new ComboBox<>(deps);
 		cmbFilterBySubDepartment = new ComboBox<>(subDeps);
+		cmbFilterByType.setOnAction(e -> filterChange());
+		cmbFilterByDataType.setOnAction(e -> filterChange());
+		cmbFilterByDepartment.setOnAction(e -> filterChange());
+		cmbFilterBySubDepartment.setOnAction(e -> filterChange());
 		paneFilterByDepartment.getChildren().addAll(lblFilterByDepartment, cmbFilterByDepartment);
 		paneFilterBySubDepartment.getChildren().addAll(lblFilterBySubDepartment, cmbFilterBySubDepartment);
 		paneFilterByType.getChildren().addAll(lblFilterByType, cmbFilterByType);
@@ -165,11 +172,94 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 		paneFilterBySubDepartment.setSpacing(5);
 		paneFilterByType.setSpacing(5);
 		paneFilterByDataType.setSpacing(5);
-		
-		paneFilters.getChildren().addAll(paneFilterByDepartment, paneFilterBySubDepartment, paneFilterByType, paneFilterByDataType);
+		cmbFilterByType.setStyle(StylePatterns.COMBO_BOX_CSS);
+		cmbFilterByDataType.setStyle(StylePatterns.COMBO_BOX_CSS);
+		cmbFilterByDepartment.setStyle(StylePatterns.COMBO_BOX_CSS);
+		cmbFilterBySubDepartment.setStyle(StylePatterns.COMBO_BOX_CSS);
+		lblFilterByDataType.setStyle(StylePatterns.LABEL_CSS);
+		lblFilterByDepartment.setStyle(StylePatterns.LABEL_CSS);
+		lblFilterBySubDepartment.setStyle(StylePatterns.LABEL_CSS);
+		lblFilterByType.setStyle(StylePatterns.LABEL_CSS);
+		btnSearch.setStyle(StylePatterns.BUTTON_CSS);
+		btnSearch.setOnAction(e -> search());
+		btnClearFilters.setStyle(StylePatterns.BUTTON_CSS);
+		btnClearFilters.setOnAction(e -> clearFilters());
+		btnClearFilters.setOnMousePressed(e -> {
+			btnClearFilters.setStyle(StylePatterns.BUTTON_HOVERD_CSS);
+		});
+		btnClearFilters.setOnMouseReleased(e -> {
+			btnClearFilters.setStyle(StylePatterns.BUTTON_CSS);
+		});
+		btnSearch.setOnMousePressed(e -> {
+			btnSearch.setStyle(StylePatterns.BUTTON_HOVERD_CSS);
+		});
+		btnSearch.setOnMouseReleased(e -> {
+			btnSearch.setStyle(StylePatterns.BUTTON_CSS);
+		});
+		paneFilters.getChildren().addAll(paneFilterByDepartment, paneFilterBySubDepartment, paneFilterByType, paneFilterByDataType, btnSearch, btnClearFilters);
+		paneFilters.setPadding(new Insets(5));
 		paneFilters.setSpacing(25);
+		paneFilters.setStyle("-fx-background-color: #EDF1FF; "
+			+"-fx-border-width: 1;"
+            + "-fx-border-style: solid inside;"
+            + "-fx-border-color:#aaaab2;");
 	}
 	
+	private void filterChange(){
+		this.hasFilterChange = true;
+	}
+	
+	private void clearFilters(){
+		cmbFilterByDataType.getSelectionModel().select(-1);
+		cmbFilterByDepartment.getSelectionModel().select(-1);
+		cmbFilterBySubDepartment.getSelectionModel().select(-1);
+		cmbFilterByType.getSelectionModel().select(-1);
+	}
+	
+	private void search(){
+		if(this.hasFilterChange){
+			if(cmbFilterByDataType.getSelectionModel().getSelectedIndex() == -1 && 
+					cmbFilterByDepartment.getSelectionModel().getSelectedIndex() == -1 &&
+					cmbFilterBySubDepartment.getSelectionModel().getSelectedIndex() == -1 &&
+					cmbFilterByType.getSelectionModel().getSelectedIndex() == -1){
+				assumptions = FXCollections.observableArrayList(getObsevableData());
+			}
+			else{
+				assumptions = getFilterdData();
+			}
+			table.setItems(assumptions);
+			this.hasFilterChange = false;
+		}
+	}
+	
+	private ObservableList<Assumption> getFilterdData(){
+		ArrayList<Assumption> lst = new ArrayList<>();
+		if(isPlanning())
+			for(int id : manager.getPlanningAssumptions().keySet()){
+				checkAndAddIfqualify(manager.getPlanningAssumptions().get(id), lst);
+			}
+		else
+			for(int id : manager.getActualAssumptions().keySet()){
+				checkAndAddIfqualify(manager.getActualAssumptions().get(id), lst);
+			}
+		
+		lst.sort(new AssumptionComperator());
+		return FXCollections.observableArrayList(lst);
+	}
+	
+	private void checkAndAddIfqualify(Assumption assumption, ArrayList<Assumption> lst) {
+		if((cmbFilterByType.getSelectionModel().getSelectedIndex() == -1) || 
+				(cmbFilterByType.getSelectionModel().getSelectedIndex() == 0 && assumption instanceof AtomAssumption) || 
+				(cmbFilterByType.getSelectionModel().getSelectedIndex() == 1 && assumption instanceof CalculatedAssumption))
+			if((cmbFilterByDepartment.getSelectionModel().getSelectedIndex() == -1) ||
+					(cmbFilterByDepartment.getSelectionModel().getSelectedItem().equals(assumption.getClassification().getDepartment())))
+				if((cmbFilterBySubDepartment.getSelectionModel().getSelectedIndex() == -1) || 
+						(cmbFilterBySubDepartment.getSelectionModel().getSelectedItem().equals(assumption.getClassification().getSubDepartment())))
+					if(cmbFilterByDataType.getSelectionModel().getSelectedIndex() == -1 || 
+					(cmbFilterByDataType.getSelectionModel().getSelectedIndex()==assumption.getType().getType().ordinal()))
+						lst.add(assumption);
+	}
+
 	private void buildNewAssumptionGUI(){
 		cmbNewAssumptionType = new ComboBox<>(types);
 		cmbNewAssumptionType.setOnAction(e -> typeChangedAction());
@@ -421,7 +511,7 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 			}
 		});
 	}
-	
+	s
 	private void setColumnsCellsFactory() {
 		colDataType.setCellFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), dataTypes));
 		colJul.setCellFactory(col -> new DoubleEditingCell<Assumption>(1,this));
