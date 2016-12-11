@@ -27,5 +27,29 @@ public class StylePatterns {
 			+ "-fx-border-width: 0.2;"
             + "-fx-border-style: solid inside;"
             + "-fx-border-color:#3F646D;";
-
+	
+	public static final String TABLE_BUTTON = "-fx-padding: 3 3 3 3;"
+			+ " -fx-background-insets: 0,2 2 2 2, 4 2 4 2, 5 2 5 2;"
+			+ "-fx-background-radius: 4;"
+			+ "-fx-background-color: "
+			+ "linear-gradient(from 0% 93% to 0% 100%, #8056DE 0%, #986CF8 100%),"
+			+ "#57389C,"
+			+ "#7656BE,"
+			+ "radial-gradient(center 50% 50%, radius 100%, #B79EEF, #8552F6);"
+			+ "-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );"
+			+ "-fx-font-weight: bold;"
+			+ "-fx-font-size: 10px;";
+	
+	public static final String TABLE_BUTTON_PRESS = "-fx-padding: 3 3 3 3;"
+			+ " -fx-background-insets: 0,4 4 4 4, 6 4 6 5, 7 4 7 4;"
+			+ "-fx-background-radius: 5;"
+			+ "-fx-background-color: "
+			+ "linear-gradient(from 0% 93% to 0% 100%, #8056DE 0%, #986CF8 100%),"
+			+ "#69539A,"
+			+ "#7656BE,"
+			+ "radial-gradient(center 50% 50%, radius 100%, #DCD1F5, #AB87F9);"
+			+ "-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );"
+			+ "-fx-font-weight: bold;"
+			+ "-fx-font-size: 9px;"
+			+ "-fx-text-fill: #504D56;";
 }

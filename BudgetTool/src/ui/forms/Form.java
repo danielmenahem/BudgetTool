@@ -4,11 +4,24 @@ import javafx.scene.layout.Pane;
 
 public abstract class Form  extends Pane{
 	private boolean isPlanning;
-	
-	public Form(boolean isPlanning){
+	private double formWidth;
+	public Form(boolean isPlanning, double width){
 		this.isPlanning = isPlanning;
+		this.formWidth = width;
 	}
 	
+	
+	public double getFormWidth() {
+		return formWidth;
+	}
+
+
+	public void setFormWidth(double width) {
+		this.formWidth = width;
+	}
+
+
+
 	public boolean isPlanning() {
 		return isPlanning;
 	}

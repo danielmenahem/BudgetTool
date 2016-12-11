@@ -1,6 +1,7 @@
 package ui;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 
 import java.util.HashMap;
 
@@ -106,6 +107,17 @@ public class MainContainer extends Scene{
 				paneMain.setCenter(null);
 			}
 		});
+		
+		btnRemove.setOnMousePressed(e->{
+			Platform.runLater(() -> {				
+				btnRemove.setStyle(StylePatterns.BUTTON_HOVERD_CSS);
+			});
+		});
+		btnRemove.setOnMouseReleased(e->{
+			Platform.runLater(() -> {				
+				btnRemove.setStyle(StylePatterns.BUTTON_CSS);
+			});
+		});
 	}
 	
 	private void setMenuAction(Class <?> c, boolean isPlanning){
@@ -127,7 +139,7 @@ public class MainContainer extends Scene{
 	
 	private Form createForm(Class<?>c, boolean isPlanning){
 		if (c == FormAssumption.class)
-			return new FormAssumption(manager, isPlanning);
+			return new FormAssumption(manager, isPlanning, this.getWidth());
 		return null;
 	}
 	

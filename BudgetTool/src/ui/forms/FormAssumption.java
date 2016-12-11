@@ -6,7 +6,7 @@ import java.util.Comparator;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
+import javafx.stage.Modality;
 import javafx.scene.control.cell.*;
 
 import bl.Assumption;
@@ -17,6 +17,7 @@ import bl.CalculatedAssumption;
 import bl.CalculatedAssumption.Action;
 import bl.AssumptionType.Type;
 import interfaces.AssumptionsManagerIF;
+import ui.BuildComplexAssumption;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
@@ -35,6 +36,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.scene.control.TableCell;
 import javafx.util.Callback;
 import javafx.beans.value.ObservableValue;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -54,7 +57,7 @@ import ui.supports.StylePatterns;
 public class FormAssumption extends Form implements FormListener<Assumption>{
 	
 	private static final int VALUE_COLUMN_WIDTH  = 50;
-	private static final int STRING_COLUMN_WIDTH  = 120;
+	private static final int STRING_COLUMN_WIDTH  = 100;
 	private AssumptionsManagerIF manager;
 	private VBox paneMain = new VBox();
 	private HBox paneFilters = new HBox();
@@ -117,6 +120,7 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 	private TableColumn <Assumption, Double> colMay = new TableColumn<>("May");
 	private TableColumn <Assumption, Double> colJun = new TableColumn<>("Jun");
 	private TableColumn <Assumption, String> colDataType = new TableColumn<>("Data Type");
+    private TableColumn<Assumption, String> colAction = new TableColumn<>( "Complex Action" );
 	private ObservableList<Assumption> assumptions;
 	private ObservableList<String> types;
 	private ObservableList<String> dataTypes;
@@ -126,8 +130,8 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 	
 	private boolean hasFilterChange = false;
 	
-	public FormAssumption(AssumptionsManagerIF manager, boolean isPlanning){
-		super(isPlanning);
+	public FormAssumption(AssumptionsManagerIF manager, boolean isPlanning, double formWidth){
+		super(isPlanning, formWidth);
 		this.manager = manager;
 		if(isPlanning)
 			this.setStyle("-fx-background-color: #FFFAD4;"); 
@@ -144,13 +148,15 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 		setColsSizesAndAlignment();
 		buildNewAssumptionGUI();
 		table.setMaxHeight(360);
+		table.setMaxWidth(this.getFormWidth()/1.02);
+		table.setMinWidth(this.getFormWidth()/1.02);
 		paneMain.getChildren().addAll(paneFilters, table, paneNew);
 		this.getChildren().add(paneMain);
 	}
 
 	@SuppressWarnings("unchecked")
 	private boolean setTableColumns() {
-		return table.getColumns().addAll(colID, colType,colDepartment, colSubDepartment, colTitle, colJul, colAug, colSep, 
+		return table.getColumns().addAll(colID, colAction, colType,colDepartment, colSubDepartment, colTitle, colJul, colAug, colSep, 
 				colOct, colNov, colDec, colJan, colFeb, colMar, colApr, colMay, colJun, colDataType);
 	}
 	
@@ -529,6 +535,7 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 		colTitle.setCellFactory(TextFieldTableCell.<Assumption>forTableColumn());
 		colSubDepartment.setCellFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), subDeps));
 		colDepartment.setCellFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), deps));
+		colAction.setCellFactory(new ActionCellFactory());
 	}
 
 	private void setColsSizesAndAlignment(){
@@ -558,6 +565,7 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 	private void setColumnsCellsValueFactory(){
 		colID.setCellValueFactory(new PropertyValueFactory<Assumption, Integer>("id"));
 		colTitle.setCellValueFactory(new PropertyValueFactory<Assumption, String>("title"));
+	    colAction.setCellValueFactory( new PropertyValueFactory<>( "DUMMY" ) );
 		colJul.setCellValueFactory(new MonthValues(1));
 		colAug.setCellValueFactory(new MonthValues(2));
 		colSep.setCellValueFactory(new MonthValues(3));
@@ -577,6 +585,7 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 						new SimpleStringProperty("Atom"):new SimpleStringProperty("Complex");
 			}
 		});
+	
 		colDataType.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Assumption,String>, ObservableValue<String>>() {
 			@Override
 			public ObservableValue<String> call(CellDataFeatures<Assumption, String> param) {
@@ -651,5 +660,58 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 		public ObservableValue<Double> call(CellDataFeatures<Assumption, Double> param) {
 			return new ReadOnlyObjectWrapper<>(param.getValue().getValue(index));
 		}
+	}
+	
+	class ActionCellFactory implements Callback<TableColumn<Assumption, String>, TableCell<Assumption, String>>{
+
+		@Override
+		public TableCell<Assumption, String> call(TableColumn<Assumption, String> param) {
+			 final TableCell<Assumption, String> cell = new TableCell<Assumption, String>(){
+
+                 final Button btn = new Button("Edit Complex");
+
+                 @Override
+                 public void updateItem(String item, boolean empty){
+                	 btn.setStyle(StylePatterns.TABLE_BUTTON);
+                     super.updateItem(item, empty);
+                     if(empty){
+                         setGraphic( null );
+                         setText(null);
+                         
+                     }
+                     else{
+                    	 if (getTableView().getItems().get(getIndex()) instanceof AtomAssumption){
+                    		 btn.setDisable(true);
+                    	 }
+                    	 else{
+                    		 btn.setDisable(false);
+                    	 }                  	 
+                		 btn.setOnAction( e -> {
+                			 Assumption assumption = getTableView().getItems().get(getIndex());
+                			 Platform.runLater(() -> {
+                				 try {
+                					 Stage aTa = new BuildComplexAssumption(manager, assumption);
+                					 aTa.initModality(Modality.APPLICATION_MODAL);
+                					 aTa.showAndWait();
+                				 } catch (Exception e1) {
+                					 e1.printStackTrace();
+                				 }
+                			 });
+                		 });
+                		 setGraphic(btn);
+                		 setText(null);
+                		 
+                		 btn.setOnMousePressed(e -> {
+                			 btn.setStyle(StylePatterns.TABLE_BUTTON_PRESS);
+                		 });
+                		 btn.setOnMouseReleased(e -> {
+                			 btn.setStyle(StylePatterns.TABLE_BUTTON);
+                		 });
+                	 }
+                 }
+
+             };
+             return cell;
+         }
 	}
 }
