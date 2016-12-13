@@ -22,7 +22,7 @@ public class CalculatedAssumption extends Assumption {
 			Action action, String budgetYear) {
 		super(title, 0, classification, type, budgetYear);
 		this.action = action;
-		
+	
 		assumptions = new ArrayList<>();
 		setSpecialOperationAction(SpecialOperation.none); 
 	}
@@ -76,11 +76,14 @@ public class CalculatedAssumption extends Assumption {
 
 	private void multValues() {
 		for(int i=1;i<=NUMBER_OF_MONTHS;i++){
-			double startValue = 1;
-			for(int j=0;j<assumptions.size();j++){
-				startValue *= assumptions.get(j).getValue(i);
-				if(assumptions.get(j).getType().getType() == AssumptionType.Type.Percentage)
-					startValue /=100;
+			double startValue = 0;
+			if(assumptions.size()>0){
+				startValue = 1;
+				for(int j=0;j<assumptions.size();j++){
+					startValue *= assumptions.get(j).getValue(i);
+					if(assumptions.get(j).getType().getType() == AssumptionType.Type.Percentage)
+						startValue /=100;
+				}
 			}
 			super.setValue(startValue, i);
 			startValue = 1;
@@ -128,7 +131,7 @@ public class CalculatedAssumption extends Assumption {
 		
 		if(specialOperationAction==null || specialOperationAction == SpecialOperation.none)
 			throw new Exception("Special operation action can't be none or null");
-		
+		 
 		if(this.specialOperationAction == SpecialOperation.none){
 			if(specialOperationAction == SpecialOperation.dev){
 				for(int i = 1; i<=NUMBER_OF_MONTHS;i++){
@@ -170,5 +173,7 @@ public class CalculatedAssumption extends Assumption {
 	
 	public void setAction(Action action){
 		this.action = action;
+		calculateValues();
+		processEvent();
 	}
 }

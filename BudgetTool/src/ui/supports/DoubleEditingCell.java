@@ -1,5 +1,6 @@
 package ui.supports;
 
+import java.text.DecimalFormat;
 import java.util.regex.Pattern;
 
 import bl.AtomAssumption;
@@ -46,12 +47,12 @@ public class DoubleEditingCell<T extends Item> extends TableCell<T, Double> {
         } else if (isEditing()) {
         	Platform.runLater(()->{            		
         		setText(null);
-        		textField.setText(value.toString());
+        		textField.setText(new DecimalFormat("##.##").format(value));
         		setGraphic(textField);
         	});
         } else {
         	Platform.runLater(()->{            		
-        		setText(value.toString());
+        		setText(new DecimalFormat("##.##").format(value));
         		setGraphic(null);
         	});
         }

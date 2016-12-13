@@ -26,6 +26,7 @@ public class Assumption extends Item implements Comparable<Assumption>{
 	public void setType(AssumptionType type) {
 		this.type = type;
 		setUpdated(false);
+		processEvent();
 	}
 
 	@Override
@@ -40,5 +41,10 @@ public class Assumption extends Item implements Comparable<Assumption>{
 			return this.getId()-this.getId();
 		}
 		return this.getClassification().compareTo(other.getClassification());
+	}
+	
+	@Override
+	public String toString(){
+		return "Title: " + this.getTitle() + "\nData Type: " + this.getType().getType().toString();
 	}
 }

@@ -690,9 +690,13 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
                 			 Assumption assumption = getTableView().getItems().get(getIndex());
                 			 Platform.runLater(() -> {
                 				 try {
-                					 Stage aTa = new BuildComplexAssumption(manager, assumption);
+                					 Stage aTa = new BuildComplexAssumption(manager, assumption, isPlanning());
                 					 aTa.initModality(Modality.APPLICATION_MODAL);
                 					 aTa.showAndWait();
+                					 hasFilterChange = true;
+                					 btnSearch.fire();
+                					 table.getColumns().get(0).setVisible(false);
+                					 table.getColumns().get(0).setVisible(true);
                 				 } catch (Exception e1) {
                 					 e1.printStackTrace();
                 				 }

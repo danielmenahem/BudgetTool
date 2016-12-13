@@ -1007,11 +1007,16 @@ public class BudgetDAL {
 			readAssumption(e.getValue(), connection);
 			if(e.getValue() instanceof AtomAssumption){
 				readAtomAssumption((AtomAssumption)e.getValue(), connection);
+				e.getValue().setUpdated(true);
+
 			}
+		}
+		for(Entry<Integer, Assumption> e : data.getAssumptions().entrySet()){
 			if(e.getValue() instanceof CalculatedAssumption){
 				readCalculatedAssumption((CalculatedAssumption)e.getValue(), connection, data);
+				e.getValue().setUpdated(true);
 			}
-			e.getValue().setUpdated(true);
+			
 		}
 	}
 	
@@ -1146,6 +1151,7 @@ public class BudgetDAL {
 		for(int i = 0; i<values.length; i++){
 			item.setValue(values[i],i+1 );
 		}
+		item.setUpdated(true);
 	}
 	
 	private Classification getClassification(Connection connection ,int id) throws SQLException{
@@ -1259,9 +1265,9 @@ public class BudgetDAL {
 					id = create(e.getValue());
 					e.getValue().setId(id);
 				}
-				else{
+/*				else{
 					update(e.getValue());
-				}
+				}*/
 			}
 		}
 	}
@@ -1300,9 +1306,9 @@ public class BudgetDAL {
 					id = create(e.getValue());
 					e.getValue().setId(id);
 				}
-				else{
+/*				else{
 					update(e.getValue());
-				}
+				}*/
 			}
 		}
 	}
@@ -1315,9 +1321,9 @@ public class BudgetDAL {
 					id = create(e.getValue());
 					e.getValue().setId(id);
 				}
-				else{
+/*				else{
 					update(e.getValue());
-				}
+				}*/
 			}
 		}
 	}
@@ -1342,9 +1348,9 @@ public class BudgetDAL {
 				id = create(e.getValue());
 				e.getValue().setId(id);
 			}
-			else{
+/*			else{
 				update(e.getValue());
-			}
+			}*/
 		}
 	}
 
@@ -1367,9 +1373,9 @@ public class BudgetDAL {
 				id = create(e.getValue());
 				e.getValue().setId(id);
 			}
-			else{
+/*			else{
 				update(e.getValue());
-			}
+			}*/
 		}
 	}
 	
@@ -1409,9 +1415,9 @@ public class BudgetDAL {
 				id = create(sc.getColumns().get(i));
 				sc.getColumns().get(i).setId(id);
 			}
-			else{
+/*			else{
 				update(sc.getColumns().get(i));
-			}
+			}*/
 		}
 	}
 	
@@ -1433,9 +1439,9 @@ public class BudgetDAL {
 				id = create(cc.getAssumptions().get(i));
 				cc.getAssumptions().get(i).setId(id);
 			}
-			else{
+/*			else{
 				update(cc.getAssumptions().get(i));
-			}
+			}*/
 		}
 	}
 	
@@ -1457,9 +1463,9 @@ public class BudgetDAL {
 				id = create(mc.getColumns().get(i));
 				mc.getColumns().get(i).setId(id);
 			}
-			else{
+/*			else{
 				update(mc.getColumns().get(i));
-			}
+			}*/
 		}
 	}
 	
@@ -1470,9 +1476,9 @@ public class BudgetDAL {
 				id = create(mc.getAssumption());
 				mc.getAssumption().setId(id);
 			}
-			else{
+/*			else{
 				update(mc.getAssumption());
-			}
+			}*/
 		}
 	}
 	
@@ -1494,9 +1500,10 @@ public class BudgetDAL {
 				id = create(ca.getAssumptions().get(j));
 				ca.getAssumptions().get(j).setId(id);
 			}
-			else{
-				update(ca.getAssumptions().get(j), connection);
-			}
+/*			else{
+				if(!ca.getAssumptions().get(j).isUpdated())
+					update(ca.getAssumptions().get(j), connection);
+			}*/
 		}
 	}
 	
@@ -1515,9 +1522,9 @@ public class BudgetDAL {
 				catch(Exception e){
 				}
 			}
-			else{
+/*			else{
 				update((Item)item.getListeners().get(i));
-			}
+			}*/
 		}
 	}
 	
@@ -1529,9 +1536,9 @@ public class BudgetDAL {
 				id = create(ca.getSpecialOperationAssumption());
 				ca.getSpecialOperationAssumption().setId(id);
 			}
-			else{
+/*			else{
 				update(ca.getSpecialOperationAssumption());
-			}
+			}*/
 		}
 	}
 	
