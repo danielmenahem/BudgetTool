@@ -134,9 +134,9 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 		super(isPlanning, formWidth);
 		this.manager = manager;
 		if(isPlanning)
-			this.setStyle("-fx-background-color: #FFFAD4;"); 
+			this.setStyle(StylePatterns.PLANNING_BACKGROUND_CSS);
 		else
-			this.setStyle("-fx-background-color: blue;");
+			this.setStyle(StylePatterns.ACTUAL_BACKGROUND_CSS);
 		setObsLists();
 		buildFiltersGUI();
 		table = new TableView<>(assumptions);

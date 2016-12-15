@@ -116,7 +116,7 @@ public class CalculatedAssumption extends Assumption {
 		return specialOperationAction;
 	}
 
-	private void setSpecialOperationAction(SpecialOperation specialOperationAction) {
+	private void setSpecialOperationAction(SpecialOperation specialOperationAction){
 		this.specialOperationAction = specialOperationAction;
 		setUpdated(false);
 	}
@@ -149,13 +149,16 @@ public class CalculatedAssumption extends Assumption {
 			throw new Exception("Special operation already exists");
 	}
 	
-	public void removeSpecialOperation() throws Exception{
+	public Assumption removeSpecialOperation() throws Exception{
 		if(specialOperationAction != null){
+			Assumption a = specialOperationAssumption;
 			specialOperationAssumption.removeListeners(this);
 			this.specialOperationAction = null;
 			setSpecialOperationAction(SpecialOperation.none);
 			calculateValues();
+			return a;
 		}
+		return null;
 	}
 	
 	public Action getAction() {

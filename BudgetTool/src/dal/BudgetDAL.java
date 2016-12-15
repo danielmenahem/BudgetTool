@@ -1028,9 +1028,9 @@ public class BudgetDAL {
 		ResultSet rs =  statement.executeQuery();
 		rs.next();
 		assumption.setAction(CalculatedAssumption.Action.values()[rs.getInt(2)]);
-		int specialOp = rs.getInt(3);
+		int specialOp = rs.getInt(4);
 		if(specialOp!=0)
-			assumption.setSpecialOperationAssumption(data.getAssumptions().get(rs.getInt(4)), 
+			assumption.setSpecialOperationAssumption(data.getAssumptions().get(rs.getInt(3)), 
 					CalculatedAssumption.SpecialOperation.values()[specialOp]);
 		readInnerAssumptions(assumption, connection, data);
 	}
