@@ -29,8 +29,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.scene.control.SelectionMode;
-import ui.supports.StylePatterns;
 import javafx.scene.shape.Polygon;
+import ui.supports.StylePatterns;
 
 public class BuildComplexAssumption extends Stage{
 	
@@ -84,6 +84,7 @@ public class BuildComplexAssumption extends Stage{
 		buildGUI();
 		setButtonsAction();
 		setSpecialOperationCurrentState();
+		this.setTitle("Build Complex Assumption");
 		this.setAlwaysOnTop(true);
 
 	}

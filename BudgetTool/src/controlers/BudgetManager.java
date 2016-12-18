@@ -19,6 +19,7 @@ public class BudgetManager implements EnteranceManagerIF, AssumptionsManagerIF  
 	private ArrayList<String> budgetYears;
 	private ArrayList<String> departments;
 	private ArrayList<String> subDepartments;
+	private ArrayList<String> titles;
 	
 	private BudgetManager(){
 		try {
@@ -65,12 +66,17 @@ public class BudgetManager implements EnteranceManagerIF, AssumptionsManagerIF  
 		return actualData.getTables();
 	}
 	
+	public ArrayList<String> getTitles() {
+		return titles;
+	}
+
 	private void loadInitialInformation() throws Exception{
 		planningData = new DataContainer(true);
 		actualData = new DataContainer(false);
 		budgetYears = planningData.getBudgetYears();
 		departments = planningData.getAllDepartments();
 		subDepartments = planningData.getAllSubDepartments();
+		titles = planningData.getAllTitles();
 	}
 	
 	public ArrayList<String> getBudgetYears() {

@@ -2,6 +2,7 @@ package ui.forms;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 
 import javafx.collections.FXCollections;
@@ -26,15 +27,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableColumn.CellEditEvent;
-import javafx.scene.control.TableColumn.SortType;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.effect.Glow;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.control.TableCell;
@@ -48,6 +45,7 @@ import javafx.beans.property.*;
 import javafx.util.converter.DefaultStringConverter;
 import javafx.application.Platform;
 import ui.interfaces.FormListener;
+import ui.supports.AutoCompleteTextField;
 import ui.supports.DoubleEditingCell;
 import ui.supports.FormEvent;
 import ui.supports.StylePatterns;
@@ -95,7 +93,7 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 	private ComboBox<String> cmbFilterByDepartment;
 	private ComboBox<String> cmbFilterBySubDepartment;
 	private ComboBox<String> cmbFilterByDataType;
-	private TextField tfNewAssumptionTitle = new TextField();
+	private AutoCompleteTextField tfNewAssumptionTitle = new  AutoCompleteTextField();
 	private TextField tfNewAssumptionValue = new TextField();
 	private Button btnNewAssumptionAdd = new Button("Add Assumption");
 	private Button btnSearch = new Button("Search");
@@ -132,6 +130,9 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 	
 	public FormAssumption(AssumptionsManagerIF manager, boolean isPlanning, double formWidth){
 		super(isPlanning, formWidth);
+		for(String s : manager.getTitles())
+			System.out.println(s);
+		tfNewAssumptionTitle.getEntries().addAll(manager.getTitles());
 		this.manager = manager;
 		if(isPlanning)
 			this.setStyle(StylePatterns.PLANNING_BACKGROUND_CSS);

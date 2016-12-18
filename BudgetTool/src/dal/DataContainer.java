@@ -13,12 +13,14 @@ public class DataContainer {
 	private HashMap<Integer,Column> columns;
 	private HashMap<Integer,Table> tables;
 	private BudgetDAL dal;
+	private boolean isPlanning;
 	
 	public DataContainer(boolean isPlanning) throws Exception{
 		if(isPlanning)
 			this.dal = new BudgetDAL();
 		else
 			this.dal = new ActingBudgetDAL();
+		this.isPlanning = isPlanning;
 		this.assumptions = new HashMap<>();
 		this.columns = new HashMap<>();
 		this.tables = new HashMap<>();
@@ -171,6 +173,12 @@ public class DataContainer {
 		else
 			throw new Exception("Copying to actual DB can be done "
 					+ "only via the acting budget data container");
+	}
+	
+	public ArrayList<String> getAllTitles() throws SQLException{
+		if(isPlanning)
+			return dal.getAllBuiltInTitles();
+		return null;
 	}
 	
 	private void removeColumnFromConteiner(Column column, boolean deleteInner){

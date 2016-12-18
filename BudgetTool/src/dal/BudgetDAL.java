@@ -373,6 +373,25 @@ public class BudgetDAL {
 		}
 		connection.close();
 	}
+	
+	public ArrayList<String> getAllBuiltInTitles() throws SQLException{
+		ArrayList<String> titles = new ArrayList<>();
+		Connection connection = getConnection();
+		try{
+			String query = "SELECT TITLE FROM BUILT_IN_TITLES";
+			PreparedStatement statement = connection.prepareStatement(query);
+			ResultSet rs =  statement.executeQuery();
+			while(rs.next()){
+				titles.add(rs.getString(1));
+			}
+		}
+		catch(SQLException e){
+			connection.close();
+			throw e;
+		}
+		connection.close();
+		return titles;
+	}
 
 
 	private void delete(Object obj, Connection connection, boolean deleteInner) throws Exception {

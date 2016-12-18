@@ -80,6 +80,7 @@ public class DoubleEditingCell<T extends Item> extends TableCell<T, Double> {
         });
     }
     
+    @SuppressWarnings("unchecked")
     @Override
     public void commitEdit(Double value) {
         super.commitEdit(value);

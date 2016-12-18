@@ -22,4 +22,5 @@ public interface AssumptionsManagerIF {
 	Assumption createAtomAssumptionInActual(String title, String department, String subDepartment, double value, Type type) throws Exception;
 	Assumption createClaculatedAssumptionInPlanning(String title, String department, String subDepartment, Action action, Type type) throws Exception;
 	Assumption createCalculatedAssumptionInActual(String title, String department, String subDepartment, Action action, Type type) throws Exception;
+	ArrayList<String> getTitles();
 }

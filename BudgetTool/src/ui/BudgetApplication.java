@@ -10,7 +10,6 @@ public class BudgetApplication extends Application {
 	private BudgetManager manager;
 	private Stage primaryStage;
 	
-		
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		this.manager = BudgetManager.createBudgetManager();
