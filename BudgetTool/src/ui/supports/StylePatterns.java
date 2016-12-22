@@ -77,10 +77,25 @@ public class StylePatterns {
 	
 	public static final String SUB_TITLE_CSS = "-fx-font-size: 13px;"
 			+ "-fx-font-family: \"Arial Black\";"
-			+ "-fx-fill: #818181;"
+			+ "-fx-text-fill: #60646D;"
 			+ "-fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );";
 	
 	public static final String PLANNING_BACKGROUND_CSS = "-fx-background-color: linear-gradient(#FFFAD4, #FFF5A6);";
 	
 	public static final String ACTUAL_BACKGROUND_CSS = "-fx-background-color: linear-gradient(#CFDDFC, #9FBAF6);";
+	
+	public static final String FILTER_PANE_CSS = "-fx-background-color: #EDF1FF; "
+			+"-fx-border-width: 1;"
+            + "-fx-border-style: solid inside;"
+            + "-fx-border-color:#aaaab2;";
+	
+	public static final String PLANNING_INNER_FORM_CSS = "-fx-background-color: #FFFBE2;"
+			+"-fx-border-width: 1;"
+			+ "-fx-border-style: solid inside;"
+			+ "-fx-border-color:#ADB4B6;";
+	
+	public static final String ACTUAL_INNER_FORM_CSS = "-fx-background-color: #DEE8FF;"
+			+"-fx-border-width: 1;"
+			+ "-fx-border-style: solid inside;"
+			+ "-fx-border-color:#ADB4B6;";
 }

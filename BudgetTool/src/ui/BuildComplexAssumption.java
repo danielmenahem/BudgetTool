@@ -55,14 +55,18 @@ public class BuildComplexAssumption extends Stage{
 	private StackPane paneButtonsContainer = new StackPane();
 	private StackPane paneValuesHeader = new StackPane();
 	private StackPane paneGridValuesContainer = new StackPane();
+	private VBox paneInnerAssumptions = new VBox();
+	private VBox paneAssumptionsPool = new VBox();
 	private Label lblAssumptionDetails;
 	private ListView<Assumption> lvInnerAssumption;
-	private ListView<Assumption> lvAssumptionsToAdd;
+	private ListView<Assumption> lvAssumptionsPool;
 	private Button btnAddToAssumption = new Button();
 	private Button btnRemoveFromAssumption = new Button();
 	private Button btnRemoveOrAddSpecialOperation = new Button(REMOVE_STATE);
 	private ComboBox<Assumption> cmbSpecialOperationAssumption = new ComboBox<>();
 	private ComboBox<CalculatedAssumption.SpecialOperation> cmbSpecialOperation = new ComboBox<>();
+	private Label lblInnerAssumptions = new Label("Inner Assumptions");
+	private Label lblAssumptionsPool = new Label("Assumptions Pool");
 	private Label lblButtomHeader = new Label("Assumption Values");
 	private Label lblSpecialOperation = new Label("Select Operation");
 	private Label lblSpecialAssumption = new Label("Select Assumption");
@@ -212,7 +216,7 @@ public class BuildComplexAssumption extends Stage{
 	
 	private void addInnerAssumptions(){
 		showMsg("");
-		ObservableList<Assumption> selectedAssumption = lvAssumptionsToAdd.getSelectionModel().getSelectedItems();
+		ObservableList<Assumption> selectedAssumption = lvAssumptionsPool.getSelectionModel().getSelectedItems();
 		ArrayList<Assumption> listAssumptions = new ArrayList<>();
 		for(Assumption a : selectedAssumption){
 			listAssumptions.add(a);
@@ -279,6 +283,7 @@ public class BuildComplexAssumption extends Stage{
 		paneSpecialData.setSpacing(10);
 		paneSpecial.setSpacing(5);
 		paneSpecial.setAlignment(Pos.CENTER);
+		paneSpecialData.setAlignment(Pos.CENTER);
 		lblSpecialHeader.setStyle(StylePatterns.SUB_TITLE_CSS);
 		lblSpecialAssumption.setStyle(StylePatterns.LABEL_CSS);
 		lblSpecialOperation.setStyle(StylePatterns.LABEL_CSS);
@@ -297,10 +302,18 @@ public class BuildComplexAssumption extends Stage{
 	}
 	
 	private void buildCenterPane(){
+		lblAssumptionsPool.setStyle(StylePatterns.SUB_TITLE_CSS);
+		lblInnerAssumptions.setStyle(StylePatterns.SUB_TITLE_CSS);
+		lblAssumptionsPool.setTextAlignment(TextAlignment.CENTER);
+		lblInnerAssumptions.setTextAlignment(TextAlignment.CENTER);
 		lvInnerAssumption = new ListView<>(this.innerAssumptions);
-		lvAssumptionsToAdd = new ListView<>(this.assumptionsToAdd);
+		lvAssumptionsPool = new ListView<>(this.assumptionsToAdd);
 		lvInnerAssumption.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-		lvAssumptionsToAdd.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		lvAssumptionsPool.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		paneInnerAssumptions.getChildren().addAll(lblInnerAssumptions, lvInnerAssumption);
+		paneAssumptionsPool.getChildren().addAll(lblAssumptionsPool, lvAssumptionsPool);
+		paneInnerAssumptions.setAlignment(Pos.CENTER);
+		paneAssumptionsPool.setAlignment(Pos.CENTER);
 		paneButtons.getChildren().addAll(btnAddToAssumption, btnRemoveFromAssumption);
 		paneButtonsContainer.getChildren().add(paneButtons);
 		paneButtons.setMaxHeight(50);
@@ -323,7 +336,13 @@ public class BuildComplexAssumption extends Stage{
 		btnAddToAssumption.setStyle(StylePatterns.LEFT_ARROW_BUTTON_CSS);
 		btnRemoveFromAssumption.setShape(rightArrow);
 		btnRemoveFromAssumption.setStyle(StylePatterns.RIGHT_ARROW_BUTTON_CSS);
-		paneCenter.getChildren().addAll(lvInnerAssumption, paneButtonsContainer, lvAssumptionsToAdd);
+		paneCenter.getChildren().addAll(paneInnerAssumptions, paneButtonsContainer, paneAssumptionsPool);
+		paneCenter.setAlignment(Pos.CENTER);
+		if(isPlanning)
+			paneCenter.setStyle(StylePatterns.PLANNING_INNER_FORM_CSS);
+		else
+			paneCenter.setStyle(StylePatterns.ACTUAL_INNER_FORM_CSS);
+		paneCenter.setPadding(new Insets(5));
 	}
 	
 	private void setBackgroundColor(){

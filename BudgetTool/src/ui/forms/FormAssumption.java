@@ -130,8 +130,6 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 	
 	public FormAssumption(AssumptionsManagerIF manager, boolean isPlanning, double formWidth){
 		super(isPlanning, formWidth);
-		for(String s : manager.getTitles())
-			System.out.println(s);
 		tfNewAssumptionTitle.getEntries().addAll(manager.getTitles());
 		this.manager = manager;
 		if(isPlanning)
@@ -206,10 +204,7 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 		paneFilters.getChildren().addAll(paneFilterByDepartment, paneFilterBySubDepartment, paneFilterByType, paneFilterByDataType, btnSearch, btnClearFilters);
 		paneFilters.setPadding(new Insets(5));
 		paneFilters.setSpacing(25);
-		paneFilters.setStyle("-fx-background-color: #EDF1FF; "
-			+"-fx-border-width: 1;"
-            + "-fx-border-style: solid inside;"
-            + "-fx-border-color:#aaaab2;");
+		paneFilters.setStyle(StylePatterns.FILTER_PANE_CSS);
 	}
 	
 	private void filterChange(){
@@ -320,10 +315,10 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 		lblNewAssumptionHeader.setStyle(StylePatterns.HEADER_CSS);
 		btnNewAssumptionAdd.setStyle(StylePatterns.BUTTON_CSS);
 		lblMsg.setStyle(StylePatterns.LABEL_MESSAGE_CSS);
-		paneNew.setStyle("-fx-background-color: #FFFBE2;"
-				+"-fx-border-width: 1;"
-				+ "-fx-border-style: solid inside;"
-				+ "-fx-border-color:#ADB4B6;");
+		if(isPlanning())
+			paneNew.setStyle(StylePatterns.PLANNING_INNER_FORM_CSS);
+		else
+			paneNew.setStyle(StylePatterns.ACTUAL_INNER_FORM_CSS);
 		btnNewAssumptionAdd.setOnMousePressed(e -> {
 			btnNewAssumptionAdd.setStyle(StylePatterns.BUTTON_HOVERD_CSS);
 		});

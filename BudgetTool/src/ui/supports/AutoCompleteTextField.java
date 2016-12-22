@@ -10,6 +10,7 @@ import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.SortedSet;
@@ -26,13 +27,23 @@ public class AutoCompleteTextField extends TextField {
 	private final SortedSet<String> entries;
 	/** The popup used to select an entry. */
 	private ContextMenu entriesPopup;
+	/**The maximum number of items in the menu*/
+	private static final int MAX_ENTRIES = 15;
+	
+	private static final Comparator<String> IGNORE_CASE = new Comparator<String>() {
+	    public int compare(String s1, String s2) {
+	        return s1.compareToIgnoreCase(s2);
+	    }
+	};
 
 	/** Construct a new AutoCompleteTextField. */
 	public AutoCompleteTextField() {
 		super();
-		entries = new TreeSet<>();
+		entries = new TreeSet<>(IGNORE_CASE);
 		entriesPopup = new ContextMenu();
+		entriesPopup.setAutoFix(true);
 		textProperty().addListener(new ChangeListener<String>() {
+			private int currentSize = 0;
 			@Override
 			public void changed(ObservableValue<? extends String> observableValue, String s, String s2) {
 				if (getText().length() == 0) {
@@ -49,9 +60,13 @@ public class AutoCompleteTextField extends TextField {
 					searchResult.addAll(entries.subSet(getText(), getText() + Character.MAX_VALUE));
 					if (entries.size() > 0) {
 						populatePopup(searchResult);
-						if (!entriesPopup.isShowing()) {
-							entriesPopup.show(AutoCompleteTextField.this, Side.BOTTOM, 0, 0);
+						if(searchResult.size() != currentSize){
+							currentSize = searchResult.size();
+							entriesPopup.hide();
 						}
+						if(!entriesPopup.isShowing())
+							entriesPopup.show(AutoCompleteTextField.this, Side.RIGHT, 0, 0);
+			
 					} else {
 						entriesPopup.hide();
 					}
@@ -88,9 +103,7 @@ public class AutoCompleteTextField extends TextField {
 	 */
 	private void populatePopup(List<String> searchResult) {
 		List<CustomMenuItem> menuItems = new LinkedList<>();
-		// If you'd like more entries, modify this line.
-		int maxEntries = 10;
-		int count = Math.min(searchResult.size(), maxEntries);
+		int count = Math.min(searchResult.size(), MAX_ENTRIES);
 		for (int i = 0; i < count; i++) {
 			final String result = searchResult.get(i);
 			Label entryLabel = new Label(result);
