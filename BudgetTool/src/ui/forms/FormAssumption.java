@@ -56,6 +56,7 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 	
 	private static final int VALUE_COLUMN_WIDTH  = 50;
 	private static final int STRING_COLUMN_WIDTH  = 100;
+	
 	private AssumptionsManagerIF manager;
 	private VBox paneMain = new VBox();
 	private HBox paneFilters = new HBox();
@@ -132,10 +133,6 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 		super(isPlanning, formWidth);
 		tfNewAssumptionTitle.getEntries().addAll(manager.getTitles());
 		this.manager = manager;
-		if(isPlanning)
-			this.setStyle(StylePatterns.PLANNING_BACKGROUND_CSS);
-		else
-			this.setStyle(StylePatterns.ACTUAL_BACKGROUND_CSS);
 		setObsLists();
 		buildFiltersGUI();
 		table = new TableView<>(assumptions);

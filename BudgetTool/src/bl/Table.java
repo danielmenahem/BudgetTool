@@ -24,7 +24,7 @@ public class Table {
 		this.budgetYear = budgetYear;
 		columns = new HashMap<>();
 		colIdInTable = 0;
-		sumColumn = new SummaryColumn(SUM_COLUMN_NAME, classification, true, this.budgetYear);
+		sumColumn = new SummaryColumn(SUM_COLUMN_NAME, classification,true, true, this.budgetYear);
 	}
 	
 	public Table(int id, Classification classification, String budgetYear,SummaryColumn column, int colIndex){
@@ -45,7 +45,7 @@ public class Table {
 		
 		colIdInTable++;
 		columns.put(colIdInTable, column);
-		if(column.getColumnType()==ColumnType.costs)
+		if(column.getColumnType()==ColumnType.cost_for_Summary)
 			this.sumColumn.addColumn(column);
 	}
 	

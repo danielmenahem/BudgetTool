@@ -8,8 +8,8 @@ public class SummaryColumn extends Column {
 	ArrayList <Column> columns;
 	
 
-	public SummaryColumn(String title, Classification classification, boolean isVisible, String budgetYear) {
-		super(title, classification, ColumnType.costs, isVisible, budgetYear);
+	public SummaryColumn(String title, Classification classification,boolean isForSummary, boolean isVisible, String budgetYear) {
+		super(title, classification, isForSummary?ColumnType.cost_for_Summary:ColumnType.costs, isVisible, budgetYear);
 		columns = new ArrayList<>();
 	}
 	
@@ -23,13 +23,12 @@ public class SummaryColumn extends Column {
 			throw new Exception("Inserted column can't be null");
 		if(!column.getClassification().equals(this.getClassification()))
 			throw new Exception("Inserted column classification must be equal to column classification ");
-		if(!(column.getColumnType() == ColumnType.costs))
-			throw new Exception("Inserted column type must be costs ");
+		if(column.getColumnType() == ColumnType.quantity)
+			throw new Exception("Inserted column type cannot be quantity ");
 
 		columns.add(column);
 		column.addListener(this);
 		recalculateValues(column, true);
-		
 	}
 	
 	public void removeColumn(Column column) throws Exception{
@@ -54,10 +53,10 @@ public class SummaryColumn extends Column {
 	}
 	
 
-
 	@Override
 	public void setColumnType(ColumnType columnType){
-
+		if(columnType != ColumnType.costs)
+			setColumnType(columnType);
 	}
 	
 	public void calculateValues(){

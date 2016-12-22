@@ -1,6 +1,7 @@
 package ui.forms;
 
 import javafx.scene.layout.Pane;
+import ui.supports.StylePatterns;
 
 public abstract class Form  extends Pane{
 	private boolean isPlanning;
@@ -8,8 +9,11 @@ public abstract class Form  extends Pane{
 	public Form(boolean isPlanning, double width){
 		this.isPlanning = isPlanning;
 		this.formWidth = width;
+		if(isPlanning)
+			this.setStyle(StylePatterns.PLANNING_BACKGROUND_CSS);
+		else
+			this.setStyle(StylePatterns.ACTUAL_BACKGROUND_CSS);
 	}
-	
 	
 	public double getFormWidth() {
 		return formWidth;

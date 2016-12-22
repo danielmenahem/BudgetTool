@@ -36,7 +36,7 @@ public class ReviewTable extends Table {
 			HashMap<Integer, MultColumn> trainingCosts = trainingCostColumns.get(i);
 			
 			for(int j=1;i<=trainingCostColumns.size();j++){
-				MultColumn mc = new MultColumn(trainingCosts.get(j+num).getTitle(), this.getClassificaion(), ColumnType.costs, true, this.getBudgetYear());
+				MultColumn mc = new MultColumn(trainingCosts.get(j+num).getTitle(), this.getClassificaion(), ColumnType.cost_for_Summary, true, this.getBudgetYear());
 				
 				for(int k=0;k<trainingCosts.get(j+num).getColumns().size();k++){
 					mc.addColumn(trainingCosts.get(j+num).getColumns().get(k));

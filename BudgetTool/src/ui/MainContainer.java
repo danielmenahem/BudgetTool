@@ -19,7 +19,9 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.StackPane;
 import ui.forms.Form;
 import ui.forms.FormAssumption;
+import ui.forms.FormColumn;
 import ui.forms.FormProperties;
+import ui.forms.FormTable;
 import ui.supports.StylePatterns;
 
 public class MainContainer extends Scene{
@@ -55,7 +57,7 @@ public class MainContainer extends Scene{
 		this.manager = manager;
 		this.application = app;
 		buildGUI();
-		initFromsNames();
+		initFormsNames();
 		setActions();
 	}
 	
@@ -67,23 +69,23 @@ public class MainContainer extends Scene{
 		menuOverview.getItems().add(showBudget);
 		menuBar.getMenus().addAll(menuPlanning, menuActual, menuOverview, menuOpen);
 		menuBar.setMinWidth(this.getWidth());
-		menuBar.setStyle("-fx-background-color: #46475a;"
-				+ "-fx-border-color: #aaaab2;"
-				+ "-fx-border-width: 2px;");
+		menuBar.setStyle(StylePatterns.EDGE_PANE_CSS);
 		btnRemove.setStyle(StylePatterns.BUTTON_CSS);
 		paneRemove.getChildren().add(btnRemove);
 		StackPane.setAlignment(btnRemove, Pos.CENTER_LEFT);
-		paneRemove.setStyle("-fx-background-color: #46475a;"
-				+ "-fx-border-color: #aaaab2;"
-				+ "-fx-border-width: 2px");
+		paneRemove.setStyle(StylePatterns.EDGE_PANE_CSS);
 		paneRemove.setPadding(new Insets(5,10,5,10));
 		paneMain.setTop(menuBar);
 		paneMain.setBottom(paneRemove);
 	}
 	
-	private void initFromsNames(){
+	private void initFormsNames(){
 		formNames.put(new FormProperties(FormAssumption.class, true),"Planning Assumptions");
 		formNames.put(new FormProperties(FormAssumption.class, false),"Actual Assumptions");
+		formNames.put(new FormProperties(FormColumn.class, true), "Planning Columns");
+		formNames.put(new FormProperties(FormColumn.class, false), "Actual Columns");
+		formNames.put(new FormProperties(FormTable.class, true), "Planning Tables");
+		formNames.put(new FormProperties(FormTable.class, false), "Actual Tables");
 	}
 	
 	private void setActions(){
@@ -93,6 +95,22 @@ public class MainContainer extends Scene{
 		
 		aAssumpation.setOnAction(e -> {
 			setMenuAction(FormAssumption.class, false);
+		});
+		
+		pColumn.setOnAction(e -> {
+			setMenuAction(FormColumn.class, true);
+		});
+		
+		aColumn.setOnAction(e -> {
+			setMenuAction(FormColumn.class, false);
+		});
+		
+		pTable.setOnAction(e -> {
+			setMenuAction(FormTable.class, true);
+		});
+		
+		aTable.setOnAction(e -> {
+			setMenuAction(FormTable.class, false);
 		});
 		
 		btnRemove.setOnAction(e -> {
@@ -139,7 +157,9 @@ public class MainContainer extends Scene{
 	
 	private Form createForm(Class<?>c, boolean isPlanning){
 		if (c == FormAssumption.class)
-			return new FormAssumption(manager, isPlanning, this.getWidth());
+			return new FormAssumption(this.manager, isPlanning, this.getWidth());
+		else if(c == FormColumn.class)
+			return new FormColumn(this.manager, isPlanning, this.getWidth());
 		return null;
 	}
 	

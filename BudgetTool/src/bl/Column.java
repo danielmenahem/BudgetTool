@@ -3,7 +3,7 @@ package bl;
 public abstract class Column extends Item {
 	
 	public enum ColumnType{
-		costs, quantity
+		costs, quantity, cost_for_Summary
 	};
 	
 	private ColumnType columnType;

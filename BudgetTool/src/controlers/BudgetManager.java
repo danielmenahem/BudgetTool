@@ -10,7 +10,7 @@ import bl.CalculatedAssumption.Action;
 import dal.DataContainer;
 import interfaces.*;
 
-public class BudgetManager implements EnteranceManagerIF, AssumptionsManagerIF  {
+public class BudgetManager implements EnteranceManagerIF, AssumptionsManagerIF, ColumnsManagerIF, TablesManagerIF {
 		
 	private static BudgetManager singleton;
 	

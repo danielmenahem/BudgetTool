@@ -95,7 +95,7 @@ public class TrainingTable extends Table {
 				qc.setValues(factor);
 				this.increaseNumberOfColumns();
 				factors.put(this.getColIdInTable(), qc);
-				MultColumn mc = new MultColumn(colTitle+COST_TITLE, new Classification(department, SUB_DEPARTMENT), ColumnType.costs, true,this.getBudgetYear());
+				MultColumn mc = new MultColumn(colTitle+COST_TITLE, new Classification(department, SUB_DEPARTMENT), ColumnType.cost_for_Summary, true,this.getBudgetYear());
 				mc.addColumn(qc);
 				mc.addColumn(this.fixedColumns.get(j));
 				this.getSumColumn().addColumn(mc);

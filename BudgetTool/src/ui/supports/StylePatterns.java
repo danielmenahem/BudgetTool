@@ -98,4 +98,8 @@ public class StylePatterns {
 			+"-fx-border-width: 1;"
 			+ "-fx-border-style: solid inside;"
 			+ "-fx-border-color:#ADB4B6;";
+	
+	public static final String EDGE_PANE_CSS = "-fx-background-color: #46475a;"
+			+ "-fx-border-color: #aaaab2;"
+			+ "-fx-border-width: 2px;";
 }
