@@ -2,7 +2,7 @@ package bl;
 
 import java.util.Comparator;
 
-public class AssumptionComperator implements Comparator<Assumption>{
+public class AssumptionComparator implements Comparator<Assumption>{
 
 	@Override
 	public int compare(Assumption a1, Assumption a2) {

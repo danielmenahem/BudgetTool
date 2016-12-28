@@ -19,7 +19,5 @@ public class FormColumn extends Form implements FormListener<Column>{
 	@Override
 	public void actionOnEvent(FormEvent<Column> e) {
 		// TODO Auto-generated method stub
-		
 	}
-
 }

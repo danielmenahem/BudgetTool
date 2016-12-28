@@ -46,8 +46,11 @@ public class CalculatedColumn extends Column {
 		
 		if(!isAdded)
 			mult = -1;
-		for(int i=1; i<=NUMBER_OF_MONTHS; i++)
+		for(int i=1; i<=NUMBER_OF_MONTHS; i++){
+			if(isAdded && assumptions.size()==1)
+				this.setValue(0, i);
 			this.setValue(getValue(i) + mult*assumption.getValue(i), i);
+		}
 		
 		setUpdated(false);
 		processEvent();

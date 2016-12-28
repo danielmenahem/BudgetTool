@@ -3,9 +3,11 @@ package ui.supports;
 import java.text.DecimalFormat;
 import java.util.regex.Pattern;
 
+import bl.Assumption;
 import bl.AtomAssumption;
 import javafx.application.Platform;
 import javafx.scene.control.TableCell;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TextField;
 import ui.interfaces.FormListener;
 import bl.Item;
@@ -25,7 +27,31 @@ public class DoubleEditingCell<T extends Item> extends TableCell<T, Double> {
         textField.setOnAction(event -> processEdit());
         this.index = index;
         this.listener = listener;
+        
+        this.itemProperty().addListener((obs, oldValue, newValue) -> {
+            @SuppressWarnings("unchecked")
+			TableRow<Assumption> row = this.getTableRow();
+            if (row == null) {
+                this.setEditable(false);
+            }
+            else {
+                Assumption a = (Assumption) this.getTableRow().getItem();
+                if(a == null)
+                    this.setEditable(false);
+                else if(a instanceof AtomAssumption)
+                	this.setEditable(true);
+                else
+                	this.setEditable(false);
+            }
+            if(this.isEditable()){
+            	this.setStyle(StylePatterns.EDITABLE_TABLE_CELL_CSS);
+            }
+            else{
+            	this.setStyle(StylePatterns.NOT_EDITABLE_TABLE_CELL_CSS);
+            }
+        });
     }
+    
 
     private void processEdit() {
         String text = textField.getText();
@@ -44,7 +70,8 @@ public class DoubleEditingCell<T extends Item> extends TableCell<T, Double> {
         		setText(null);
         		setGraphic(null);
         	});
-        } else if (isEditing()) {
+        } 
+        else if (isEditing()) {
         	Platform.runLater(()->{            		
         		setText(null);
         		textField.setText(new DecimalFormat("##.##").format(value));
@@ -57,7 +84,7 @@ public class DoubleEditingCell<T extends Item> extends TableCell<T, Double> {
         	});
         }
     }
-
+    
     @Override
     public void startEdit() {
         super.startEdit();
@@ -80,7 +107,12 @@ public class DoubleEditingCell<T extends Item> extends TableCell<T, Double> {
         });
     }
     
-    @SuppressWarnings("unchecked")
+    public TextField getTextField() {
+		return textField;
+	}
+
+
+	@SuppressWarnings("unchecked")
     @Override
     public void commitEdit(Double value) {
         super.commitEdit(value);

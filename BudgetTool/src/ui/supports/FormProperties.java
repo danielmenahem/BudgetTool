@@ -1,4 +1,4 @@
-package ui.forms;
+package ui.supports;
 
 public class FormProperties {
 	Class<?> c;

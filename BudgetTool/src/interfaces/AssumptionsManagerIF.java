@@ -8,7 +8,6 @@ import bl.AssumptionType.Type;
 import bl.CalculatedAssumption.Action;
 
 public interface AssumptionsManagerIF {
-	
 	void saveAssumptionToActual(Assumption assumption) throws Exception;
 	void saveAssumtionToPlanning(Assumption assumption) throws Exception;
 	HashMap<Integer, Assumption> getActualAssumptions();

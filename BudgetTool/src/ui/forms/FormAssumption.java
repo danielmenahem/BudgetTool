@@ -2,48 +2,47 @@ package ui.forms;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.stage.Modality;
-import javafx.scene.control.cell.*;
 
 import bl.Assumption;
-import bl.AssumptionComperator;
+import bl.AssumptionComparator;
 import bl.AssumptionType;
+import bl.AssumptionType.Type;
 import bl.AtomAssumption;
 import bl.CalculatedAssumption;
 import bl.CalculatedAssumption.Action;
-import bl.AssumptionType.Type;
 import interfaces.AssumptionsManagerIF;
-import ui.BuildComplexAssumption;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TableColumn.CellDataFeatures;
-import javafx.scene.control.TableColumn.CellEditEvent;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.VBox;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import javafx.scene.control.TableCell;
-import javafx.util.Callback;
-import javafx.beans.value.ObservableValue;
+import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.beans.property.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.TableColumn.CellEditEvent;
+import javafx.scene.control.TableRow;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.ComboBoxTableCell;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.util.Callback;
 import javafx.util.converter.DefaultStringConverter;
-import javafx.application.Platform;
+import ui.BuildComplexAssumption;
 import ui.interfaces.FormListener;
 import ui.supports.AutoCompleteTextField;
 import ui.supports.DoubleEditingCell;
@@ -120,14 +119,17 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 	private TableColumn <Assumption, Double> colJun = new TableColumn<>("Jun");
 	private TableColumn <Assumption, String> colDataType = new TableColumn<>("Data Type");
     private TableColumn<Assumption, String> colAction = new TableColumn<>( "Complex Action" );
+    private Callback<TableColumn<Assumption,String>,TableCell<Assumption,String>> depsCallBack;
+    private Callback<TableColumn<Assumption,String>,TableCell<Assumption,String>> subDepsCallBack;
 	private ObservableList<Assumption> assumptions;
 	private ObservableList<String> types;
 	private ObservableList<String> dataTypes;
 	private ObservableList<String> deps;
 	private ObservableList<String> subDeps;
 	private ObservableList<String> actions;
-	
+		
 	private boolean hasFilterChange = false;
+	
 	
 	public FormAssumption(AssumptionsManagerIF manager, boolean isPlanning, double formWidth){
 		super(isPlanning, formWidth);
@@ -136,10 +138,10 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 		setObsLists();
 		buildFiltersGUI();
 		table = new TableView<>(assumptions);
+		setTableColumns();
 		setColumnsCellsValueFactory();
 		setColumnsCellsFactory();
 		setColumnsActions();
-		setTableColumns();
 		table.setEditable(true);
 		setColsSizesAndAlignment();
 		buildNewAssumptionGUI();
@@ -155,6 +157,7 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 		return table.getColumns().addAll(colID, colAction, colType,colDepartment, colSubDepartment, colTitle, colJul, colAug, colSep, 
 				colOct, colNov, colDec, colJan, colFeb, colMar, colApr, colMay, colJun, colDataType);
 	}
+	
 	
 	private void buildFiltersGUI(){
 		cmbFilterByType = new ComboBox<>(types);
@@ -227,6 +230,7 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 				assumptions = getFilterdData();
 			}
 			table.setItems(assumptions);
+			setColumnsCellsFactory();
 			this.hasFilterChange = false;
 		}
 	}
@@ -242,7 +246,7 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 				checkAndAddIfqualify(manager.getActualAssumptions().get(id), lst);
 			}
 		
-		lst.sort(new AssumptionComperator());
+		lst.sort(new AssumptionComparator());
 		return FXCollections.observableArrayList(lst);
 	}
 	
@@ -482,6 +486,8 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 			}
 		});
 		
+
+		
 		colDepartment.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Assumption,String>>() {
 			@Override
 			public void handle(CellEditEvent<Assumption, String> event) {
@@ -526,9 +532,61 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 		colMay.setCellFactory(col -> new DoubleEditingCell<Assumption>(11,this));
 		colJun.setCellFactory(col -> new DoubleEditingCell<Assumption>(12,this));
 		colTitle.setCellFactory(TextFieldTableCell.<Assumption>forTableColumn());
-		colSubDepartment.setCellFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), subDeps));
-		colDepartment.setCellFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), deps));
+		depsCallBack = ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), deps);
+		subDepsCallBack = ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), subDeps);
+		setComboBoxColumnsCellFactory();
 		colAction.setCellFactory(new ActionCellFactory());
+	}
+
+	private void setComboBoxColumnsCellFactory() {
+        colSubDepartment.setCellFactory(col -> {
+            TableCell<Assumption, String> cell = subDepsCallBack.call(col);
+            addComboBoxCellListener(cell);
+            return cell;
+        });
+		
+		colDepartment.setCellFactory(col -> {
+            TableCell<Assumption, String> cell = depsCallBack.call(col);
+            addComboBoxCellListener(cell);
+            return cell;
+        });
+	}
+	
+	private void addComboBoxCellListener(TableCell<Assumption, String> cell){
+        cell.itemProperty().addListener((obs, oldValue, newValue) -> {
+            TableRow<Assumption> row = cell.getTableRow();
+            if (row == null) {
+                cell.setEditable(false);
+            }
+            else {
+                Assumption a = (Assumption) cell.getTableRow().getItem();
+                if(a == null){
+                    cell.setEditable(false);
+                }
+                else if (a.getListeners().size() == 0) {
+                	if(a instanceof CalculatedAssumption){
+                		if(((CalculatedAssumption)a).getAssumptions().size()>0){
+                			cell.setEditable(false);
+                		}
+                		else{
+                			cell.setEditable(true);
+                		}
+                	}
+                	else{
+                		cell.setEditable(true);
+                	}
+                } 
+                else {
+                    cell.setEditable(false);
+                }
+            }
+            if(cell.isEditable()){
+            	cell.setStyle(StylePatterns.EDITABLE_TABLE_CELL_CSS);
+            }
+            else{
+            	cell.setStyle(StylePatterns.NOT_EDITABLE_TABLE_CELL_CSS);
+            }
+        });
 	}
 
 	private void setColsSizesAndAlignment(){
@@ -551,8 +609,10 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 		colMay.setPrefWidth(VALUE_COLUMN_WIDTH);
 		colJun.setPrefWidth(VALUE_COLUMN_WIDTH);
 		for(TableColumn<?,?> tc : table.getColumns()){
-			tc.setStyle( "-fx-alignment: CENTER;");
+			tc.setStyle( "-fx-alignment: CENTER; -fx-text-fill: black;");
 		}
+		colType.setStyle(StylePatterns.NOT_EDITABLE_TABLE_CELL_CSS);
+		colID.setStyle(StylePatterns.NOT_EDITABLE_TABLE_CELL_CSS);
 	}
 	
 	private void setColumnsCellsValueFactory(){
@@ -628,12 +688,7 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 				lst.add(manager.getActualAssumptions().get(id));
 			}
 		
-		lst.sort(new Comparator<Assumption>() {
-			@Override
-			public int compare(Assumption a1, Assumption a2) {
-				return a1.compareTo(a2);
-			}
-		});
+		lst.sort(new AssumptionComparator());
 		return FXCollections.observableArrayList(lst);
 	}
 
@@ -647,6 +702,7 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 		private int index;
 		public MonthValues(int index) {
 			this.index = index;
+			
 		}
 		
 		@Override
@@ -670,7 +726,6 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
                      if(empty){
                          setGraphic( null );
                          setText(null);
-                         
                      }
                      else{
                     	 if (getTableView().getItems().get(getIndex()) instanceof AtomAssumption){
@@ -690,6 +745,7 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
                 					 btnSearch.fire();
                 					 table.getColumns().get(0).setVisible(false);
                 					 table.getColumns().get(0).setVisible(true);
+                					 setComboBoxColumnsCellFactory();
                 				 } catch (Exception e1) {
                 					 e1.printStackTrace();
                 				 }

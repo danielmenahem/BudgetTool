@@ -61,7 +61,7 @@ public class BudgetManager implements EnteranceManagerIF, AssumptionsManagerIF, 
 	public HashMap<Integer, Column> getActualColumns(){
 		return actualData.getColumns();
 	}
-	
+
 	public HashMap<Integer, Table> getActualTables(){
 		return actualData.getTables();
 	}

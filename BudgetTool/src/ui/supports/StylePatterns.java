@@ -102,4 +102,8 @@ public class StylePatterns {
 	public static final String EDGE_PANE_CSS = "-fx-background-color: #46475a;"
 			+ "-fx-border-color: #aaaab2;"
 			+ "-fx-border-width: 2px;";
+	
+	public static final String NOT_EDITABLE_TABLE_CELL_CSS = "-fx-text-fill: #626262; -fx-alignment: CENTER";
+	public static final String EDITABLE_TABLE_CELL_CSS = "-fx-text-fill: Black; -fx-alignment: CENTER";
+
 }

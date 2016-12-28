@@ -717,7 +717,7 @@ public class BudgetDAL {
 		String query = "UPDATE REGULAR_TABLE SET CLASSIFICATION_ID = ?, COL_INDEX = ? "
 				+ "WHERE TABLE_ID = ?";
 		PreparedStatement statement = connection.prepareStatement(query);
-		statement.setInt(1, getClassificationID(connection, table.getClassificaion()));
+		statement.setInt(1, getClassificationID(connection, table.getClassification()));
 		statement.setInt(2, table.getColIdInTable());
 		statement.setInt(3, table.getId());
 		statement.executeUpdate();
@@ -1640,7 +1640,7 @@ public class BudgetDAL {
 	private PreparedStatement tableStatement (Connection connection, Table table) throws SQLException{
 		String s = "INSERT INTO REGULAR_TABLE (CLASSIFICATION_ID ,B_YEAR ,SUM_COLUMN_ID ,TABLE_TYPE, COL_INDEX) VALUES (?,?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(s, Statement.RETURN_GENERATED_KEYS);
-		ps.setInt(1, getClassificationID(connection, table.getClassificaion()));
+		ps.setInt(1, getClassificationID(connection, table.getClassification()));
 		ps.setString(2, table.getBudgetYear());
 		ps.setInt(3, table.getSumColumn().getId());
 		ps.setInt(4, tableType.get(table.getClass()));

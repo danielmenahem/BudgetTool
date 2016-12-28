@@ -20,8 +20,8 @@ import javafx.scene.layout.StackPane;
 import ui.forms.Form;
 import ui.forms.FormAssumption;
 import ui.forms.FormColumn;
-import ui.forms.FormProperties;
 import ui.forms.FormTable;
+import ui.supports.FormProperties;
 import ui.supports.StylePatterns;
 
 public class MainContainer extends Scene{
@@ -38,10 +38,10 @@ public class MainContainer extends Scene{
 	private Menu menuOverview = new Menu("Overview");
 	private Menu menuOpen = new Menu("Open Forms");
 	private MenuItem pAssumpation = new MenuItem("Assumptions");
-	private MenuItem pColumn = new MenuItem("Columns");
+	private MenuItem pColumn = new MenuItem("Columns to Table");
 	private MenuItem pTable = new MenuItem("Tables");
 	private MenuItem aAssumpation = new MenuItem("Assumptions");
-	private MenuItem aColumn = new MenuItem("Columns");
+	private MenuItem aColumn = new MenuItem("Columns to Table");
 	private MenuItem aTable = new MenuItem("Tables");
 	private MenuItem showBudget = new MenuItem("Show Budget");
 	private StackPane paneRemove = new StackPane();
@@ -63,9 +63,9 @@ public class MainContainer extends Scene{
 	
 	private void buildGUI(){
 		this.getStylesheets().add("/ui/supports/MenuStyle.css");
-		menuPlanning.getItems().addAll(pAssumpation, pColumn, pTable);
+		menuPlanning.getItems().addAll(pAssumpation, pTable, pColumn);
 		menuPlanning.getStyleClass().add("menu");
-		menuActual.getItems().addAll(aAssumpation, aColumn, aTable);
+		menuActual.getItems().addAll(aAssumpation, aTable, aColumn);
 		menuOverview.getItems().add(showBudget);
 		menuBar.getMenus().addAll(menuPlanning, menuActual, menuOverview, menuOpen);
 		menuBar.setMinWidth(this.getWidth());
@@ -82,8 +82,8 @@ public class MainContainer extends Scene{
 	private void initFormsNames(){
 		formNames.put(new FormProperties(FormAssumption.class, true),"Planning Assumptions");
 		formNames.put(new FormProperties(FormAssumption.class, false),"Actual Assumptions");
-		formNames.put(new FormProperties(FormColumn.class, true), "Planning Columns");
-		formNames.put(new FormProperties(FormColumn.class, false), "Actual Columns");
+		formNames.put(new FormProperties(FormColumn.class, true), "Planning Columns to Table");
+		formNames.put(new FormProperties(FormColumn.class, false), "Actual Columns to Table");
 		formNames.put(new FormProperties(FormTable.class, true), "Planning Tables");
 		formNames.put(new FormProperties(FormTable.class, false), "Actual Tables");
 	}
@@ -158,8 +158,10 @@ public class MainContainer extends Scene{
 	private Form createForm(Class<?>c, boolean isPlanning){
 		if (c == FormAssumption.class)
 			return new FormAssumption(this.manager, isPlanning, this.getWidth());
-		else if(c == FormColumn.class)
+		if(c == FormColumn.class)
 			return new FormColumn(this.manager, isPlanning, this.getWidth());
+		if(c == FormTable.class)
+			return new FormTable(this.manager, isPlanning, this.getWidth());
 		return null;
 	}
 	
