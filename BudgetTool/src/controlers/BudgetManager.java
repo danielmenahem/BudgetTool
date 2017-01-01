@@ -170,6 +170,24 @@ public class BudgetManager implements EnteranceManagerIF, AssumptionsManagerIF, 
 		actualData.addAssumption(assumption);
 		return assumption;
 	}
+
+	@Override
+	public void updateTableInPlanning(Table table) {
+		try {
+			planningData.updateObject(table);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void updateTableInActual(Table table) {
+		try {
+			actualData.updateObject(table);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 }
 

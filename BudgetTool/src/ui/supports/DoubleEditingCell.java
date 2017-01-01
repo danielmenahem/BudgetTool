@@ -27,7 +27,6 @@ public class DoubleEditingCell<T extends Item> extends TableCell<T, Double> {
         textField.setOnAction(event -> processEdit());
         this.index = index;
         this.listener = listener;
-        
         this.itemProperty().addListener((obs, oldValue, newValue) -> {
             @SuppressWarnings("unchecked")
 			TableRow<Assumption> row = this.getTableRow();

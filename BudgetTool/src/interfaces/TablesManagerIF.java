@@ -10,5 +10,7 @@ public interface TablesManagerIF {
 	ArrayList<String> getSubDepartments();
 	HashMap<Integer, Table> getActualTables();
 	HashMap<Integer, Table> getPlanningTables();
-	
+	void updateTableInActual(Table table);
+	void updateTableInPlanning(Table table);
+
 }

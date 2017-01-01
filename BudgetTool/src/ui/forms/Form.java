@@ -4,6 +4,9 @@ import javafx.scene.layout.Pane;
 import ui.supports.StylePatterns;
 
 public abstract class Form  extends Pane{
+	public static final int VALUE_COLUMN_WIDTH  = 50;
+	public static final int STRING_COLUMN_WIDTH  = 100;
+	
 	private boolean isPlanning;
 	private double formWidth;
 	public Form(boolean isPlanning, double width){

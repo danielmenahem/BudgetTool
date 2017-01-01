@@ -53,9 +53,6 @@ import ui.supports.StylePatterns;
 
 public class FormAssumption extends Form implements FormListener<Assumption>{
 	
-	private static final int VALUE_COLUMN_WIDTH  = 50;
-	private static final int STRING_COLUMN_WIDTH  = 100;
-	
 	private AssumptionsManagerIF manager;
 	private VBox paneMain = new VBox();
 	private HBox paneFilters = new HBox();
@@ -139,6 +136,7 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 		buildFiltersGUI();
 		table = new TableView<>(assumptions);
 		setTableColumns();
+		setColumnsCallBacks();
 		setColumnsCellsValueFactory();
 		setColumnsCellsFactory();
 		setColumnsActions();
@@ -517,6 +515,11 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 		});
 	}
 	
+	private void setColumnsCallBacks(){
+		depsCallBack = ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), deps);
+		subDepsCallBack = ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), subDeps);
+	}
+	
 	private void setColumnsCellsFactory() {
 		colDataType.setCellFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), dataTypes));
 		colJul.setCellFactory(col -> new DoubleEditingCell<Assumption>(1,this));
@@ -532,8 +535,6 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 		colMay.setCellFactory(col -> new DoubleEditingCell<Assumption>(11,this));
 		colJun.setCellFactory(col -> new DoubleEditingCell<Assumption>(12,this));
 		colTitle.setCellFactory(TextFieldTableCell.<Assumption>forTableColumn());
-		depsCallBack = ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), deps);
-		subDepsCallBack = ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), subDeps);
 		setComboBoxColumnsCellFactory();
 		colAction.setCellFactory(new ActionCellFactory());
 	}
@@ -554,7 +555,8 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 	
 	private void addComboBoxCellListener(TableCell<Assumption, String> cell){
         cell.itemProperty().addListener((obs, oldValue, newValue) -> {
-            TableRow<Assumption> row = cell.getTableRow();
+            @SuppressWarnings("unchecked")
+			TableRow<Assumption> row = cell.getTableRow();
             if (row == null) {
                 cell.setEditable(false);
             }
@@ -609,7 +611,7 @@ public class FormAssumption extends Form implements FormListener<Assumption>{
 		colMay.setPrefWidth(VALUE_COLUMN_WIDTH);
 		colJun.setPrefWidth(VALUE_COLUMN_WIDTH);
 		for(TableColumn<?,?> tc : table.getColumns()){
-			tc.setStyle( "-fx-alignment: CENTER; -fx-text-fill: black;");
+			tc.setStyle(StylePatterns.EDITABLE_TABLE_CELL_CSS);
 		}
 		colType.setStyle(StylePatterns.NOT_EDITABLE_TABLE_CELL_CSS);
 		colID.setStyle(StylePatterns.NOT_EDITABLE_TABLE_CELL_CSS);

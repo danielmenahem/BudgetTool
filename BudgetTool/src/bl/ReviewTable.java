@@ -70,7 +70,7 @@ public class ReviewTable extends Table {
 			}
 		}
 	}
-	
+	 
 	public void trainingTable(TrainingTable trainingTable){
 		this.trainingTable = trainingTable;
 		multColumns = new ArrayList<>();
